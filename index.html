@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <!-- Card Resumen con Blanco y Acentos Verde Menta -->
+            <!-- Card Resumen Informativo -->
             <div class="bg-white border border-slate-200/80 p-8 rounded-3xl text-slate-800 shadow-xl shadow-slate-200/50">
                 <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
                     <div class="w-10 h-10 rounded-xl bg-brand-lightmint text-brand-darkmint flex items-center justify-center font-bold">
@@ -205,10 +205,10 @@
                 <div>
                     <label class="block font-bold text-slate-800 mb-2 text-sm">Servicio Requerido:</label>
                     <select id="tipoServicio" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-bold text-slate-800 transition">
-                        <option value="50">Cuidado Adulto Mayor ($50 por turno)</option>
-                        <option value="70">Cuidados Postoperatorios ($70 por turno)</option>
-                        <option value="90">Turno Nocturno Continuo ($90 por turno)</option>
-                        <option value="40">Procedimiento / Curación Puntual ($40)</option>
+                        <option value="90">Cuidado Adulto Mayor (S/. 90 por turno)</option>
+                        <option value="120">Cuidados Postoperatorios (S/. 120 por turno)</option>
+                        <option value="140">Turno Nocturno Continuo (S/. 140 por turno)</option>
+                        <option value="60">Procedimiento / Curación Puntual (S/. 60)</option>
                     </select>
                 </div>
 
@@ -219,7 +219,7 @@
                     </div>
                     <div>
                         <label class="block font-bold text-slate-800 mb-2 text-sm">Distrito / Ubicación:</label>
-                        <input type="text" id="ubicacion" placeholder="Ej: Miraflores" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-bold" required>
+                        <input type="text" id="ubicacion" placeholder="Ej: Miraflores, San Borja, etc." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-bold" required>
                     </div>
                 </div>
 
@@ -234,7 +234,7 @@
                         <span class="block text-xs font-black uppercase tracking-wider text-brand-softblue">Total Estimado</span>
                         <span class="text-xs text-slate-500">Servicios garantizados</span>
                     </div>
-                    <span id="precioTotal" class="text-4xl font-black text-brand-darkmint">$50.00</span>
+                    <span id="precioTotal" class="text-4xl font-black text-brand-darkmint">S/. 90.00</span>
                 </div>
 
                 <button type="submit" class="w-full bg-brand-mint hover:bg-brand-darkmint text-white font-extrabold p-4 rounded-2xl shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-3 text-lg">
@@ -259,7 +259,7 @@
 
         function actualizarTotal() {
             const total = servicioSelect.value * cantidadInput.value;
-            precioTotal.textContent = `$${total}.00`;
+            precioTotal.textContent = `S/. ${total}.00`;
         }
 
         servicioSelect.addEventListener('change', actualizarTotal);

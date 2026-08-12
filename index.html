@@ -512,22 +512,26 @@
       const scheduleValue = document.getElementById('schedule').value;
       const detailsValue = document.getElementById('details').value.trim() || 'No especificada';
 
-      // Enviar datos al Webhook de Make vía URL Query String (GET)
-      if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
-        const queryParams = new URLSearchParams({
-          fecha_solicitud: new Date().toISOString(),
-          modalidad: selected.text,
-          cantidad: quantity.value,
-          zona: zoneValue,
-          horario: scheduleValue,
-          inicio_aproximado: date,
-          necesidad_general: detailsValue,
-          estimado: total.textContent
-        }).toString();
+      // Payload JSON para enviar vía POST
+      const payload = {
+        fecha_solicitud: new Date().toISOString(),
+        modalidad: selected.text,
+        cantidad: quantity.value,
+        zona: zoneValue,
+        horario: scheduleValue,
+        inicio_aproximado: date,
+        necesidad_general: detailsValue,
+        estimado: total.textContent
+      };
 
-        fetch(`${CONFIG.API_WEBHOOK_URL}?${queryParams}`, {
-          method: 'GET',
-          mode: 'no-cors'
+      // Enviar datos al Webhook de Make vía POST JSON
+      if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
+        fetch(CONFIG.API_WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
         }).catch(err => console.error('Error enviando datos a Make:', err));
       }
 

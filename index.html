@@ -514,21 +514,22 @@
 
       // Enviar datos al Webhook de Make si está habilitado
       if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
-        fetch(CONFIG.API_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fecha_solicitud: new Date().toISOString(),
-            modalidad: selected.text,
-            cantidad: quantity.value,
-            zona: zoneValue,
-            horario: scheduleValue,
-            inicio_aproximado: date,
-            necesidad_general: detailsValue,
-            estimado: total.textContent
-          })
-        }).catch(err => console.error('Error enviando datos a Make:', err));
-      }
+  fetch(CONFIG.API_WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      fecha_solicitud: new Date().toISOString(),
+      modalidad: selected.text,
+      cantidad: quantity.value,
+      zona: zoneValue,
+      horario: scheduleValue,
+      inicio_aproximado: date,
+      necesidad_general: detailsValue,
+      estimado: total.textContent
+    })
+  }).catch(err => console.error('Error enviando datos a Make:', err));
+}
 
       const message = [
         'Hola CuidadoVital, quiero solicitar una cotización.',

@@ -46,7 +46,7 @@
     }
   </style>
 
-  <!-- Datos estructurados: ajusta los datos reales antes de publicar -->
+  <!-- Datos estructurados -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -512,24 +512,24 @@
       const scheduleValue = document.getElementById('schedule').value;
       const detailsValue = document.getElementById('details').value.trim() || 'No especificada';
 
-      // Enviar datos al Webhook de Make si está habilitado
+      // Enviar datos al Webhook de Make vía URL Query String (GET)
       if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
-  fetch(CONFIG.API_WEBHOOK_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      fecha_solicitud: new Date().toISOString(),
-      modalidad: selected.text,
-      cantidad: quantity.value,
-      zona: zoneValue,
-      horario: scheduleValue,
-      inicio_aproximado: date,
-      necesidad_general: detailsValue,
-      estimado: total.textContent
-    })
-  }).catch(err => console.error('Error enviando datos a Make:', err));
-}
+        const queryParams = new URLSearchParams({
+          fecha_solicitud: new Date().toISOString(),
+          modalidad: selected.text,
+          cantidad: quantity.value,
+          zona: zoneValue,
+          horario: scheduleValue,
+          inicio_aproximado: date,
+          necesidad_general: detailsValue,
+          estimado: total.textContent
+        }).toString();
+
+        fetch(`${CONFIG.API_WEBHOOK_URL}?${queryParams}`, {
+          method: 'GET',
+          mode: 'no-cors'
+        }).catch(err => console.error('Error enviando datos a Make:', err));
+      }
 
       const message = [
         'Hola CuidadoVital, quiero solicitar una cotización.',
@@ -639,7 +639,7 @@
     clearTimeout(window.cvToastTimer); window.cvToastTimer=setTimeout(()=>el.classList.remove('show'),3200);
   };
 
-  // Accesos rápidos: seleccionan el servicio existente y llevan al cotizador.
+  // Accesos rápidos
   document.querySelectorAll('.cv-quick').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const select=$('service');
@@ -649,10 +649,10 @@
     });
   });
 
-  // Área familiar demo.
+  // Área familiar demo
   document.querySelectorAll('.cv-demo').forEach(btn=>btn.addEventListener('click',()=>toast(btn.dataset.msg)));
 
-  // Solicitud de llamada: añade una vía de contacto sin crear otro formulario principal.
+  // Solicitud de llamada
   const form=$('quoteForm');
   if(form && !$('cv-call-extra')){
     const box=document.createElement('div');
@@ -679,7 +679,7 @@
     });
   }
 
-  // Orientador.
+  // Orientador
   const modal=$('cv-advisor'), content=$('cv-advisor-content'), progress=$('cv-progress');
   let state={step:0,answers:{}};
   const open=()=>{state={step:0,answers:{}};modal.classList.add('cv-open');render();};
@@ -740,7 +740,6 @@
 </script>
 <!-- ================== FIN CAPA INTERACTIVA ================== -->
 
-
 <script id="cv-navigation-controller">
 (() => {
   const navMap = {
@@ -784,7 +783,6 @@
     });
   }
 
-  // Intercept both desktop and mobile navigation links.
   document.querySelectorAll('nav a[href^="#"]').forEach(link => {
     link.addEventListener('click', event => {
       const id = link.getAttribute('href').slice(1);
@@ -795,7 +793,6 @@
     });
   });
 
-  // Highlight the section currently visible.
   const sections = ['cv-orientador','servicios','seguridad','proceso','cv-familia','faq','cotizar']
     .map(id => document.getElementById(id))
     .filter(Boolean);
@@ -816,7 +813,6 @@
 
   sections.forEach(section => observer.observe(section));
 
-  // If the page opens with a hash, position the correct section.
   if (window.location.hash) {
     const id = window.location.hash.slice(1);
     if (document.getElementById(id)) {

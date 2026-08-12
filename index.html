@@ -44,10 +44,9 @@
       outline: 3px solid rgba(20,184,166,.35);
       outline-offset: 3px;
     }
-    .cv-modal{display:none}.cv-modal.cv-open{display:flex}
-    .cv-toast{transform:translateY(130px);transition:.3s}.cv-toast.show{transform:translateY(0)}
   </style>
 
+  <!-- Datos estructurados: ajusta los datos reales antes de publicar -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -58,6 +57,22 @@
     "telephone": "+51 968 495 402"
   }
   </script>
+
+<style id="cv-navigation-fix">
+  html { scroll-behavior: smooth; }
+  #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #faq, #cotizar {
+    scroll-margin-top: 105px;
+  }
+  .cv-nav-active {
+    color: #0f766e !important;
+  }
+  @media (max-width: 767px) {
+    #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #faq, #cotizar {
+      scroll-margin-top: 82px;
+    }
+  }
+</style>
+
 </head>
 
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -88,6 +103,7 @@
         <a href="#seguridad" class="hover:text-teal-700 focus-ring rounded">Seguridad</a>
         <a href="#proceso" class="hover:text-teal-700 focus-ring rounded">Cómo funciona</a>
         <a href="#cv-familia" class="hover:text-teal-700 focus-ring rounded">Área familiar</a>
+        <a href="#faq" class="hover:text-teal-700 focus-ring rounded">Preguntas</a>
         <a href="#cotizar" class="bg-teal-600 text-white px-5 py-2.5 rounded-xl hover:bg-teal-700 focus-ring shadow-md shadow-teal-600/20">Solicitar atención</a>
       </nav>
 
@@ -103,13 +119,14 @@
         <a href="#seguridad" class="py-2">Seguridad</a>
         <a href="#proceso" class="py-2">Cómo funciona</a>
         <a href="#cv-familia" class="py-2">Área familiar</a>
+        <a href="#faq" class="py-2">Preguntas frecuentes</a>
         <a href="#cotizar" class="py-3 text-center rounded-xl bg-teal-600 text-white">Solicitar atención</a>
       </nav>
     </div>
   </header>
 
+  <!-- HERO -->
   <main>
-    <!-- HERO -->
     <section class="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-blue-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24 grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-center">
         <div>
@@ -136,6 +153,21 @@
               Hablar por WhatsApp
             </a>
           </div>
+
+          <div class="mt-7 grid sm:grid-cols-3 gap-3 max-w-2xl">
+            <div class="bg-white/80 border border-slate-200 rounded-2xl p-4">
+              <p class="font-black text-slate-950">Evaluación</p>
+              <p class="text-xs text-slate-500 mt-1">Antes de asignar el servicio</p>
+            </div>
+            <div class="bg-white/80 border border-slate-200 rounded-2xl p-4">
+              <p class="font-black text-slate-950">Seguimiento</p>
+              <p class="text-xs text-slate-500 mt-1">Registro de incidencias y novedades</p>
+            </div>
+            <div class="bg-white/80 border border-slate-200 rounded-2xl p-4">
+              <p class="font-black text-slate-950">Continuidad</p>
+              <p class="text-xs text-slate-500 mt-1">Coordinación ante cambios</p>
+            </div>
+          </div>
         </div>
 
         <div class="bg-white rounded-[2rem] border border-slate-200 shadow-2xl shadow-slate-300/30 p-7 sm:p-9">
@@ -146,6 +178,7 @@
               <p class="text-sm text-slate-500 mt-1">Procesos claros para la familia y el paciente</p>
             </div>
           </div>
+
           <div class="mt-7 space-y-5">
             <div class="flex gap-4">
               <span class="mt-1 w-7 h-7 rounded-lg bg-teal-50 text-teal-700 grid place-items-center font-black">✓</span>
@@ -153,29 +186,164 @@
             </div>
             <div class="flex gap-4">
               <span class="mt-1 w-7 h-7 rounded-lg bg-teal-50 text-teal-700 grid place-items-center font-black">✓</span>
-              <div><strong class="text-slate-950">Base de Datos Centralizada</strong><p class="text-sm text-slate-600 mt-1">Gestión automatizada de disponibilidades y asignaciones de personal.</p></div>
+              <div><strong class="text-slate-950">Plan de atención</strong><p class="text-sm text-slate-600 mt-1">Se definen tareas, horarios, límites del servicio y señales que deben comunicarse.</p></div>
             </div>
+            <div class="flex gap-4">
+              <span class="mt-1 w-7 h-7 rounded-lg bg-teal-50 text-teal-700 grid place-items-center font-black">✓</span>
+              <div><strong class="text-slate-950">Comunicación con la familia</strong><p class="text-sm text-slate-600 mt-1">La familia recibe novedades relevantes y se escala cualquier cambio importante.</p></div>
+            </div>
+          </div>
+
+          <div class="mt-7 rounded-2xl bg-amber-50 border border-amber-200 p-4 text-xs text-amber-900 leading-5">
+            <strong>Importante:</strong> este servicio no sustituye una evaluación médica ni está diseñado para emergencias. Ante una emergencia, contacta con el servicio de emergencias correspondiente.
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COTIZADOR Y CONEXIÓN CON BACKEND/DATABASE -->
+    <!-- SERVICIOS -->
+    <section id="servicios" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Servicios</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Una atención definida según cada paciente</h2>
+          <p class="mt-4 text-slate-600">No todos los pacientes necesitan lo mismo. Primero identificamos el tipo de apoyo requerido y después proponemos la modalidad adecuada.</p>
+        </div>
+
+        <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <article class="p-6 rounded-3xl border border-slate-200 hover:border-teal-300 hover:-translate-y-1 transition bg-slate-50">
+            <div class="w-12 h-12 rounded-2xl bg-teal-100 grid place-items-center text-2xl">👵</div>
+            <h3 class="mt-5 text-lg font-black text-slate-950">Adulto mayor</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Apoyo en higiene, alimentación, movilidad, compañía, prevención de riesgos y seguimiento de indicaciones.</p>
+          </article>
+
+          <article class="p-6 rounded-3xl border border-slate-200 hover:border-blue-300 hover:-translate-y-1 transition bg-slate-50">
+            <div class="w-12 h-12 rounded-2xl bg-blue-100 grid place-items-center text-2xl">🩹</div>
+            <h3 class="mt-5 text-lg font-black text-slate-950">Recuperación</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Apoyo domiciliario durante la recuperación, siempre de acuerdo con las indicaciones del profesional responsable.</p>
+          </article>
+
+          <article class="p-6 rounded-3xl border border-slate-200 hover:border-teal-300 hover:-translate-y-1 transition bg-slate-50">
+            <div class="w-12 h-12 rounded-2xl bg-teal-100 grid place-items-center text-2xl">🩺</div>
+            <h3 class="mt-5 text-lg font-black text-slate-950">Cuidado continuo</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Turnos diurnos o nocturnos para pacientes que necesitan supervisión y acompañamiento frecuente.</p>
+          </article>
+
+          <article class="p-6 rounded-3xl border border-slate-200 hover:border-blue-300 hover:-translate-y-1 transition bg-slate-50">
+            <div class="w-12 h-12 rounded-2xl bg-blue-100 grid place-items-center text-2xl">📋</div>
+            <h3 class="mt-5 text-lg font-black text-slate-950">Procedimientos</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Servicios puntuales únicamente cuando correspondan al perfil profesional, indicación y normativa aplicable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEGURIDAD -->
+    <section id="seguridad" class="py-20 bg-pattern border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Seguridad y confianza</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">La familia también forma parte del cuidado</h2>
+          <p class="mt-5 text-slate-600 leading-7">Una buena atención domiciliaria necesita comunicación, límites claros y documentación. Por eso el servicio debe estar organizado, no improvisado.</p>
+
+          <div class="mt-7 grid sm:grid-cols-2 gap-4">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200">
+              <h3 class="font-black">Identificación</h3>
+              <p class="text-sm text-slate-600 mt-1">Personal identificado y asignación registrada.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200">
+              <h3 class="font-black">Incidencias</h3>
+              <p class="text-sm text-slate-600 mt-1">Registro de novedades relevantes del turno.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200">
+              <h3 class="font-black">Escalamiento</h3>
+              <p class="text-sm text-slate-600 mt-1">Criterios para comunicar cambios a la familia.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200">
+              <h3 class="font-black">Privacidad</h3>
+              <p class="text-sm text-slate-600 mt-1">Recogida mínima de información para coordinar el servicio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-xl p-7">
+          <h3 class="text-xl font-black text-slate-950">Antes de iniciar un servicio</h3>
+          <ol class="mt-6 space-y-5">
+            <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-xl bg-teal-600 text-white grid place-items-center font-black">1</span><div><strong>Conocemos la necesidad</strong><p class="text-sm text-slate-600 mt-1">Horario, ubicación, tipo de apoyo y situación general.</p></div></li>
+            <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-xl bg-teal-600 text-white grid place-items-center font-black">2</span><div><strong>Verificamos compatibilidad</strong><p class="text-sm text-slate-600 mt-1">Perfil del paciente, tareas solicitadas y disponibilidad del personal.</p></div></li>
+            <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-xl bg-teal-600 text-white grid place-items-center font-black">3</span><div><strong>Confirmamos condiciones</strong><p class="text-sm text-slate-600 mt-1">Precio, horario, responsabilidades, insumos y canal de comunicación.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section id="proceso" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center">
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Proceso</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Así puedes contratar</h2>
+        </div>
+
+        <div class="mt-12 grid md:grid-cols-4 gap-5">
+          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">1</div><h3 class="mt-4 font-black">Solicita</h3><p class="mt-2 text-sm text-slate-600">Cuéntanos qué necesitas y dónde.</p></div>
+          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">2</div><h3 class="mt-4 font-black">Evaluamos</h3><p class="mt-2 text-sm text-slate-600">Precisamos modalidad, duración y perfil requerido.</p></div>
+          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">3</div><h3 class="mt-4 font-black">Confirmamos</h3><p class="mt-2 text-sm text-slate-600">Acordamos condiciones y disponibilidad.</p></div>
+          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">4</div><h3 class="mt-4 font-black">Iniciamos</h3><p class="mt-2 text-sm text-slate-600">Se asigna el personal y comienza el servicio.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 bg-slate-50">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <div class="text-center">
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Preguntas frecuentes</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Lo que conviene saber antes de contratar</h2>
+        </div>
+
+        <div class="mt-10 space-y-3">
+          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿Atienden emergencias?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
+            <p class="mt-3 text-sm leading-6 text-slate-600">No somos un servicio de emergencias. Si existe riesgo inmediato para la vida o una situación aguda, debe utilizarse el sistema de emergencias correspondiente.</p>
+          </details>
+          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿El precio mostrado es definitivo?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
+            <p class="mt-3 text-sm leading-6 text-slate-600">La calculadora muestra un estimado. El precio final puede depender de horario, duración, ubicación, complejidad y recursos requeridos.</p>
+          </details>
+          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿Qué información debo enviar?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
+            <p class="mt-3 text-sm leading-6 text-slate-600">Para una primera cotización basta con ubicación, horario, modalidad de cuidado y una descripción general de la necesidad. Evita enviar por WhatsApp datos clínicos innecesarios.</p>
+          </details>
+          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿Puedo solicitar un reemplazo?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
+            <p class="mt-3 text-sm leading-6 text-slate-600">La continuidad y los reemplazos dependen de disponibilidad. La condición concreta debe quedar establecida en la contratación; evita promesas automáticas de tiempos que no puedas garantizar.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- COTIZADOR -->
     <section id="cotizar" class="py-20 bg-slate-950 text-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-start">
         <div class="lg:sticky lg:top-28">
-          <span class="text-teal-300 font-black text-xs uppercase tracking-widest">Cotización Automatizada</span>
+          <span class="text-teal-300 font-black text-xs uppercase tracking-widest">Cotización</span>
           <h2 class="mt-3 text-3xl sm:text-4xl font-black">Cuéntanos qué necesitas</h2>
-          <p class="mt-4 text-slate-300 leading-7">Tu solicitud se registrará automáticamente en nuestro sistema y generará la asignación de personal previa en base de datos.</p>
+          <p class="mt-4 text-slate-300 leading-7">La estimación es orientativa. Después podremos confirmar disponibilidad, modalidad y precio final.</p>
+          <div class="mt-7 rounded-2xl bg-white/5 border border-white/10 p-5 text-sm text-slate-300">
+            <strong class="text-white">Privacidad:</strong> no introduzcas aquí DNI, historia clínica, fotografías, recetas ni otros datos sensibles. Para la primera coordinación solo necesitamos información general.
+          </div>
         </div>
 
         <div class="bg-white text-slate-800 rounded-3xl p-6 sm:p-9 shadow-2xl">
           <form id="quoteForm" class="space-y-5" novalidate>
             <div>
-              <label for="service" class="block text-sm font-extrabold mb-2">Modalidad (Cargado dinámicamente desde BD)</label>
-              <!-- Los options se cargan mediante JavaScript desde la BD -->
+              <label for="service" class="block text-sm font-extrabold mb-2">Modalidad</label>
               <select id="service" name="service" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
-                <option value="">Cargando servicios...</option>
+                <option value="90" data-unit="turno">Cuidado adulto mayor — S/ 90 por turno</option>
+                <option value="120" data-unit="turno">Cuidado postoperatorio — S/ 120 por turno</option>
+                <option value="140" data-unit="turno">Turno nocturno — S/ 140 por turno</option>
+                <option value="60" data-unit="servicio">Procedimiento puntual — S/ 60 por servicio</option>
               </select>
             </div>
 
@@ -185,19 +353,8 @@
                 <input id="quantity" name="quantity" type="number" min="1" max="31" value="1" inputmode="numeric" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="zone" class="block text-sm font-extrabold mb-2">Distrito / Zona</label>
-                <input id="zone" name="zone" maxlength="80" placeholder="Ej. Piura, Castilla" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
-              </div>
-            </div>
-
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label for="clientName" class="block text-sm font-extrabold mb-2">Nombre completo</label>
-                <input id="clientName" name="clientName" type="text" placeholder="Ej. Juan Pérez" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
-              </div>
-              <div>
-                <label for="clientPhone" class="block text-sm font-extrabold mb-2">Teléfono de contacto</label>
-                <input id="clientPhone" name="clientPhone" type="tel" placeholder="Ej. 987654321" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
+                <label for="zone" class="block text-sm font-extrabold mb-2">Distrito / zona</label>
+                <input id="zone" name="zone" maxlength="80" placeholder="Ej. Castilla" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
             </div>
 
@@ -217,199 +374,428 @@
             </div>
 
             <div>
-              <label for="details" class="block text-sm font-extrabold mb-2">Detalles adicionales</label>
-              <textarea id="details" name="details" rows="3" maxlength="500" placeholder="Indicaciones o requerimientos particulares del paciente." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring"></textarea>
+              <label for="details" class="block text-sm font-extrabold mb-2">Necesidad general <span class="font-medium text-slate-400">(opcional)</span></label>
+              <textarea id="details" name="details" rows="3" maxlength="500" placeholder="Ej. apoyo para movilidad, higiene y compañía durante recuperación." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring"></textarea>
+              <p class="mt-1 text-xs text-slate-400">Máximo 500 caracteres. No incluyas datos clínicos sensibles.</p>
             </div>
 
             <div class="rounded-2xl bg-teal-50 border border-teal-100 p-5 flex items-center justify-between gap-4">
               <div>
-                <p class="text-xs font-black uppercase tracking-wider text-teal-700">Estimado total</p>
+                <p class="text-xs font-black uppercase tracking-wider text-teal-700">Estimado</p>
                 <p id="estimateLabel" class="text-xs text-slate-500 mt-1">1 turno</p>
               </div>
-              <output id="total" class="text-3xl sm:text-4xl font-black text-teal-700" aria-live="polite">S/ 0</output>
+              <output id="total" class="text-3xl sm:text-4xl font-black text-teal-700" aria-live="polite">S/ 90</output>
             </div>
 
             <p id="formError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3"></p>
 
-            <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring flex items-center justify-center gap-2">
-              <span>Registrar y enviar a WhatsApp</span>
+            <button type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring">
+              Continuar por WhatsApp
             </button>
+
+            <p class="text-xs text-slate-400 text-center">Al continuar se abrirá WhatsApp con un resumen de la solicitud. La cotización final requiere confirmación.</p>
           </form>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="bg-slate-950 text-slate-400 py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center text-xs">
-      © 2026 CuidadoVital - Sistema Integrado con Base de Datos.
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <p class="text-xl font-black text-white">Cuidado<span class="text-teal-400">Vital</span></p>
+          <p class="mt-3 text-sm max-w-md">Cuidado domiciliario organizado alrededor de las necesidades del paciente y la tranquilidad de su familia.</p>
+        </div>
+        <div class="md:text-right text-sm">
+          <p class="font-bold text-white">Contacto</p>
+          <a href="tel:+51968495402" class="block mt-2 hover:text-white">+51 968 495 402</a>
+          <a href="https://wa.me/51968495402" target="_blank" rel="noopener noreferrer" class="block mt-1 hover:text-white">WhatsApp</a>
+        </div>
+      </div>
+      <div class="border-t border-white/10 mt-8 pt-6 text-xs leading-5">
+        © 2026 CuidadoVital. La información de esta página es orientativa y no sustituye una evaluación profesional ni un servicio de emergencia.
+      </div>
     </div>
   </footer>
 
-  <div id="cv-toast" class="cv-toast fixed left-5 bottom-5 z-[90] bg-slate-950 text-white rounded-2xl px-5 py-4 shadow-2xl text-sm max-w-sm"></div>
+  <!-- WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/51968495402?text=Hola%20CuidadoVital%2C%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20cuidado%20domiciliario."
+     target="_blank" rel="noopener noreferrer"
+     class="fixed right-5 bottom-5 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white grid place-items-center shadow-2xl focus-ring"
+     aria-label="Contactar por WhatsApp">
+    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12.04 2a9.93 9.93 0 0 0-8.52 15.03L2 22l5.12-1.47A9.94 9.94 0 1 0 12.04 2Zm5.83 14.08c-.24.68-1.18 1.24-1.91 1.4-.5.1-1.15.18-3.76-.78-3.15-1.16-5.17-4.38-5.33-4.58-.16-.21-1.28-1.7-1.28-3.24s.81-2.3 1.1-2.62c.29-.32.63-.4.84-.4h.61c.2 0 .46-.08.72.55.27.63.91 2.18.99 2.34.08.16.13.35.03.56-.1.2-.15.33-.29.5-.14.17-.3.37-.43.5-.14.14-.29.29-.12.58.17.29.76 1.25 1.63 2.02 1.12.99 2.07 1.3 2.36 1.45.29.14.46.12.63-.08.17-.2.72-.84.91-1.13.19-.29.38-.24.64-.14.27.1 1.69.8 1.98.94.29.14.48.22.55.34.07.12.07.7-.17 1.38Z"/>
+    </svg>
+  </a>
 
-  <!-- LÓGICA DE INTEGRACIÓN CON BASE DE DATOS Y AUTOMATIZACIÓN DE WHATSAPP -->
   <script>
-    // CONFIGURACIÓN DE CONEXIÓN A BACKEND Y WEBHOOKS
-    const CONFIG = {
-      WHATSAPP_NUMBER: '51968495402',
-      // Reemplaza esta URL con tu endpoint de Webhook de Make, Zapier, N8N o API propia en Node.js/Python
-      API_WEBHOOK_URL: 'https://hook.eu1.make.com/tu-webhook-personalizado-aqui',
-      ENABLE_API_PUSH: true // Si es false, almacena localmente
-    };
+    const WHATSAPP = '51968495402';
 
-    // SIMULACIÓN DE BASE DE DATOS (Servicios y Personal)
-    // En producción esto se obtiene con un fetch() desde tu API REST / Supabase / Firebase
-    const DB_CATALOG = [
-      { id: 'srv_1', name: 'Cuidado adulto mayor', price: 90, unit: 'turno' },
-      { id: 'srv_2', name: 'Cuidado postoperatorio', price: 120, unit: 'turno' },
-      { id: 'srv_3', name: 'Turno nocturno especializado', price: 140, unit: 'turno' },
-      { id: 'srv_4', name: 'Procedimiento puntual', price: 60, unit: 'servicio' }
-    ];
+    // Menú móvil
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    const DB_PERSONAL = [
-      { id: 'p_101', name: 'Lic. Rosa Flores', zona: 'Piura', disponible: true },
-      { id: 'p_102', name: 'Téc. María Carmen', zona: 'Castilla', disponible: true },
-      { id: 'p_103', name: 'Lic. Ana Mendoza', zona: 'Veintiséis de Octubre', disponible: true }
-    ];
+    menuBtn.addEventListener('click', () => {
+      const open = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!open));
+    });
 
-    // ELEMENTOS DOM
-    const serviceSelect = document.getElementById('service');
-    const quantityInput = document.getElementById('quantity');
-    const totalOutput = document.getElementById('total');
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Fecha mínima = hoy
+    const startDate = document.getElementById('startDate');
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    startDate.min = `${yyyy}-${mm}-${dd}`;
+
+    // Cotizador
+    const service = document.getElementById('service');
+    const quantity = document.getElementById('quantity');
+    const total = document.getElementById('total');
     const estimateLabel = document.getElementById('estimateLabel');
     const form = document.getElementById('quoteForm');
-    const errorBox = document.getElementById('formError');
+    const error = document.getElementById('formError');
 
-    // Cargar Servicios desde la "Base de Datos" al inicializar
-    function loadServicesFromDB() {
-      serviceSelect.innerHTML = '';
-      DB_CATALOG.forEach(srv => {
-        const option = document.createElement('option');
-        option.value = srv.price;
-        option.dataset.id = srv.id;
-        option.dataset.name = srv.name;
-        option.dataset.unit = srv.unit;
-        option.textContent = `${srv.name} — S/ ${srv.price} por ${srv.unit}`;
-        serviceSelect.appendChild(option);
-      });
-      updateEstimate();
-    }
-
-    const money = val => `S/ ${Number(val).toLocaleString('es-PE', { minimumFractionDigits: 0 })}`;
+    const money = value => `S/ ${Number(value).toLocaleString('es-PE', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
+    })}`;
 
     function updateEstimate() {
-      if(!serviceSelect.selectedOptions.length) return;
-      const selected = serviceSelect.selectedOptions[0];
-      const price = Number(selected.value);
-      const qty = Math.max(1, Math.min(31, Number(quantityInput.value) || 1));
-      quantityInput.value = qty;
-      const unit = selected.dataset.unit;
-      
-      totalOutput.textContent = money(price * qty);
+      const price = Number(service.value);
+      const qty = Math.max(1, Math.min(31, Number(quantity.value) || 1));
+      quantity.value = qty;
+      const unit = service.selectedOptions[0].dataset.unit;
+      const result = price * qty;
+      total.textContent = money(result);
       estimateLabel.textContent = `${qty} ${unit}${qty === 1 ? '' : 's'}`;
     }
 
-    serviceSelect.addEventListener('change', updateEstimate);
-    quantityInput.addEventListener('input', updateEstimate);
+    service.addEventListener('change', updateEstimate);
+    quantity.addEventListener('input', updateEstimate);
+    updateEstimate();
 
-    // FUNCIÓN DE GUARDADO EN BASE DE DATOS Y ENVÍO A WEBHOOK
-    async function saveToDatabaseAndNotify(payload) {
-      // 1. Guardar localmente en el navegador como respaldo (Local Storage DB)
-      const existingRecords = JSON.parse(localStorage.getItem('cv_leads') || '[]');
-      existingRecords.push(payload);
-      localStorage.setItem('cv_leads', JSON.stringify(existingRecords));
-
-      // 2. Enviar a Servidor Backend / Webhook para Automatización de WhatsApp / CRM
-      if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL.includes('http')) {
-        try {
-          await fetch(CONFIG.API_WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-        } catch (err) {
-          console.warn('Servidor Backend no disponible, guardado en buffer local:', err);
-        }
-      }
-    }
-
-    // MANEJO DE ENVÍO DE FORMULARIO
-    form.addEventListener('submit', async (event) => {
+    form.addEventListener('submit', event => {
       event.preventDefault();
-      errorBox.classList.add('hidden');
+      error.classList.add('hidden');
+      error.textContent = '';
 
       if (!form.checkValidity()) {
-        errorBox.textContent = 'Por favor completa todos los campos requeridos.';
-        errorBox.classList.remove('hidden');
+        error.textContent = 'Revisa los campos obligatorios antes de continuar.';
+        error.classList.remove('hidden');
         form.reportValidity();
         return;
       }
 
-      const selectedService = serviceSelect.selectedOptions[0];
-      const zoneVal = document.getElementById('zone').value.trim();
-      
-      // Consultar disponibilidad en Base de datos de Personal
-      const matchedStaff = DB_PERSONAL.find(p => p.zona.toLowerCase().includes(zoneVal.toLowerCase()) && p.disponile) 
-                           || { name: 'Por asignar desde central' };
+      const selected = service.selectedOptions[0];
+      const date = startDate.value
+        ? new Date(`${startDate.value}T12:00:00`).toLocaleDateString('es-PE')
+        : 'Por confirmar';
 
-      // Estructura de datos normalizada para la Base de Datos
-      const leadData = {
-        id: 'REQ-' + Date.now(),
-        timestamp: new Date().toISOString(),
-        cliente: {
-          nombre: document.getElementById('clientName').value.trim(),
-          telefono: document.getElementById('clientPhone').value.trim(),
-          zona: zoneVal
-        },
-        servicio: {
-          id: selectedService.dataset.id,
-          nombre: selectedService.dataset.name,
-          cantidad: quantityInput.value,
-          precioEstimado: totalOutput.textContent
-        },
-        programacion: {
-          horario: document.getElementById('schedule').value,
-          fechaInicio: document.getElementById('startDate').value || 'Por definir',
-          detalles: document.getElementById('details').value.trim() || 'Sin observaciones'
-        },
-        personalSugeridoBD: matchedStaff.name
-      };
-
-      // Guardar en BD
-      await saveToDatabaseAndNotify(leadData);
-
-      // Generar mensaje formateado para WhatsApp
-      const waMessage = [
-        `*NUEVA SOLICITUD DE ATENCIÓN - CUIDADOVITAL*`,
-        `*ID Registro:* ${leadData.id}`,
-        ``,
-        `👤 *Cliente:* ${leadData.cliente.nombre}`,
-        `📞 *Teléfono:* ${leadData.cliente.telefono}`,
-        `📍 *Zona:* ${leadData.cliente.zona}`,
-        `🩺 *Servicio:* ${leadData.servicio.nombre}`,
-        `🔢 *Cantidad:* ${leadData.servicio.cantidad}`,
-        `🗓 *Fecha Inicio:* ${leadData.programacion.fechaInicio}`,
-        `⏰ *Horario:* ${leadData.programacion.horario}`,
-        `📝 *Notas:* ${leadData.programacion.detalles}`,
-        `💰 *Estimado:* ${leadData.servicio.precioEstimado}`,
-        ``,
-        `_Solicitud registrada automáticamente en la base de datos._`
+      const message = [
+        'Hola CuidadoVital, quiero solicitar una cotización.',
+        '',
+        `• Modalidad: ${selected.text}`,
+        `• Cantidad: ${quantity.value}`,
+        `• Zona: ${document.getElementById('zone').value.trim()}`,
+        `• Horario: ${document.getElementById('schedule').value}`,
+        `• Inicio aproximado: ${date}`,
+        `• Necesidad general: ${document.getElementById('details').value.trim() || 'No especificada'}`,
+        `• Estimado mostrado: ${total.textContent}`,
+        '',
+        'Entiendo que el precio final y la disponibilidad deben confirmarse.'
       ].join('\n');
 
-      // Redireccionar a WhatsApp
-      window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`, '_blank');
-    });
-
-    // Inicialización al cargar la página
-    document.addEventListener('DOMContentLoaded', () => {
-      loadServicesFromDB();
-      
-      // Establecer fecha mínima como hoy
-      const dateInput = document.getElementById('startDate');
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.min = today;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
     });
   </script>
+
+<!-- ================== CUIDADOVITAL PREMIUM: CAPA INTERACTIVA ================== -->
+<style>
+  .cv-premium-btn{transition:.2s}.cv-premium-btn:hover{transform:translateY(-2px)}
+  .cv-modal{display:none}.cv-modal.cv-open{display:flex}
+  .cv-toast{transform:translateY(130px);transition:.3s}.cv-toast.show{transform:translateY(0)}
+  .cv-step{display:none}.cv-step.active{display:block}
+</style>
+
+<!-- Accesos rápidos para familiares -->
+<section id="cv-orientador" class="py-12 bg-white border-y border-slate-200">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row gap-6 items-center justify-between">
+      <div>
+        <span class="text-brand-darkmint font-black text-xs uppercase tracking-widest">Empieza aquí</span>
+        <h2 class="text-2xl md:text-3xl font-black text-slate-900 mt-2">¿Qué necesitas para tu familiar?</h2>
+        <p class="text-slate-500 text-sm mt-1">No necesitas saber el nombre técnico del servicio.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full lg:w-auto">
+        <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="90">👵<br>Adulto mayor</button>
+        <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="120">🏥<br>Recuperación</button>
+        <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="140">🌙<br>Cuidado nocturno</button>
+        <button id="cv-open-advisor" class="cv-premium-btn bg-teal-50 border border-teal-200 text-teal-800 rounded-2xl p-4 font-extrabold text-left">❓<br>No sé qué necesito</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Área familiar: demostración visual -->
+<section id="cv-familia" class="py-20 bg-slate-50 border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl">
+      <span class="text-brand-softblue font-black text-xs uppercase tracking-widest">Área familiar</span>
+      <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3">La familia puede saber qué está pasando sin complicarse</h2>
+      <p class="text-slate-600 mt-4">Esta es la interfaz propuesta para la futura zona privada de familiares.</p>
+    </div>
+    <div class="mt-10 grid lg:grid-cols-[.8fr_1.2fr] gap-6">
+      <div class="bg-slate-950 text-white rounded-3xl p-7 shadow-xl">
+        <p class="text-xs uppercase font-black text-slate-400">Servicio activo</p>
+        <h3 class="text-2xl font-black mt-2">Familiar registrado</h3>
+        <div class="mt-6 p-4 rounded-2xl bg-white/5 border border-white/10">
+          <p class="text-xs text-slate-400">Estado</p>
+          <p class="text-xl font-black text-emerald-300">● Activo</p>
+        </div>
+        <div class="mt-3 p-4 rounded-2xl bg-white/5 border border-white/10">
+          <p class="text-xs text-slate-400">Próximo turno</p>
+          <p class="font-black mt-1">Mañana · 08:00–20:00</p>
+          <p class="text-xs text-slate-400 mt-1">Personal asignado · Confirmado</p>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería la bitácora de novedades del turno.">
+          <span class="text-2xl">📋</span><h3 class="font-black mt-3">Novedades</h3><p class="text-sm text-slate-600 mt-2">Actualizaciones relevantes y fáciles de leer.</p>
+        </button>
+        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería el perfil del personal asignado.">
+          <span class="text-2xl">👩‍⚕️</span><h3 class="font-black mt-3">Personal asignado</h3><p class="text-sm text-slate-600 mt-2">Perfil, turno, zona y estado de asignación.</p>
+        </button>
+        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería el resumen de pagos y pendientes.">
+          <span class="text-2xl">💳</span><h3 class="font-black mt-3">Pagos</h3><p class="text-sm text-slate-600 mt-2">Contratado, pagado y pendiente.</p>
+        </button>
+        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería la evaluación del servicio.">
+          <span class="text-2xl">⭐</span><h3 class="font-black mt-3">Evaluar servicio</h3><p class="text-sm text-slate-600 mt-2">Puntualidad, trato y satisfacción.</p>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Orientador tipo wizard -->
+<div id="cv-advisor" class="cv-modal fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-sm items-center justify-center p-4">
+  <div class="bg-white w-full max-w-xl rounded-3xl p-6 md:p-8 shadow-2xl">
+    <div class="flex justify-between gap-4">
+      <div><span class="text-teal-700 font-black text-xs uppercase">Orientador</span><h2 class="text-2xl font-black mt-1">Encuentra el cuidado adecuado</h2></div>
+      <button id="cv-close-advisor" class="text-2xl" aria-label="Cerrar">×</button>
+    </div>
+    <div class="h-2 bg-slate-100 rounded-full mt-6"><div id="cv-progress" class="h-2 bg-teal-600 rounded-full transition-all" style="width:25%"></div></div>
+    <div id="cv-advisor-content" class="mt-7"></div>
+  </div>
+</div>
+
+<div id="cv-toast" class="cv-toast fixed left-5 bottom-5 z-[90] bg-slate-950 text-white rounded-2xl px-5 py-4 shadow-2xl text-sm max-w-sm"></div>
+
+<script>
+(() => {
+  const WA='51968495402';
+  const $=id=>document.getElementById(id);
+  const toast=t=>{
+    const el=$('cv-toast'); el.textContent=t; el.classList.add('show');
+    clearTimeout(window.cvToastTimer); window.cvToastTimer=setTimeout(()=>el.classList.remove('show'),3200);
+  };
+
+  // Accesos rápidos: seleccionan el servicio existente y llevan al cotizador.
+  document.querySelectorAll('.cv-quick').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const select=$('tipoServicio');
+      if(select){select.value=btn.dataset.service; select.dispatchEvent(new Event('change'));}
+      const target=$('calculadora');
+      if(target) target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // Área familiar demo.
+  document.querySelectorAll('.cv-demo').forEach(btn=>btn.addEventListener('click',()=>toast(btn.dataset.msg)));
+
+  // Solicitud de llamada: añade una vía de contacto sin crear otro formulario principal.
+  const form=$('reservaForm');
+  if(form && !$('cv-call-extra')){
+    const box=document.createElement('div');
+    box.id='cv-call-extra';
+    box.className='mt-3';
+    box.innerHTML=`
+      <button type="button" id="cv-call-btn" class="w-full border-2 border-teal-600 text-teal-700 font-extrabold p-4 rounded-2xl hover:bg-teal-50">
+        📞 Prefiero que me contacten por teléfono
+      </button>
+      <div id="cv-call-fields" class="hidden mt-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+        <label class="block text-sm font-bold mb-2" for="cv-phone">Número de teléfono</label>
+        <input id="cv-phone" type="tel" inputmode="tel" maxlength="20" placeholder="Ej. 999 999 999"
+          class="w-full p-3 bg-white border rounded-xl focus:outline-none focus:border-teal-500">
+        <button type="button" id="cv-send-call" class="mt-3 w-full bg-slate-900 text-white p-3 rounded-xl font-black">Enviar solicitud de llamada</button>
+      </div>`;
+    form.appendChild(box);
+    $('cv-call-btn').addEventListener('click',()=>$('cv-call-fields').classList.toggle('hidden'));
+    $('cv-send-call').addEventListener('click',()=>{
+      const phone=$('cv-phone').value.trim();
+      if(phone.length<7){toast('Introduce un número válido.');return;}
+      const zone=$('ubicacion')?.value.trim()||'Por confirmar';
+      const msg=`Hola CuidadoVital, quiero que me contacten por teléfono.%0ATeléfono: ${encodeURIComponent(phone)}%0AZona: ${encodeURIComponent(zone)}`;
+      window.open(`https://wa.me/${WA}?text=${msg}`,'_blank','noopener,noreferrer');
+    });
+  }
+
+  // Orientador.
+  const modal=$('cv-advisor'), content=$('cv-advisor-content'), progress=$('cv-progress');
+  let state={step:0,answers:{}};
+  const open=()=>{state={step:0,answers:{}};modal.classList.add('cv-open');render();};
+  const close=()=>modal.classList.remove('cv-open');
+  $('cv-open-advisor').addEventListener('click',open);
+  $('cv-close-advisor').addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close();});
+
+  function render(){
+    progress.style.width=(((state.step+1)/4)*100)+'%';
+    if(state.step===0){
+      content.innerHTML=`<p class="text-slate-600">¿Para quién buscas apoyo?</p><div class="mt-5 grid gap-3">
+        ${['Adulto mayor','Paciente en recuperación','Persona que necesita supervisión','No estoy seguro'].map(v=>`<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
+    }else if(state.step===1){
+      content.innerHTML=`<p class="text-slate-600">¿Qué apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">
+        ${['Higiene y actividades diarias','Movilidad y acompañamiento','Supervisión durante varias horas','Cuidado nocturno','Necesito orientación'].map(v=>`<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="necesidad" data-v="${v}">${v}</button>`).join('')}</div>`;
+    }else if(state.step===2){
+      content.innerHTML=`<p class="text-slate-600">¿Cuándo necesitas comenzar?</p><div class="mt-5 grid gap-3">
+        ${['Hoy','Mañana','Esta semana','Fecha por definir'].map(v=>`<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="cuando" data-v="${v}">${v}</button>`).join('')}</div>`;
+    }else{
+      content.innerHTML=`<p class="text-slate-600">¿En qué distrito o zona?</p>
+        <input id="cv-zone" maxlength="80" class="w-full mt-5 p-4 bg-slate-50 border rounded-xl" placeholder="Ej. Castilla">
+        <button id="cv-finish" class="w-full mt-4 bg-teal-600 text-white p-4 rounded-xl font-black">Ver orientación →</button>`;
+      $('cv-finish').addEventListener('click',()=>{
+        const z=$('cv-zone').value.trim();
+        if(!z){toast('Indica el distrito o zona.');return;}
+        state.answers.zona=z; result();
+      });
+    }
+    content.querySelectorAll('.cv-answer').forEach(b=>b.addEventListener('click',()=>{
+      state.answers[b.dataset.k]=b.dataset.v;state.step++;render();
+    }));
+  }
+
+  function result(){
+    progress.style.width='100%';
+    const a=state.answers;
+    const safe=v=>String(v||'Por confirmar').replace(/[<>&"]/g,'');
+    content.innerHTML=`<div class="bg-teal-50 border border-teal-100 rounded-2xl p-5">
+      <span class="text-xs uppercase font-black text-teal-700">Orientación inicial</span>
+      <h3 class="text-xl font-black mt-2">Podemos ayudarte a coordinar el cuidado</h3>
+      <p class="text-sm text-slate-600 mt-3">Situación: <b>${safe(a.tipo)}</b><br>Necesidad: <b>${safe(a.necesidad)}</b><br>Inicio: <b>${safe(a.cuando)}</b><br>Zona: <b>${safe(a.zona)}</b></p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-3 mt-5">
+      <button id="cv-wa" class="bg-emerald-500 text-white p-4 rounded-xl font-black">Enviar por WhatsApp</button>
+      <button id="cv-go-quote" class="border p-4 rounded-xl font-black">Ir al cotizador</button>
+    </div>
+    <p class="text-xs text-slate-400 mt-4">Esta orientación no constituye diagnóstico ni indicación médica.</p>`;
+    $('cv-wa').addEventListener('click',()=>{
+      const msg=`Hola CuidadoVital, necesito orientación para contratar cuidado domiciliario.%0A%0A• Situación: ${encodeURIComponent(a.tipo||'Por confirmar')}%0A• Necesidad: ${encodeURIComponent(a.necesidad||'Por confirmar')}%0A• Inicio: ${encodeURIComponent(a.cuando||'Por confirmar')}%0A• Zona: ${encodeURIComponent(a.zona||'Por confirmar')}`;
+      window.open(`https://wa.me/${WA}?text=${msg}`,'_blank','noopener,noreferrer');close();
+    });
+    $('cv-go-quote').addEventListener('click',()=>{close();$('calculadora')?.scrollIntoView({behavior:'smooth'});});
+  }
+
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+</script>
+<!-- ================== FIN CAPA INTERACTIVA ================== -->
+
+
+<script id="cv-navigation-controller">
+(() => {
+  const navMap = {
+    'Empieza aquí': 'cv-orientador',
+    'Servicios': 'servicios',
+    'Seguridad': 'seguridad',
+    'Cómo funciona': 'proceso',
+    'Área familiar': 'cv-familia',
+    'Preguntas': 'faq',
+    'Preguntas frecuentes': 'faq',
+    'Solicitar atención': 'cotizar'
+  };
+
+  const header = document.querySelector('header');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuBtn = document.getElementById('menuBtn');
+
+  function goToSection(id, updateHash = true) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const headerHeight = header ? header.offsetHeight : 0;
+    const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+
+    window.scrollTo({
+      top: Math.max(0, y),
+      behavior: 'smooth'
+    });
+
+    if (updateHash) {
+      history.replaceState(null, '', '#' + id);
+    }
+
+    if (mobileMenu) mobileMenu.classList.add('hidden');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+
+    document.querySelectorAll('nav a').forEach(link => link.classList.remove('cv-nav-active'));
+    document.querySelectorAll('nav a').forEach(link => {
+      const text = link.textContent.trim();
+      if (navMap[text] === id) link.classList.add('cv-nav-active');
+    });
+  }
+
+  // Intercept both desktop and mobile navigation links.
+  document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
+      const id = link.getAttribute('href').slice(1);
+      if (document.getElementById(id)) {
+        event.preventDefault();
+        goToSection(id);
+      }
+    });
+  });
+
+  // Highlight the section currently visible.
+  const sections = ['cv-orientador','servicios','seguridad','proceso','cv-familia','faq','cotizar']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (!visible) return;
+    document.querySelectorAll('nav a').forEach(link => {
+      link.classList.toggle('cv-nav-active', navMap[link.textContent.trim()] === visible.target.id);
+    });
+  }, {
+    rootMargin: '-115px 0px -55% 0px',
+    threshold: [0.05, 0.2, 0.5]
+  });
+
+  sections.forEach(section => observer.observe(section));
+
+  // If the page opens with a hash, position the correct section.
+  if (window.location.hash) {
+    const id = window.location.hash.slice(1);
+    if (document.getElementById(id)) {
+      setTimeout(() => goToSection(id, false), 80);
+    }
+  }
+})();
+</script>
+
 </body>
 </html>

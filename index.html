@@ -1,83 +1,187 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CuidadoVital | Servicios de Enfermería Técnica</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-500 selection:text-white">
 
-    <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-teal-600">🏥 CuidadoVital</h1>
-            <nav class="hidden md:flex space-x-6 font-medium">
-                <a href="#servicios" class="hover:text-teal-600">Servicios</a>
-                <a href="#calculadora" class="hover:text-teal-600">Reservar</a>
+    <!-- Header / Navegación -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-teal-100/60 sticky top-0 z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-teal-500/20">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+                <span class="text-2xl font-extrabold bg-gradient-to-r from-teal-800 via-teal-600 to-emerald-600 bg-clip-text text-transparent">CuidadoVital</span>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8 font-semibold text-slate-600">
+                <a href="#servicios" class="hover:text-teal-600 transition-colors">Servicios</a>
+                <a href="#calculadora" class="bg-teal-50 text-teal-700 hover:bg-teal-100 px-5 py-2.5 rounded-full border border-teal-200/60 transition-all shadow-sm">Cotizar Ahora</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="bg-teal-900 text-white py-20 px-4 text-center">
-        <h2 class="text-4xl font-extrabold mb-6">Cuidado Profesional a Domicilio</h2>
-        <p class="text-lg text-teal-100 max-w-2xl mx-auto mb-8">Enfermeras técnicas tituladas para el cuidado integral de pacientes.</p>
-        <a href="#calculadora" class="bg-amber-500 text-slate-900 font-bold px-8 py-3 rounded-xl hover:bg-amber-400 transition">Agendar Servicio</a>
+    <!-- Hero / Encabezado principal -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-teal-900 via-teal-800 to-emerald-900 text-white py-24 px-6">
+        <!-- Luces de fondo decorativas -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-teal-200 text-sm font-medium mb-8">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Atención Médica Calificada a Domicilio
+            </div>
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Cuidado humano y profesional <br class="hidden md:block">
+                <span class="bg-gradient-to-r from-teal-200 via-emerald-200 to-amber-200 bg-clip-text text-transparent">en la comodidad de tu hogar</span>
+            </h2>
+            <p class="text-lg md:text-xl text-teal-100/90 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+                Enfermeras técnicas tituladas dedicadas a brindar tranquilidad, salud y afecto integral a quienes más amas.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#calculadora" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-8 py-4 rounded-2xl shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 hover:-translate-y-0.5 transition-all duration-200 text-center">
+                    Agendar Servicio
+                </a>
+                <a href="#servicios" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-2xl backdrop-blur-sm border border-white/10 transition-all text-center">
+                    Ver Especialidades
+                </a>
+            </div>
+
+            <!-- Indicadores de confianza -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-16 mt-12 border-t border-white/10 text-center">
+                <div>
+                    <p class="text-3xl font-extrabold text-teal-200">100%</p>
+                    <p class="text-xs text-teal-100/70 uppercase tracking-wider font-semibold mt-1">Personal Titulado</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-extrabold text-teal-200">24/7</p>
+                    <p class="text-xs text-teal-100/70 uppercase tracking-wider font-semibold mt-1">Monitoreo Continuo</p>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <p class="text-3xl font-extrabold text-teal-200">+500</p>
+                    <p class="text-xs text-teal-100/70 uppercase tracking-wider font-semibold mt-1">Familias Atendidas</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Servicios -->
-    <section id="servicios" class="py-16 max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Nuestros Servicios</h2>
+    <!-- Sección Servicios -->
+    <section id="servicios" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-teal-600 font-bold text-xs uppercase tracking-widest bg-teal-50 px-4 py-1.5 rounded-full border border-teal-100">Atención Personalizada</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 mb-4">Nuestros Servicios de Enfermería</h2>
+            <p class="text-slate-600 text-base">Brindamos planes de atención técnica estructurados para responder a cada etapa de recuperación o acompañamiento.</p>
+        </div>
+
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <div class="text-3xl mb-4">👵</div>
-                <h3 class="font-bold text-xl mb-2">Adulto Mayor</h3>
-                <p class="text-slate-600">Acompañamiento, control vital y medicación.</p>
+            <!-- Servicio 1 -->
+            <div class="group bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-slate-200/80 hover:border-teal-300 transition-all duration-300 relative overflow-hidden">
+                <div class="w-16 h-16 bg-teal-50 group-hover:bg-teal-500 group-hover:text-white transition-colors duration-300 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    👵
+                </div>
+                <h3 class="font-bold text-xl text-slate-900 mb-3 group-hover:text-teal-600 transition-colors">Adulto Mayor</h3>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Acompañamiento cálido, control diario de signos vitales, administración rigurosa de medicamentos y asistencia en la movilidad.
+                </p>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-teal-600 font-semibold text-sm">
+                    <span>Desde $50 / turno</span>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <div class="text-3xl mb-4">🩹</div>
-                <h3 class="font-bold text-xl mb-2">Post-Operatorio</h3>
-                <p class="text-slate-600">Curación de heridas y movilidad segura.</p>
+
+            <!-- Servicio 2 -->
+            <div class="group bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-slate-200/80 hover:border-rose-300 transition-all duration-300 relative overflow-hidden">
+                <div class="w-16 h-16 bg-rose-50 group-hover:bg-rose-500 group-hover:text-white transition-colors duration-300 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    🩹
+                </div>
+                <h3 class="font-bold text-xl text-slate-900 mb-3 group-hover:text-rose-600 transition-colors">Post-Operatorio</h3>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Curación especializada de heridas quirúrgicas, manejo del dolor, higiene y vigilancia activa del proceso de recuperación.
+                </p>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-rose-600 font-semibold text-sm">
+                    <span>Desde $70 / turno</span>
+                </div>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                <div class="text-3xl mb-4">🌙</div>
-                <h3 class="font-bold text-xl mb-2">Turno Nocturno</h3>
-                <p class="text-slate-600">Supervisión constante durante la noche.</p>
+
+            <!-- Servicio 3 -->
+            <div class="group bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl border border-slate-200/80 hover:border-indigo-300 transition-all duration-300 relative overflow-hidden">
+                <div class="w-16 h-16 bg-indigo-50 group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                    🌙
+                </div>
+                <h3 class="font-bold text-xl text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">Turno Nocturno</h3>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    Supervisión continua durante las horas de sueño, asistencia para ir al baño, medicación nocturna y tranquilidad para la familia.
+                </p>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-indigo-600 font-semibold text-sm">
+                    <span>Desde $90 / turno</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Cotizador -->
-    <section id="calculadora" class="bg-teal-50 py-16 px-4">
-        <div class="max-w-xl mx-auto bg-white p-8 rounded-3xl shadow-md">
-            <h2 class="text-2xl font-bold text-center mb-6">Cotiza tu Turno</h2>
+    <section id="calculadora" class="bg-gradient-to-b from-teal-50/50 via-teal-50 to-emerald-50/40 py-20 px-6">
+        <div class="max-w-xl mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-teal-900/5 border border-teal-100 relative">
+            
+            <div class="text-center mb-8">
+                <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-100/60 px-3 py-1 rounded-full">Reserva Online</span>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">Cotiza tu Turno al Instante</h2>
+                <p class="text-slate-500 text-sm mt-1">Calcula el presupuesto estimado para la atención requerida</p>
+            </div>
+
             <form id="reservaForm" class="space-y-6">
                 <div>
-                    <label class="block font-medium mb-2">Tipo de Servicio:</label>
-                    <select id="tipoServicio" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-teal-500">
-                        <option value="50">Cuidado Adulto Mayor ($50)</option>
-                        <option value="70">Cuidados Post-Operatorios ($70)</option>
-                        <option value="90">Turno Nocturno ($90)</option>
-                    </select>
+                    <label class="block font-semibold text-slate-700 mb-2 text-sm">Selecciona el Servicio:</label>
+                    <div class="relative">
+                        <select id="tipoServicio" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl appearance-none outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white text-slate-800 font-medium transition cursor-pointer">
+                            <option value="50">Cuidado Adulto Mayor ($50 por turno)</option>
+                            <option value="70">Cuidados Post-Operatorios ($70 por turno)</option>
+                            <option value="90">Turno Nocturno ($90 por turno)</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
                 </div>
+
                 <div>
-                    <label class="block font-medium mb-2">Cantidad de días/turnos:</label>
-                    <input type="number" id="cantidad" min="1" value="1" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-teal-500">
+                    <label class="block font-semibold text-slate-700 mb-2 text-sm">Cantidad de turnos o días:</label>
+                    <input type="number" id="cantidad" min="1" value="1" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white text-slate-800 font-medium transition">
                 </div>
-                <div class="bg-slate-100 p-4 rounded-xl flex justify-between items-center text-lg font-bold">
-                    <span>Total Estimado:</span>
-                    <span id="precioTotal" class="text-teal-600">$50.00</span>
+
+                <!-- Card del Total Estimado -->
+                <div class="bg-gradient-to-br from-teal-50 to-emerald-50 border border-teal-200/80 p-5 rounded-2xl flex justify-between items-center">
+                    <div>
+                        <span class="block text-xs font-semibold text-teal-800 uppercase tracking-wide">Total Estimado</span>
+                        <span class="text-xs text-slate-500">Transparente y sin costos ocultos</span>
+                    </div>
+                    <span id="precioTotal" class="text-3xl font-black bg-gradient-to-r from-teal-700 to-emerald-600 bg-clip-text text-transparent">$50.00</span>
                 </div>
-                <button type="submit" class="w-full bg-teal-600 text-white font-bold p-4 rounded-xl hover:bg-teal-700 transition">
+
+                <!-- Botón de WhatsApp -->
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-4 rounded-2xl shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/35 transition-all duration-200 flex items-center justify-center gap-3 text-base">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <path d="M12.031 2c-5.517 0-9.993 4.476-9.993 9.993 0 1.763.459 3.484 1.33 5.003l-1.412 5.161 5.282-1.385c1.467.8 3.12 1.22 4.793 1.22h.004c5.517 0 9.993-4.476 9.993-9.993 0-2.668-1.039-5.176-2.928-7.065A9.925 9.925 0 0012.031 2zm5.835 14.129c-.246.692-1.24 1.272-1.71 1.321-.433.045-.992.208-3.237-.718-2.622-1.082-4.288-3.772-4.418-3.947-.13-.174-1.062-1.412-1.062-2.693 0-1.28.67-1.91 0.908-2.162.238-.252.52-.315.693-.315.174 0 .347.002.498.01.161.008.378-.061.591.45.225.541.768 1.871.833 2.005.065.134.108.291.022.464-.087.173-.13.282-.26.433-.13.151-.272.337-.389.453-.13.13-.265.272-.114.531.151.259.673 1.11 1.442 1.794.988.88 1.821 1.152 2.08 1.282.259.13.411.108.563-.065.151-.173.649-.757.822-1.017.173-.259.346-.216.584-.13.238.087 1.515.714 1.775.844.259.13.433.195.498.303.065.108.065.627-.181 1.319z"/>
+                    </svg>
                     Reservar vía WhatsApp
                 </button>
             </form>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800 text-center text-sm">
+        <p>© 2026 CuidadoVital. Todos los derechos reservados. Cuidado profesional con empatía y calidez.</p>
+    </footer>
 
     <script>
         const servicioSelect = document.getElementById('tipoServicio');

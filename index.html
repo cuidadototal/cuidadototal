@@ -523,12 +523,16 @@
         necesidad_general: detailsValue,
         estimado: total.textContent
       };
+// --- CÓDIGO CORREGIDO ---
+});
 
-      // Enviar datos al Webhook de Make vía POST JSON
-      if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
-        fetch(CONFIG.API_WEBHOOK_URL, {
-          method: 'POST',
-          headers: {
+fetch(CONFIG.API_WEBHOOK_URL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(payload)
+}).catch(err => console.error('Error enviando datos a Make:', err));
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)

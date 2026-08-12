@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CuidadoVital | Servicios de Enfermería Técnica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
 
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-teal-600">🏥 CuidadoVital</h1>
+            <nav class="hidden md:flex space-x-6 font-medium">
+                <a href="#servicios" class="hover:text-teal-600">Servicios</a>
+                <a href="#calculadora" class="hover:text-teal-600">Reservar</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="bg-teal-900 text-white py-20 px-4 text-center">
+        <h2 class="text-4xl font-extrabold mb-6">Cuidado Profesional a Domicilio</h2>
+        <p class="text-lg text-teal-100 max-w-2xl mx-auto mb-8">Enfermeras técnicas tituladas para el cuidado integral de pacientes.</p>
+        <a href="#calculadora" class="bg-amber-500 text-slate-900 font-bold px-8 py-3 rounded-xl hover:bg-amber-400 transition">Agendar Servicio</a>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-16 max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Nuestros Servicios</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="text-3xl mb-4">👵</div>
+                <h3 class="font-bold text-xl mb-2">Adulto Mayor</h3>
+                <p class="text-slate-600">Acompañamiento, control vital y medicación.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="text-3xl mb-4">🩹</div>
+                <h3 class="font-bold text-xl mb-2">Post-Operatorio</h3>
+                <p class="text-slate-600">Curación de heridas y movilidad segura.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="text-3xl mb-4">🌙</div>
+                <h3 class="font-bold text-xl mb-2">Turno Nocturno</h3>
+                <p class="text-slate-600">Supervisión constante durante la noche.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cotizador -->
+    <section id="calculadora" class="bg-teal-50 py-16 px-4">
+        <div class="max-w-xl mx-auto bg-white p-8 rounded-3xl shadow-md">
+            <h2 class="text-2xl font-bold text-center mb-6">Cotiza tu Turno</h2>
+            <form id="reservaForm" class="space-y-6">
+                <div>
+                    <label class="block font-medium mb-2">Tipo de Servicio:</label>
+                    <select id="tipoServicio" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-teal-500">
+                        <option value="50">Cuidado Adulto Mayor ($50)</option>
+                        <option value="70">Cuidados Post-Operatorios ($70)</option>
+                        <option value="90">Turno Nocturno ($90)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-medium mb-2">Cantidad de días/turnos:</label>
+                    <input type="number" id="cantidad" min="1" value="1" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-teal-500">
+                </div>
+                <div class="bg-slate-100 p-4 rounded-xl flex justify-between items-center text-lg font-bold">
+                    <span>Total Estimado:</span>
+                    <span id="precioTotal" class="text-teal-600">$50.00</span>
+                </div>
+                <button type="submit" class="w-full bg-teal-600 text-white font-bold p-4 rounded-xl hover:bg-teal-700 transition">
+                    Reservar vía WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        const servicioSelect = document.getElementById('tipoServicio');
+        const cantidadInput = document.getElementById('cantidad');
+        const precioTotal = document.getElementById('precioTotal');
+        const form = document.getElementById('reservaForm');
+
+        function actualizarTotal() {
+            const total = servicioSelect.value * cantidadInput.value;
+            precioTotal.textContent = `$${total}.00`;
+        }
+
+        servicioSelect.addEventListener('change', actualizarTotal);
+        cantidadInput.addEventListener('input', actualizarTotal);
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const mensaje = `Hola, quiero agendar: ${servicioSelect.options[servicioSelect.selectedIndex].text} por ${cantidadInput.value} unidades. Total: ${precioTotal.textContent}`;
+            window.open(`https://wa.me/51999999999?text=${encodeURIComponent(mensaje)}`, '_blank');
+        });
+    </script>
+</body>
+</html>

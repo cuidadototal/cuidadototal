@@ -337,6 +337,19 @@
 
         <div class="bg-white text-slate-800 rounded-3xl p-6 sm:p-9 shadow-2xl">
           <form id="quoteForm" class="space-y-5" novalidate>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="customerName" class="block text-sm font-extrabold mb-2">Nombre del familiar</label>
+                <input id="customerName" name="customerName" type="text" maxlength="100" autocomplete="name"
+                  placeholder="Ej. María Pérez" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
+              </div>
+              <div>
+                <label for="customerPhone" class="block text-sm font-extrabold mb-2">WhatsApp / teléfono</label>
+                <input id="customerPhone" name="customerPhone" type="tel" maxlength="20" inputmode="tel"
+                  autocomplete="tel" placeholder="Ej. 999 999 999" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
+              </div>
+            </div>
+
             <div>
               <label for="service" class="block text-sm font-extrabold mb-2">Modalidad</label>
               <select id="service" name="service" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
@@ -360,16 +373,27 @@
 
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
-                <label for="schedule" class="block text-sm font-extrabold mb-2">Horario preferido</label>
-                <select id="schedule" name="schedule" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring">
-                  <option>Diurno</option>
-                  <option>Nocturno</option>
-                  <option>Flexible</option>
-                </select>
+                <label for="startDate" class="block text-sm font-extrabold mb-2">Fecha de inicio</label>
+                <input id="startDate" name="startDate" type="date" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="startDate" class="block text-sm font-extrabold mb-2">Inicio aproximado</label>
-                <input id="startDate" name="startDate" type="date" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring">
+                <label for="schedule" class="block text-sm font-extrabold mb-2">Horario</label>
+                <select id="schedule" name="schedule" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring">
+                  <option value="Diurno">Diurno</option>
+                  <option value="Nocturno">Nocturno</option>
+                  <option value="Flexible">Flexible</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="startTime" class="block text-sm font-extrabold mb-2">Hora de inicio</label>
+                <input id="startTime" name="startTime" type="time" value="08:00" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
+              </div>
+              <div>
+                <label for="endTime" class="block text-sm font-extrabold mb-2">Hora de fin</label>
+                <input id="endTime" name="endTime" type="time" value="20:00" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
             </div>
 
@@ -378,6 +402,11 @@
               <textarea id="details" name="details" rows="3" maxlength="500" placeholder="Ej. apoyo para movilidad, higiene y compañía durante recuperación." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring"></textarea>
               <p class="mt-1 text-xs text-slate-400">Máximo 500 caracteres. No incluyas datos clínicos sensibles.</p>
             </div>
+
+            <label class="flex gap-3 items-start text-xs text-slate-500">
+              <input id="privacyConsent" type="checkbox" class="mt-0.5 w-4 h-4 accent-teal-600" required>
+              <span>Acepto que CuidadoVital use estos datos para contactarme y coordinar la solicitud de servicio.</span>
+            </label>
 
             <div class="rounded-2xl bg-teal-50 border border-teal-100 p-5 flex items-center justify-between gap-4">
               <div>
@@ -388,12 +417,13 @@
             </div>
 
             <p id="formError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3"></p>
+            <p id="formStatus" class="hidden text-sm rounded-xl p-3"></p>
 
-            <button type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring">
-              Continuar por WhatsApp
+            <button id="quoteSubmit" type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring">
+              Enviar solicitud y abrir WhatsApp
             </button>
 
-            <p class="text-xs text-slate-400 text-center">Al continuar se abrirá WhatsApp con un resumen de la solicitud. La cotización final requiere confirmación.</p>
+            <p class="text-xs text-slate-400 text-center">La solicitud se registrará en Make. Después podrás automatizar la notificación y el evento de Google Calendar.</p>
           </form>
         </div>
       </div>
@@ -431,10 +461,16 @@
   </a>
 
   <script>
+    /*
+      IMPORTANTE:
+      1) Crea un Custom Webhook en Make.
+      2) Pega su URL en MAKE_WEBHOOK_URL.
+      3) No uses la URL antigua si ya la compartiste públicamente: genera una nueva.
+    */
     const CONFIG = {
       WHATSAPP_NUMBER: '51968495402',
-      API_WEBHOOK_URL: 'https://hook.us2.make.com/l2numiph8wd6tplcrid4xo15',
-      ENABLE_API_PUSH: true
+      MAKE_WEBHOOK_URL: 'PEGA_AQUI_LA_URL_NUEVA_DE_TU_WEBHOOK_DE_MAKE',
+      ENABLE_MAKE_PUSH: true
     };
 
     const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
@@ -456,13 +492,13 @@
       });
     });
 
-    // Fecha mínima = hoy
+    // Fecha mínima = fecha local del navegador
     const startDate = document.getElementById('startDate');
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    startDate.min = `${yyyy}-${mm}-${dd}`;
+    const now = new Date();
+    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+      .toISOString().slice(0, 10);
+    startDate.min = localDate;
+    if (!startDate.value) startDate.value = localDate;
 
     // Cotizador
     const service = document.getElementById('service');
@@ -471,6 +507,8 @@
     const estimateLabel = document.getElementById('estimateLabel');
     const form = document.getElementById('quoteForm');
     const error = document.getElementById('formError');
+    const status = document.getElementById('formStatus');
+    const submitButton = document.getElementById('quoteSubmit');
 
     const money = value => `S/ ${Number(value).toLocaleString('es-PE', {
       minimumFractionDigits: 0,
@@ -491,10 +529,81 @@
     quantity.addEventListener('input', updateEstimate);
     updateEstimate();
 
-    form.addEventListener('submit', event => {
+    function showStatus(message, ok = true) {
+      status.textContent = message;
+      status.className = ok
+        ? 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800'
+        : 'text-sm rounded-xl p-3 bg-red-50 border border-red-200 text-red-800';
+      status.classList.remove('hidden');
+    }
+
+    function normalizePhone(value) {
+      const digits = String(value || '').replace(/\D/g, '');
+      if (!digits) return '';
+      return digits.startsWith('51') ? `+${digits}` : `+51${digits}`;
+    }
+
+    function buildPayload() {
+      const selected = service.selectedOptions[0];
+      const name = document.getElementById('customerName').value.trim();
+      const phone = normalizePhone(document.getElementById('customerPhone').value.trim());
+      const zone = document.getElementById('zone').value.trim();
+      const schedule = document.getElementById('schedule').value;
+      const startTime = document.getElementById('startTime').value;
+      const endTime = document.getElementById('endTime').value;
+      const details = document.getElementById('details').value.trim() || 'No especificada';
+
+      return {
+        tipo_solicitud: 'cotizacion_web',
+        fecha_solicitud: new Date().toISOString(),
+        nombre_familiar: name,
+        telefono: phone,
+        modalidad: selected.text,
+        servicio: selected.textContent.trim(),
+        precio_unitario: Number(selected.value),
+        cantidad: Number(quantity.value),
+        zona,
+        horario: schedule,
+        fecha_inicio: startDate.value,
+        hora_inicio: startTime,
+        hora_fin: endTime,
+        necesidad_general: details,
+        estimado: total.textContent,
+        fuente: window.location.href,
+        zona_horaria: Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Lima'
+      };
+    }
+
+    async function sendToMake(payload) {
+      if (!CONFIG.ENABLE_MAKE_PUSH || !CONFIG.MAKE_WEBHOOK_URL || CONFIG.MAKE_WEBHOOK_URL.includes('PEGA_AQUI')) {
+        return { sent: false, reason: 'webhook_not_configured' };
+      }
+
+      /*
+        Se usa application/x-www-form-urlencoded para evitar el preflight CORS
+        que suele provocar fallos cuando se envía application/json directamente
+        desde un HTML estático a un webhook externo.
+      */
+      const body = new URLSearchParams();
+      Object.entries(payload).forEach(([key, value]) => body.append(key, String(value ?? '')));
+
+      try {
+        await fetch(CONFIG.MAKE_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body
+        });
+        return { sent: true };
+      } catch (err) {
+        console.error('Error enviando la solicitud a Make:', err);
+        return { sent: false, reason: 'network_error', error: err };
+      }
+    }
+
+    form.addEventListener('submit', async event => {
       event.preventDefault();
       error.classList.add('hidden');
-      error.textContent = '';
+      status.classList.add('hidden');
 
       if (!form.checkValidity()) {
         error.textContent = 'Revisa los campos obligatorios antes de continuar.';
@@ -503,53 +612,53 @@
         return;
       }
 
-      const selected = service.selectedOptions[0];
-      const date = startDate.value
-        ? new Date(`${startDate.value}T12:00:00`).toLocaleDateString('es-PE')
-        : 'Por confirmar';
-
-      const zoneValue = document.getElementById('zone').value.trim();
-      const scheduleValue = document.getElementById('schedule').value;
-      const detailsValue = document.getElementById('details').value.trim() || 'No especificada';
-
-      // Payload JSON para enviar vía POST
-      const payload = {
-        fecha_solicitud: new Date().toISOString(),
-        modalidad: selected.text,
-        cantidad: quantity.value,
-        zona: zoneValue,
-        horario: scheduleValue,
-        inicio_aproximado: date,
-        necesidad_general: detailsValue,
-        estimado: total.textContent
-      };
-
-      // Envío POST a Make
-      if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
-        fetch(CONFIG.API_WEBHOOK_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        }).catch(err => console.error('Error enviando datos a Make:', err));
+      const startTime = document.getElementById('startTime').value;
+      const endTime = document.getElementById('endTime').value;
+      if (startTime >= endTime) {
+        error.textContent = 'La hora de fin debe ser posterior a la hora de inicio.';
+        error.classList.remove('hidden');
+        return;
       }
 
+      const payload = buildPayload();
+      submitButton.disabled = true;
+      submitButton.textContent = 'Registrando solicitud...';
+
+      const result = await sendToMake(payload);
+
+      // WhatsApp directo como respaldo y canal de contacto inmediato
       const message = [
         'Hola CuidadoVital, quiero solicitar una cotización.',
         '',
-        `• Modalidad: ${selected.text}`,
-        `• Cantidad: ${quantity.value}`,
-        `• Zona: ${zoneValue}`,
-        `• Horario: ${scheduleValue}`,
-        `• Inicio aproximado: ${date}`,
-        `• Necesidad general: ${detailsValue}`,
-        `• Estimado mostrado: ${total.textContent}`,
+        `• Familiar: ${payload.nombre_familiar}`,
+        `• Teléfono: ${payload.telefono}`,
+        `• Modalidad: ${payload.servicio}`,
+        `• Cantidad: ${payload.cantidad}`,
+        `• Zona: ${payload.zona}`,
+        `• Fecha: ${payload.fecha_inicio}`,
+        `• Horario: ${payload.hora_inicio}–${payload.hora_fin}`,
+        `• Turno: ${payload.horario}`,
+        `• Necesidad general: ${payload.necesidad_general}`,
+        `• Estimado: ${payload.estimado}`,
         '',
         'Entiendo que el precio final y la disponibilidad deben confirmarse.'
       ].join('\n');
 
-      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+      showStatus(
+        result.sent
+          ? 'Solicitud registrada. Ahora se abrirá WhatsApp para continuar la coordinación.'
+          : 'WhatsApp se abrirá, pero primero configura el webhook de Make para activar la automatización.',
+        result.sent
+      );
+
+      window.open(
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
+        '_blank',
+        'noopener,noreferrer'
+      );
+
+      submitButton.disabled = false;
+      submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
     });
   </script>
 
@@ -586,7 +695,7 @@
     <div class="max-w-3xl">
       <span class="text-brand-softblue font-black text-xs uppercase tracking-widest">Área familiar</span>
       <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3">La familia puede saber qué está pasando sin complicarse</h2>
-      <p class="text-slate-600 mt-4">Esta es la interfaz propuesta para la futura zona privada de familiares.</p>
+      <p class="text-slate-600 mt-4">Esta es una interfaz demostrativa; todavía no es un área privada conectada a datos reales.</p>
     </div>
     <div class="mt-10 grid lg:grid-cols-[.8fr_1.2fr] gap-6">
       <div class="bg-slate-950 text-white rounded-3xl p-7 shadow-xl">

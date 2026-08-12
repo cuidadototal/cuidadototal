@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CuidadoVital | Servicios de Enfermería Técnica Profesional</title>
+    <title>CuidadoVital | Enfermería Técnica Domiciliaria Profesional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
@@ -12,12 +12,12 @@
                 extend: {
                     colors: {
                         brand: {
-                            blue: '#2563EB',       /* Azul confianza principal */
-                            softblue: '#3B82F6',   /* Azul suave */
-                            iceblue: '#EFF6FF',    /* Azul ultra claro para fondos */
-                            mint: '#10B981',       /* Verde menta (salud y bienestar) */
-                            lightmint: '#D1FAE5',  /* Verde menta claro */
-                            darkmint: '#059669',   /* Verde menta hover */
+                            blue: '#2563EB',
+                            softblue: '#3B82F6',
+                            iceblue: '#EFF6FF',
+                            mint: '#10B981',
+                            lightmint: '#D1FAE5',
+                            darkmint: '#059669',
                         }
                     },
                     fontFamily: {
@@ -28,7 +28,6 @@
         }
     </script>
     <style>
-        /* Patrón sutil en fondo gris muy claro para transmitir limpieza y orden */
         .bg-clean-pattern {
             background-color: #F8FAFC;
             background-image: radial-gradient(#E2E8F0 1.2px, transparent 1.2px);
@@ -38,8 +37,21 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-softblue selection:text-white">
 
-    <!-- Botón Flotante de WhatsApp -->
-    <a href="https://wa.me/51999999999?text=Hola,%20necesito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20enfermer%C3%ADa" 
+    <!-- 1. BARRA SUPERIOR DE EMERGENCIA / ATENCIÓN RÁPIDA -->
+    <div class="bg-slate-900 text-white text-xs py-2 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-mint animate-ping"></span>
+                Atención Domiciliaria Inmediata y Programada en Lima y Callao
+            </span>
+            <a href="tel:+51999999999" class="font-bold text-brand-lightmint hover:underline hidden sm:inline">
+                📞 Central de Atención: +51 999 999 999
+            </a>
+        </div>
+    </div>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/51999999999?text=Hola,%20necesito%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20enfermer%C3%ADa" 
        target="_blank" 
        class="fixed bottom-6 right-6 z-50 bg-brand-mint text-white p-4 rounded-full shadow-2xl hover:bg-brand-darkmint hover:scale-110 transition-all flex items-center justify-center group"
        title="Contactar por WhatsApp">
@@ -51,7 +63,7 @@
         </span>
     </a>
 
-    <!-- Header / Navegación -->
+    <!-- NAVEGACIÓN -->
     <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -64,30 +76,32 @@
             </div>
             <nav class="hidden md:flex items-center space-x-8 font-semibold text-slate-600 text-sm">
                 <a href="#servicios" class="hover:text-brand-softblue transition-colors">Servicios</a>
-                <a href="#equipo" class="hover:text-brand-softblue transition-colors">Nuestro Equipo</a>
+                <a href="#proceso" class="hover:text-brand-softblue transition-colors">¿Cómo Funciona?</a>
+                <a href="#equipo" class="hover:text-brand-softblue transition-colors">Equipo</a>
+                <a href="#faq" class="hover:text-brand-softblue transition-colors">Preguntas Frecuentes</a>
                 <a href="#calculadora" class="bg-brand-softblue text-white hover:bg-brand-blue px-6 py-2.5 rounded-full shadow-md shadow-blue-500/20 transition-all font-bold">Cotizar Servicio</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero / Sección Principal con Azul Suave y Blanco -->
-    <section class="bg-gradient-to-br from-brand-iceblue via-white to-slate-50 relative py-16 lg:py-24 px-6 border-b border-slate-200/80">
+    <!-- HERO PRINCIPAL -->
+    <section class="bg-gradient-to-br from-brand-iceblue via-white to-slate-50 py-16 lg:py-24 px-6 border-b border-slate-200/80">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <div class="inline-flex items-center gap-2 bg-brand-lightmint text-brand-darkmint border border-emerald-200 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider mb-6">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-mint animate-pulse"></span>
-                    Enfermeras Técnicas Tituladas
+                    Enfermeras Técnicas Tituladas & Colegiadas
                 </div>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6">
-                    Salud, tranquilidad y <br>
-                    <span class="text-brand-softblue">bienestar en tu hogar</span>
+                    La tranquilidad de un <br>
+                    <span class="text-brand-softblue">cuidado profesional en casa</span>
                 </h1>
                 <p class="text-lg font-medium text-slate-600 max-w-xl mb-8 leading-relaxed">
-                    Atención médica integral, limpia y profesional. Cuidamos con empatía a adultos mayores, pacientes postoperatorios y enfermedades crónicas.
+                    Apañamiento médico cálido, continuo y seguro. Especializadas en cuidado gerontológico, recuperación quirúrgica y control de enfermedades crónicas.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="#calculadora" class="bg-brand-softblue hover:bg-brand-blue text-white font-extrabold text-base px-8 py-4 rounded-2xl shadow-lg shadow-blue-500/20 transition-all text-center">
-                        Cotizar o Agendar
+                        Solicitar Cotización
                     </a>
                     <a href="https://wa.me/51999999999" target="_blank" class="bg-white text-slate-700 hover:bg-slate-100 font-extrabold text-base px-8 py-4 rounded-2xl border border-slate-200 shadow-sm transition-all text-center">
                         Consulta Inmediata
@@ -95,115 +109,172 @@
                 </div>
             </div>
 
-            <!-- Card Resumen Informativo -->
-            <div class="bg-white border border-slate-200/80 p-8 rounded-3xl text-slate-800 shadow-xl shadow-slate-200/50">
+            <!-- TARJETA DESTACADA DE COMPROMISO -->
+            <div class="bg-white border border-slate-200/80 p-8 rounded-3xl text-slate-800 shadow-xl shadow-slate-200/50 relative">
                 <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-brand-lightmint text-brand-darkmint flex items-center justify-center font-bold">
-                        ✓
+                    <div class="w-12 h-12 rounded-2xl bg-brand-lightmint text-brand-darkmint flex items-center justify-center font-black text-xl">
+                        🛡️
                     </div>
                     <div>
-                        <h3 class="text-lg font-extrabold text-slate-900">¿Por qué elegir CuidadoVital?</h3>
-                        <p class="text-xs text-slate-500">Atención profesional de alta calidad</p>
+                        <h3 class="text-lg font-extrabold text-slate-900">Garantía CuidadoVital</h3>
+                        <p class="text-xs text-slate-500">Seguridad total para tu familia</p>
                     </div>
                 </div>
                 <ul class="space-y-4 text-sm font-medium">
                     <li class="flex items-start gap-3">
                         <span class="bg-brand-lightmint text-brand-darkmint p-1 rounded-md text-xs font-bold">✓</span>
-                        <span><strong class="text-slate-900">Personal Verificado:</strong> Títulos y antecedentes 100% validados.</span>
+                        <span><strong class="text-slate-900">Personal Verificado:</strong> Selección rigurosa con antecedentes policiales y laborales comprobados.</span>
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="bg-brand-lightmint text-brand-darkmint p-1 rounded-md text-xs font-bold">✓</span>
-                        <span><strong class="text-slate-900">Planes Flexibles:</strong> Cobertura por horas, turnos de 8h, 12h o 24h.</span>
+                        <span><strong class="text-slate-900">Reemplazo Asegurado:</strong> Sustitución de personal en menos de 2 horas ante cualquier imprevisto.</span>
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="bg-brand-lightmint text-brand-darkmint p-1 rounded-md text-xs font-bold">✓</span>
-                        <span><strong class="text-slate-900">Reporte Clínico Diario:</strong> Registro de signos vitales e incidencias.</span>
+                        <span><strong class="text-slate-900">Bitácora Médica:</strong> Reportes diarios del monitoreo de signos vitales e incidencias.</span>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Servicios Especializados con Blanco y Acentos Gris/Menta -->
+    <!-- 2. PROCESO DE CONTRATACIÓN (NUEVA SECCIÓN) -->
+    <section id="proceso" class="py-16 bg-white border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-softblue font-black text-xs uppercase tracking-widest bg-brand-iceblue px-4 py-1.5 rounded-full border border-blue-100">Paso a Paso</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">¿Cómo iniciamos el servicio?</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 rounded-3xl bg-slate-50 border border-slate-200">
+                    <div class="w-12 h-12 bg-brand-softblue text-white rounded-2xl font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-md">1</div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Solicita y Cotiza</h3>
+                    <p class="text-slate-600 text-sm">Elige el servicio, turno y ubicación requeridos en nuestro cotizador web o por WhatsApp.</p>
+                </div>
+                <div class="text-center p-6 rounded-3xl bg-slate-50 border border-slate-200">
+                    <div class="w-12 h-12 bg-brand-mint text-white rounded-2xl font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-md">2</div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Evaluación del Paciente</h3>
+                    <p class="text-slate-600 text-sm">Analizamos el diagnóstico médico para asignar a la enfermera ideal según la especialidad.</p>
+                </div>
+                <div class="text-center p-6 rounded-3xl bg-slate-50 border border-slate-200">
+                    <div class="w-12 h-12 bg-slate-900 text-white rounded-2xl font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-md">3</div>
+                    <h3 class="font-extrabold text-lg text-slate-900 mb-2">Inicio de Atención</h3>
+                    <p class="text-slate-600 text-sm">El personal acude al domicilio puntualmente, equipado y listo para el cuidado del paciente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS ESPECIALIZADOS -->
     <section id="servicios" class="py-20 max-w-7xl mx-auto px-6">
         <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-brand-softblue font-black text-xs uppercase tracking-widest bg-brand-iceblue px-4 py-1.5 rounded-full border border-blue-100">
-                Salud y Bienestar
-            </span>
-            <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3">Nuestros Servicios de Cuidado</h2>
-            <p class="text-slate-500 text-sm mt-2">Un enfoque médico ordenado, seguro y humano para cada paciente.</p>
+            <span class="text-brand-softblue font-black text-xs uppercase tracking-widest bg-brand-iceblue px-4 py-1.5 rounded-full border border-blue-100">Atención Personalizada</span>
+            <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3">Servicios Adaptados a Cada Necesidad</h2>
         </div>
 
         <div class="grid md:grid-cols-4 gap-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:border-brand-softblue transition-all">
                 <div class="w-12 h-12 bg-brand-iceblue rounded-2xl flex items-center justify-center text-2xl mb-4">👵</div>
                 <h3 class="font-extrabold text-xl mb-2 text-slate-900">Adulto Mayor</h3>
-                <p class="text-slate-600 text-sm">Higiene, administración de fármacos, acompañamiento y ejercicios de estimulación.</p>
+                <p class="text-slate-600 text-sm">Higiene corporal, administración de fármacos, apoyo en movilidad y estimulación cognitiva.</p>
             </div>
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:border-brand-mint transition-all">
                 <div class="w-12 h-12 bg-brand-lightmint rounded-2xl flex items-center justify-center text-2xl mb-4">🩹</div>
                 <h3 class="font-extrabold text-xl mb-2 text-slate-900">Postoperatorio</h3>
-                <p class="text-slate-600 text-sm">Curación de heridas, control del dolor, drenajes y asistencia segura en movilización.</p>
+                <p class="text-slate-600 text-sm">Curación de heridas quirúrgicas, manejo de drenajes, control del dolor y apoyo en recuperación.</p>
             </div>
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:border-brand-softblue transition-all">
                 <div class="w-12 h-12 bg-brand-iceblue rounded-2xl flex items-center justify-center text-2xl mb-4">🩺</div>
-                <h3 class="font-extrabold text-xl mb-2 text-slate-900">Enfermedades Crónicas</h3>
-                <p class="text-slate-600 text-sm">Cuidado integral para Alzheimer, Parkinson, Diabetes, hipertensión y secuelas ACV.</p>
+                <h3 class="font-extrabold text-xl mb-2 text-slate-900">Pacientes Crónicos</h3>
+                <p class="text-slate-600 text-sm">Atención para Alzheimer, Parkinson, Diabetes, Secuelas de ACV y control de glucosa/presión.</p>
             </div>
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:border-brand-mint transition-all">
                 <div class="w-12 h-12 bg-brand-lightmint rounded-2xl flex items-center justify-center text-2xl mb-4">💉</div>
                 <h3 class="font-extrabold text-xl mb-2 text-slate-900">Procedimientos Puntuales</h3>
-                <p class="text-slate-600 text-sm">Inyectables, sueroterapia, cambio de sondas, nebulizaciones y toma de muestras.</p>
+                <p class="text-slate-600 text-sm">Inyectables, sueroterapia, colocación y cambio de sondas, nebulizaciones y tomas de muestra.</p>
             </div>
         </div>
     </section>
 
-    <!-- Sección Equipo Técnico (Gris Muy Claro y Menta) -->
+    <!-- EQUIPO PROFESIONAL -->
     <section id="equipo" class="bg-clean-pattern py-20 px-6 border-y border-slate-200/80">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-brand-darkmint font-black text-xs uppercase tracking-widest bg-brand-lightmint px-4 py-1.5 rounded-full border border-emerald-200">
-                    Confianza Garantizada
-                </span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Equipo Técnico Profesional</h2>
+                <span class="text-brand-darkmint font-black text-xs uppercase tracking-widest bg-brand-lightmint px-4 py-1.5 rounded-full border border-emerald-200">Personal Calificado</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">Enfermeras Técnicas Certificadas</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white p-8 rounded-3xl text-center border border-slate-200/80 shadow-sm">
                     <div class="w-20 h-20 mx-auto bg-brand-iceblue text-brand-softblue rounded-full flex items-center justify-center text-3xl mb-4 border border-blue-100">👩‍⚕️</div>
                     <h3 class="font-extrabold text-lg text-slate-900">Lic. María Fernández</h3>
-                    <p class="text-brand-softblue font-bold text-xs mb-2">Esp. Geriatría & Neurología</p>
-                    <p class="text-slate-500 text-xs">8 años de experiencia en cuidado domiciliario intensivo.</p>
+                    <p class="text-brand-softblue font-bold text-xs mb-2">Especialista en Geriatría</p>
+                    <p class="text-slate-500 text-xs">8 años de experiencia acompañando adultos mayores en entorno familiar.</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl text-center border border-slate-200/80 shadow-sm">
                     <div class="w-20 h-20 mx-auto bg-brand-lightmint text-brand-darkmint rounded-full flex items-center justify-center text-3xl mb-4 border border-emerald-100">👩‍⚕️</div>
                     <h3 class="font-extrabold text-lg text-slate-900">Tec. Ana Gutiérrez</h3>
-                    <p class="text-brand-darkmint font-bold text-xs mb-2">Esp. Postoperatorio & Heridas</p>
-                    <p class="text-slate-500 text-xs">Experta en curación de úlceras y cuidados quirúrgicos.</p>
+                    <p class="text-brand-darkmint font-bold text-xs mb-2">Especialista en Postoperatorio</p>
+                    <p class="text-slate-500 text-xs">Expertiz en cuidados quirúrgicos, manejo de heridas complejas y alivio del dolor.</p>
                 </div>
                 <div class="bg-white p-8 rounded-3xl text-center border border-slate-200/80 shadow-sm">
                     <div class="w-20 h-20 mx-auto bg-brand-iceblue text-brand-softblue rounded-full flex items-center justify-center text-3xl mb-4 border border-blue-100">👩‍⚕️</div>
                     <h3 class="font-extrabold text-lg text-slate-900">Tec. Rosa Martínez</h3>
-                    <p class="text-brand-softblue font-bold text-xs mb-2">Esp. Monitoreo Nocturno</p>
-                    <p class="text-slate-500 text-xs">Especialista en asistencia a pacientes con movilidad reducida.</p>
+                    <p class="text-brand-softblue font-bold text-xs mb-2">Monitoreo Nocturno y Continuo</p>
+                    <p class="text-slate-500 text-xs">Especialista en guardia nocturna, asistencia de sueño y administración puntual de medicinas.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Cotizador Limpio y Ordenado -->
-    <section id="calculadora" class="py-20 px-6 bg-slate-50">
+    <!-- 3. PREGUNTAS FRECUENTES (NUEVA SECCIÓN RECOMENDADA) -->
+    <section id="faq" class="py-20 max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <span class="text-brand-softblue font-black text-xs uppercase tracking-widest bg-brand-iceblue px-4 py-1.5 rounded-full border border-blue-100">Resuelve tus Dudas</span>
+            <h2 class="text-3xl font-black text-slate-900 mt-3">Preguntas Frecuentes</h2>
+        </div>
+        <div class="space-y-4">
+            <details class="bg-white p-6 rounded-2xl border border-slate-200 font-bold text-slate-800 cursor-pointer shadow-sm">
+                <summary class="flex justify-between items-center">
+                    ¿Con cuánta anticipación debo solicitar el servicio?
+                    <span class="text-brand-softblue ml-2">+</span>
+                </summary>
+                <p class="text-slate-600 font-normal text-sm mt-3 leading-relaxed">
+                    Atendemos solicitudes programadas y requerimientos de urgencia en el mismo día, según disponibilidad de personal en tu distrito.
+                </p>
+            </details>
+            <details class="bg-white p-6 rounded-2xl border border-slate-200 font-bold text-slate-800 cursor-pointer shadow-sm">
+                <summary class="flex justify-between items-center">
+                    ¿El personal lleva sus propios insumos médicos?
+                    <span class="text-brand-softblue ml-2">+</span>
+                </summary>
+                <p class="text-slate-600 font-normal text-sm mt-3 leading-relaxed">
+                    Las enfermeras llevan sus herramientas de evaluación básica (tensiómetro, oxímetro, termómetro). Los medicamentos e insumos específicos (gasas, guantes, sueros) son provistos por la familia o añadidos a la cotización previa coordinación.
+                </p>
+            </details>
+            <details class="bg-white p-6 rounded-2xl border border-slate-200 font-bold text-slate-800 cursor-pointer shadow-sm">
+                <summary class="flex justify-between items-center">
+                    ¿Qué sucede si la enfermera no se adapta al paciente?
+                    <span class="text-brand-softblue ml-2">+</span>
+                </summary>
+                <p class="text-slate-600 font-normal text-sm mt-3 leading-relaxed">
+                    Garantizamos el reemplazo de la enfermera sin costo adicional dentro de las primeras 24 horas para asegurar la tranquilidad y empatía con tu familiar.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- COTIZADOR OPTIMIZADO -->
+    <section id="calculadora" class="py-20 px-6 bg-slate-100">
         <div class="max-w-2xl mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-200/80">
             <div class="text-center mb-8">
-                <span class="text-xs font-black uppercase tracking-widest text-brand-softblue bg-brand-iceblue px-4 py-1 rounded-full">
-                    Cotizador Online
-                </span>
-                <h2 class="text-3xl font-black text-slate-900 mt-3">Calcula y Solicita tu Servicio</h2>
-                <p class="text-slate-500 text-sm mt-1">Ingresa tus requerimientos para una cotización inmediata</p>
+                <span class="text-xs font-black uppercase tracking-widest text-brand-softblue bg-brand-iceblue px-4 py-1 rounded-full">Calculadora de Tarifas</span>
+                <h2 class="text-3xl font-black text-slate-900 mt-3">Solicita tu Cotización</h2>
+                <p class="text-slate-500 text-sm mt-1">Recibe un desglose completo directamente en tu WhatsApp</p>
             </div>
 
             <form id="reservaForm" class="space-y-6">
                 <div>
-                    <label class="block font-bold text-slate-800 mb-2 text-sm">Servicio Requerido:</label>
+                    <label class="block font-bold text-slate-800 mb-2 text-sm">Selecciona el Servicio:</label>
                     <select id="tipoServicio" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-bold text-slate-800 transition">
                         <option value="90">Cuidado Adulto Mayor (S/. 90 por turno)</option>
                         <option value="120">Cuidados Postoperatorios (S/. 120 por turno)</option>
@@ -214,39 +285,38 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block font-bold text-slate-800 mb-2 text-sm">Cantidad de días/turnos:</label>
+                        <label class="block font-bold text-slate-800 mb-2 text-sm">Turnos/Días requeridos:</label>
                         <input type="number" id="cantidad" min="1" value="1" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-bold">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-800 mb-2 text-sm">Distrito / Ubicación:</label>
-                        <input type="text" id="ubicacion" placeholder="Ej: Miraflores, San Borja, etc." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-bold" required>
+                        <input type="text" id="ubicacion" placeholder="Ej: Miraflores, Surco..." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-bold" required>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block font-bold text-slate-800 mb-2 text-sm">Observaciones del Paciente (Opcional):</label>
-                    <textarea id="detalles" rows="2" placeholder="Ej: Paciente de 80 años con Alzheimer, requiere control de presión." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-medium text-sm"></textarea>
+                    <label class="block font-bold text-slate-800 mb-2 text-sm">Condición del Paciente (Opcional):</label>
+                    <textarea id="detalles" rows="2" placeholder="Indica edad, enfermedad, o requerimiento especial." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-brand-softblue font-medium text-sm"></textarea>
                 </div>
 
-                <!-- Caja de Total en Azul y Verde Menta -->
                 <div class="bg-gradient-to-r from-brand-iceblue to-brand-lightmint/40 p-6 rounded-2xl border border-blue-100 flex justify-between items-center">
                     <div>
                         <span class="block text-xs font-black uppercase tracking-wider text-brand-softblue">Total Estimado</span>
-                        <span class="text-xs text-slate-500">Servicios garantizados</span>
+                        <span class="text-xs text-slate-500">Transparente y sin costos ocultos</span>
                     </div>
                     <span id="precioTotal" class="text-4xl font-black text-brand-darkmint">S/. 90.00</span>
                 </div>
 
                 <button type="submit" class="w-full bg-brand-mint hover:bg-brand-darkmint text-white font-extrabold p-4 rounded-2xl shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-3 text-lg">
-                    Agendar por WhatsApp
+                    Agendar / Enviar a WhatsApp
                 </button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-400 py-10 px-6 text-center text-sm border-t border-slate-800">
-        <p>© 2026 CuidadoVital - Enfermería Técnica Domiciliaria. Cuidado profesional con la máxima limpieza y calidez humana.</p>
+        <p>© 2026 CuidadoVital - Enfermería Técnica Domiciliaria. Compromiso, higiene y atención humana.</p>
     </footer>
 
     <script>

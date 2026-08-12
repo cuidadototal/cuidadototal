@@ -431,7 +431,13 @@
   </a>
 
   <script>
-    const WHATSAPP = '51968495402';
+    const CONFIG = {
+      WHATSAPP_NUMBER: '51968495402',
+      API_WEBHOOK_URL: 'https://hook.us2.make.com/l2numiph8wd6tplcrid4xo15',
+      ENABLE_API_PUSH: true
+    };
+
+    const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
 
     // Menú móvil
     const menuBtn = document.getElementById('menuBtn');
@@ -502,15 +508,37 @@
         ? new Date(`${startDate.value}T12:00:00`).toLocaleDateString('es-PE')
         : 'Por confirmar';
 
+      const zoneValue = document.getElementById('zone').value.trim();
+      const scheduleValue = document.getElementById('schedule').value;
+      const detailsValue = document.getElementById('details').value.trim() || 'No especificada';
+
+      // Enviar datos al Webhook de Make si está habilitado
+      if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
+        fetch(CONFIG.API_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fecha_solicitud: new Date().toISOString(),
+            modalidad: selected.text,
+            cantidad: quantity.value,
+            zona: zoneValue,
+            horario: scheduleValue,
+            inicio_aproximado: date,
+            necesidad_general: detailsValue,
+            estimado: total.textContent
+          })
+        }).catch(err => console.error('Error enviando datos a Make:', err));
+      }
+
       const message = [
         'Hola CuidadoVital, quiero solicitar una cotización.',
         '',
         `• Modalidad: ${selected.text}`,
         `• Cantidad: ${quantity.value}`,
-        `• Zona: ${document.getElementById('zone').value.trim()}`,
-        `• Horario: ${document.getElementById('schedule').value}`,
+        `• Zona: ${zoneValue}`,
+        `• Horario: ${scheduleValue}`,
         `• Inicio aproximado: ${date}`,
-        `• Necesidad general: ${document.getElementById('details').value.trim() || 'No especificada'}`,
+        `• Necesidad general: ${detailsValue}`,
         `• Estimado mostrado: ${total.textContent}`,
         '',
         'Entiendo que el precio final y la disponibilidad deben confirmarse.'
@@ -603,7 +631,7 @@
 
 <script>
 (() => {
-  const WA='51968495402';
+  const WA=CONFIG.WHATSAPP_NUMBER;
   const $=id=>document.getElementById(id);
   const toast=t=>{
     const el=$('cv-toast'); el.textContent=t; el.classList.add('show');
@@ -613,9 +641,9 @@
   // Accesos rápidos: seleccionan el servicio existente y llevan al cotizador.
   document.querySelectorAll('.cv-quick').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      const select=$('tipoServicio');
+      const select=$('service');
       if(select){select.value=btn.dataset.service; select.dispatchEvent(new Event('change'));}
-      const target=$('calculadora');
+      const target=$('cotizar');
       if(target) target.scrollIntoView({behavior:'smooth'});
     });
   });
@@ -624,7 +652,7 @@
   document.querySelectorAll('.cv-demo').forEach(btn=>btn.addEventListener('click',()=>toast(btn.dataset.msg)));
 
   // Solicitud de llamada: añade una vía de contacto sin crear otro formulario principal.
-  const form=$('reservaForm');
+  const form=$('quoteForm');
   if(form && !$('cv-call-extra')){
     const box=document.createElement('div');
     box.id='cv-call-extra';
@@ -644,7 +672,7 @@
     $('cv-send-call').addEventListener('click',()=>{
       const phone=$('cv-phone').value.trim();
       if(phone.length<7){toast('Introduce un número válido.');return;}
-      const zone=$('ubicacion')?.value.trim()||'Por confirmar';
+      const zone=$('zone')?.value.trim()||'Por confirmar';
       const msg=`Hola CuidadoVital, quiero que me contacten por teléfono.%0ATeléfono: ${encodeURIComponent(phone)}%0AZona: ${encodeURIComponent(zone)}`;
       window.open(`https://wa.me/${WA}?text=${msg}`,'_blank','noopener,noreferrer');
     });
@@ -703,7 +731,7 @@
       const msg=`Hola CuidadoVital, necesito orientación para contratar cuidado domiciliario.%0A%0A• Situación: ${encodeURIComponent(a.tipo||'Por confirmar')}%0A• Necesidad: ${encodeURIComponent(a.necesidad||'Por confirmar')}%0A• Inicio: ${encodeURIComponent(a.cuando||'Por confirmar')}%0A• Zona: ${encodeURIComponent(a.zona||'Por confirmar')}`;
       window.open(`https://wa.me/${WA}?text=${msg}`,'_blank','noopener,noreferrer');close();
     });
-    $('cv-go-quote').addEventListener('click',()=>{close();$('calculadora')?.scrollIntoView({behavior:'smooth'});});
+    $('cv-go-quote').addEventListener('click',()=>{close();$('cotizar')?.scrollIntoView({behavior:'smooth'});});
   }
 
   document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});

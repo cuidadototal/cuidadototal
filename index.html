@@ -201,6 +201,25 @@
       </div>
     </section>
 
+    <!-- ACCESOS RÁPIDOS (EMPIEZA AQUÍ) -->
+    <section id="cv-orientador" class="py-12 bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-6 items-center justify-between">
+          <div>
+            <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Empieza aquí</span>
+            <h2 class="text-2xl md:text-3xl font-black text-slate-900 mt-2">¿Qué necesitas para tu familiar?</h2>
+            <p class="text-slate-500 text-sm mt-1">No necesitas saber el nombre técnico del servicio.</p>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full lg:w-auto">
+            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="90">👵<br>Adulto mayor</button>
+            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="120">🏥<br>Recuperación</button>
+            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="140">🌙<br>Cuidado nocturno</button>
+            <button id="cv-open-advisor" class="cv-premium-btn bg-teal-50 border border-teal-200 text-teal-800 rounded-2xl p-4 font-extrabold text-left">❓<br>No sé qué necesito</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- SERVICIOS -->
     <section id="servicios" class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
@@ -294,6 +313,46 @@
       </div>
     </section>
 
+    <!-- ÁREA FAMILIAR (DEMO) -->
+    <section id="cv-familia" class="py-20 bg-slate-50 border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl">
+          <span class="text-blue-600 font-black text-xs uppercase tracking-widest">Área familiar</span>
+          <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3">La familia puede saber qué está pasando sin complicarse</h2>
+          <p class="text-slate-600 mt-4">Esta es una interfaz demostrativa; todavía no es un área privada conectada a datos reales.</p>
+        </div>
+        <div class="mt-10 grid lg:grid-cols-[.8fr_1.2fr] gap-6">
+          <div class="bg-slate-950 text-white rounded-3xl p-7 shadow-xl">
+            <p class="text-xs uppercase font-black text-slate-400">Servicio activo</p>
+            <h3 class="text-2xl font-black mt-2">Familiar registrado</h3>
+            <div class="mt-6 p-4 rounded-2xl bg-white/5 border border-white/10">
+              <p class="text-xs text-slate-400">Estado</p>
+              <p class="text-xl font-black text-emerald-300">● Activo</p>
+            </div>
+            <div class="mt-3 p-4 rounded-2xl bg-white/5 border border-white/10">
+              <p class="text-xs text-slate-400">Próximo turno</p>
+              <p class="font-black mt-1">Mañana · 08:00–20:00</p>
+              <p class="text-xs text-slate-400 mt-1">Personal asignado · Confirmado</p>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería la bitácora de novedades del turno.">
+              <span class="text-2xl">📋</span><h3 class="font-black mt-3">Novedades</h3><p class="text-sm text-slate-600 mt-2">Actualizaciones relevantes y fáciles de leer.</p>
+            </button>
+            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería el perfil del personal asignado.">
+              <span class="text-2xl">👩‍⚕️</span><h3 class="font-black mt-3">Personal asignado</h3><p class="text-sm text-slate-600 mt-2">Perfil, turno, zona y estado de asignación.</p>
+            </button>
+            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería el resumen de pagos y pendientes.">
+              <span class="text-2xl">💳</span><h3 class="font-black mt-3">Pagos</h3><p class="text-sm text-slate-600 mt-2">Contratado, pagado y pendiente.</p>
+            </button>
+            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería la evaluación del servicio.">
+              <span class="text-2xl">⭐</span><h3 class="font-black mt-3">Evaluar servicio</h3><p class="text-sm text-slate-600 mt-2">Puntualidad, trato y satisfacción.</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ -->
     <section id="faq" class="py-20 bg-slate-50">
       <div class="max-w-3xl mx-auto px-4 sm:px-6">
@@ -350,7 +409,7 @@
               </div>
             </div>
 
-            <!-- CAMPO CORREO ELECTRÓNICO (NUEVO) -->
+            <!-- CAMPO CORREO ELECTRÓNICO -->
             <div>
               <label for="customerEmail" class="block text-sm font-extrabold mb-2">Correo electrónico <span class="font-medium text-slate-400">(para confirmación)</span></label>
               <input id="customerEmail" name="customerEmail" type="email" maxlength="100" autocomplete="email"
@@ -467,15 +526,31 @@
     </svg>
   </a>
 
+  <!-- MODAL ORIENTADOR (WIZARD) -->
+  <div id="cv-advisor" class="cv-modal fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-3xl p-6 md:p-8 shadow-2xl">
+      <div class="flex justify-between gap-4">
+        <div><span class="text-teal-700 font-black text-xs uppercase">Orientador</span><h2 class="text-2xl font-black mt-1">Encuentra el cuidado adecuado</h2></div>
+        <button id="cv-close-advisor" class="text-2xl" aria-label="Cerrar">×</button>
+      </div>
+      <div class="h-2 bg-slate-100 rounded-full mt-6"><div id="cv-progress" class="h-2 bg-teal-600 rounded-full transition-all" style="width:25%"></div></div>
+      <div id="cv-advisor-content" class="mt-7"></div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICACIÓN -->
+  <div id="cv-toast" class="cv-toast fixed left-5 bottom-5 z-[90] bg-slate-950 text-white rounded-2xl px-5 py-4 shadow-2xl text-sm max-w-sm"></div>
+
+  <!-- ESTILOS ADICIONALES PARA COMPONENTES DINÁMICOS -->
+  <style>
+    .cv-premium-btn{transition:.2s}.cv-premium-btn:hover{transform:translateY(-2px)}
+    .cv-modal{display:none}.cv-modal.cv-open{display:flex}
+    .cv-toast{transform:translateY(130px);transition:.3s}.cv-toast.show{transform:translateY(0)}
+    .cv-step{display:none}.cv-step.active{display:block}
+  </style>
+
+  <!-- LÓGICA DE NEGOCIO Y COMPORTAMIENTO -->
   <script>
-    /*
-      CUIDADOVITAL - INTEGRACIÓN WEB + WHATSAPP + MAKE
-      -------------------------------------------------
-      1) El formulario abre WhatsApp inmediatamente.
-      2) Los datos se envían a Make en segundo plano.
-      3) Los turnos que cruzan medianoche se calculan correctamente.
-      4) Se envían campos preparados para Google Calendar y Gmail.
-    */
     const CONFIG = {
       WHATSAPP_NUMBER: '51968495402',
       MAKE_WEBHOOK_URL: 'https://hook.us2.make.com/wvb297ce2i88hlijo25sqs9492gkdc8u',
@@ -718,18 +793,12 @@
       status.classList.add('hidden');
       status.textContent = '';
 
-      // ---------------------------------------------------------
-      // 1. VALIDACIÓN DE CAMPOS
-      // ---------------------------------------------------------
       if (!form.checkValidity()) {
         showError('Revisa los campos obligatorios antes de continuar.');
         form.reportValidity();
         return;
       }
 
-      // ---------------------------------------------------------
-      // 2. VALIDACIÓN DE HORARIOS
-      // ---------------------------------------------------------
       const startTime = document.getElementById('startTime').value;
       const endTime = document.getElementById('endTime').value;
       const shift = getShiftInfo(startDate.value, startTime, endTime);
@@ -739,18 +808,8 @@
         return;
       }
 
-      if (shift.crossesMidnight) {
-        console.log('Turno nocturno detectado:', shift.startDateTime, '→', shift.endDateTime);
-      }
-
-      // ---------------------------------------------------------
-      // 3. CONSTRUIR PAYLOAD
-      // ---------------------------------------------------------
       const payload = buildPayload();
 
-      // ---------------------------------------------------------
-      // 4. PREPARAR WHATSAPP
-      // ---------------------------------------------------------
       let fechaTexto = payload.fecha_inicio;
       if (payload.cruza_medianoche === 'SI') {
         fechaTexto = `${payload.fecha_inicio} → ${payload.fecha_fin}`;
@@ -774,29 +833,14 @@
         'Entiendo que el precio final y la disponibilidad deben confirmarse.'
       ].join('\n');
 
-      // ---------------------------------------------------------
-      // 5. WHATSAPP PRIMERO
-      // ---------------------------------------------------------
-      const whatsappUrl =
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+      const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
-      const whatsappWindow = window.open(
-        whatsappUrl,
-        '_blank',
-        'noopener,noreferrer'
-      );
-
-      // ---------------------------------------------------------
-      // 6. ENVIAR A MAKE
-      // ---------------------------------------------------------
       submitButton.disabled = true;
       submitButton.textContent = 'Registrando solicitud...';
 
       const result = await sendToMake(payload);
 
-      // ---------------------------------------------------------
-      // 7. RESULTADO
-      // ---------------------------------------------------------
       if (result.sent) {
         showStatus(
           `Solicitud registrada. WhatsApp se abrió para continuar la coordinación. Código: ${payload.request_id}`,
@@ -807,298 +851,233 @@
           'WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración del webhook.',
           false
         );
-        console.error('Make:', result);
       }
 
-      // ---------------------------------------------------------
-      // 8. AVISAR SI EL NAVEGADOR BLOQUEÓ WHATSAPP
-      // ---------------------------------------------------------
       if (!whatsappWindow) {
         showError(
           'El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.'
         );
       }
 
-      // ---------------------------------------------------------
-      // 9. RESTAURAR BOTÓN
-      // ---------------------------------------------------------
       submitButton.disabled = false;
       submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
     });
-  </script>
 
-<!-- ================== CUIDADOVITAL PREMIUM: CAPA INTERACTIVA ================== -->
-<style>
-  .cv-premium-btn{transition:.2s}.cv-premium-btn:hover{transform:translateY(-2px)}
-  .cv-modal{display:none}.cv-modal.cv-open{display:flex}
-  .cv-toast{transform:translateY(130px);transition:.3s}.cv-toast.show{transform:translateY(0)}
-  .cv-step{display:none}.cv-step.active{display:block}
-</style>
+    // =========================================================
+    // LÓGICA DE CAPA INTERACTIVA (ORIENTADOR Y SOLICITUD DE LLAMADA)
+    // =========================================================
+    (() => {
+      const WA = CONFIG.WHATSAPP_NUMBER;
+      const $ = id => document.getElementById(id);
+      
+      const toast = t => {
+        const el = $('cv-toast'); 
+        if (!el) return;
+        el.textContent = t; 
+        el.classList.add('show');
+        clearTimeout(window.cvToastTimer); 
+        window.cvToastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+      };
 
-<!-- Accesos rápidos para familiares -->
-<section id="cv-orientador" class="py-12 bg-white border-y border-slate-200">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="flex flex-col lg:flex-row gap-6 items-center justify-between">
-      <div>
-        <span class="text-brand-darkmint font-black text-xs uppercase tracking-widest">Empieza aquí</span>
-        <h2 class="text-2xl md:text-3xl font-black text-slate-900 mt-2">¿Qué necesitas para tu familiar?</h2>
-        <p class="text-slate-500 text-sm mt-1">No necesitas saber el nombre técnico del servicio.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full lg:w-auto">
-        <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="90">👵<br>Adulto mayor</button>
-        <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="120">🏥<br>Recuperación</button>
-        <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="140">🌙<br>Cuidado nocturno</button>
-        <button id="cv-open-advisor" class="cv-premium-btn bg-teal-50 border border-teal-200 text-teal-800 rounded-2xl p-4 font-extrabold text-left">❓<br>No sé qué necesito</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Área familiar: demostración visual -->
-<section id="cv-familia" class="py-20 bg-slate-50 border-b border-slate-200">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="max-w-3xl">
-      <span class="text-brand-softblue font-black text-xs uppercase tracking-widest">Área familiar</span>
-      <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3">La familia puede saber qué está pasando sin complicarse</h2>
-      <p class="text-slate-600 mt-4">Esta es una interfaz demostrativa; todavía no es un área privada conectada a datos reales.</p>
-    </div>
-    <div class="mt-10 grid lg:grid-cols-[.8fr_1.2fr] gap-6">
-      <div class="bg-slate-950 text-white rounded-3xl p-7 shadow-xl">
-        <p class="text-xs uppercase font-black text-slate-400">Servicio activo</p>
-        <h3 class="text-2xl font-black mt-2">Familiar registrado</h3>
-        <div class="mt-6 p-4 rounded-2xl bg-white/5 border border-white/10">
-          <p class="text-xs text-slate-400">Estado</p>
-          <p class="text-xl font-black text-emerald-300">● Activo</p>
-        </div>
-        <div class="mt-3 p-4 rounded-2xl bg-white/5 border border-white/10">
-          <p class="text-xs text-slate-400">Próximo turno</p>
-          <p class="font-black mt-1">Mañana · 08:00–20:00</p>
-          <p class="text-xs text-slate-400 mt-1">Personal asignado · Confirmado</p>
-        </div>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería la bitácora de novedades del turno.">
-          <span class="text-2xl">📋</span><h3 class="font-black mt-3">Novedades</h3><p class="text-sm text-slate-600 mt-2">Actualizaciones relevantes y fáciles de leer.</p>
-        </button>
-        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería el perfil del personal asignado.">
-          <span class="text-2xl">👩‍⚕️</span><h3 class="font-black mt-3">Personal asignado</h3><p class="text-sm text-slate-600 mt-2">Perfil, turno, zona y estado de asignación.</p>
-        </button>
-        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería el resumen de pagos y pendientes.">
-          <span class="text-2xl">💳</span><h3 class="font-black mt-3">Pagos</h3><p class="text-sm text-slate-600 mt-2">Contratado, pagado y pendiente.</p>
-        </button>
-        <button class="cv-demo bg-white border rounded-3xl p-6 text-left" data-msg="Aquí aparecería la evaluación del servicio.">
-          <span class="text-2xl">⭐</span><h3 class="font-black mt-3">Evaluar servicio</h3><p class="text-sm text-slate-600 mt-2">Puntualidad, trato y satisfacción.</p>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Orientador tipo wizard -->
-<div id="cv-advisor" class="cv-modal fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-sm items-center justify-center p-4">
-  <div class="bg-white w-full max-w-xl rounded-3xl p-6 md:p-8 shadow-2xl">
-    <div class="flex justify-between gap-4">
-      <div><span class="text-teal-700 font-black text-xs uppercase">Orientador</span><h2 class="text-2xl font-black mt-1">Encuentra el cuidado adecuado</h2></div>
-      <button id="cv-close-advisor" class="text-2xl" aria-label="Cerrar">×</button>
-    </div>
-    <div class="h-2 bg-slate-100 rounded-full mt-6"><div id="cv-progress" class="h-2 bg-teal-600 rounded-full transition-all" style="width:25%"></div></div>
-    <div id="cv-advisor-content" class="mt-7"></div>
-  </div>
-</div>
-
-<div id="cv-toast" class="cv-toast fixed left-5 bottom-5 z-[90] bg-slate-950 text-white rounded-2xl px-5 py-4 shadow-2xl text-sm max-w-sm"></div>
-
-<script>
-(() => {
-  const WA=CONFIG.WHATSAPP_NUMBER;
-  const $=id=>document.getElementById(id);
-  const toast=t=>{
-    const el=$('cv-toast'); el.textContent=t; el.classList.add('show');
-    clearTimeout(window.cvToastTimer); window.cvToastTimer=setTimeout(()=>el.classList.remove('show'),3200);
-  };
-
-  // Accesos rápidos
-  document.querySelectorAll('.cv-quick').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const select=$('service');
-      if(select){select.value=btn.dataset.service; select.dispatchEvent(new Event('change'));}
-      const target=$('cotizar');
-      if(target) target.scrollIntoView({behavior:'smooth'});
-    });
-  });
-
-  // Área familiar demo
-  document.querySelectorAll('.cv-demo').forEach(btn=>btn.addEventListener('click',()=>toast(btn.dataset.msg)));
-
-  // Solicitud de llamada
-  const form=$('quoteForm');
-  if(form && !$('cv-call-extra')){
-    const box=document.createElement('div');
-    box.id='cv-call-extra';
-    box.className='mt-3';
-    box.innerHTML=`
-      <button type="button" id="cv-call-btn" class="w-full border-2 border-teal-600 text-teal-700 font-extrabold p-4 rounded-2xl hover:bg-teal-50">
-        📞 Prefiero que me contacten por teléfono
-      </button>
-      <div id="cv-call-fields" class="hidden mt-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
-        <label class="block text-sm font-bold mb-2" for="cv-phone">Número de teléfono</label>
-        <input id="cv-phone" type="tel" inputmode="tel" maxlength="20" placeholder="Ej. 999 999 999"
-          class="w-full p-3 bg-white border rounded-xl focus:outline-none focus:border-teal-500">
-        <button type="button" id="cv-send-call" class="mt-3 w-full bg-slate-900 text-white p-3 rounded-xl font-black">Enviar solicitud de llamada</button>
-      </div>`;
-    form.appendChild(box);
-    $('cv-call-btn').addEventListener('click',()=>$('cv-call-fields').classList.toggle('hidden'));
-    $('cv-send-call').addEventListener('click',()=>{
-      const phone=$('cv-phone').value.trim();
-      if(phone.length<7){toast('Introduce un número válido.');return;}
-      const zone=$('zone')?.value.trim()||'Por confirmar';
-      const msg=`Hola CuidadoVital, quiero que me contacten por teléfono.%0ATeléfono: ${encodeURIComponent(phone)}%0AZona: ${encodeURIComponent(zone)}`;
-      window.open(`https://wa.me/${WA}?text=${msg}`,'_blank','noopener,noreferrer');
-    });
-  }
-
-  // Orientador
-  const modal=$('cv-advisor'), content=$('cv-advisor-content'), progress=$('cv-progress');
-  let state={step:0,answers:{}};
-  const open=()=>{state={step:0,answers:{}};modal.classList.add('cv-open');render();};
-  const close=()=>modal.classList.remove('cv-open');
-  $('cv-open-advisor').addEventListener('click',open);
-  $('cv-close-advisor').addEventListener('click',close);
-  modal.addEventListener('click',e=>{if(e.target===modal)close();});
-
-  function render(){
-    progress.style.width=(((state.step+1)/4)*100)+'%';
-    if(state.step===0){
-      content.innerHTML=`<p class="text-slate-600">¿Para quién buscas apoyo?</p><div class="mt-5 grid gap-3">
-        ${['Adulto mayor','Paciente en recuperación','Persona que necesita supervisión','No estoy seguro'].map(v=>`<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
-    }else if(state.step===1){
-      content.innerHTML=`<p class="text-slate-600">¿Qué apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">
-        ${['Higiene y actividades diarias','Movilidad y acompañamiento','Supervisión durante varias horas','Cuidado nocturno','Necesito orientación'].map(v=>`<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="necesidad" data-v="${v}">${v}</button>`).join('')}</div>`;
-    }else if(state.step===2){
-      content.innerHTML=`<p class="text-slate-600">¿Cuándo necesitas comenzar?</p><div class="mt-5 grid gap-3">
-        ${['Hoy','Mañana','Esta semana','Fecha por definir'].map(v=>`<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="cuando" data-v="${v}">${v}</button>`).join('')}</div>`;
-    }else{
-      content.innerHTML=`<p class="text-slate-600">¿En qué distrito o zona?</p>
-        <input id="cv-zone" maxlength="80" class="w-full mt-5 p-4 bg-slate-50 border rounded-xl" placeholder="Ej. Castilla">
-        <button id="cv-finish" class="w-full mt-4 bg-teal-600 text-white p-4 rounded-xl font-black">Ver orientación →</button>`;
-      $('cv-finish').addEventListener('click',()=>{
-        const z=$('cv-zone').value.trim();
-        if(!z){toast('Indica el distrito o zona.');return;}
-        state.answers.zona=z; result();
+      // Accesos rápidos
+      document.querySelectorAll('.cv-quick').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const select = $('service');
+          if (select) {
+            select.value = btn.dataset.service; 
+            select.dispatchEvent(new Event('change'));
+          }
+          const target = $('cotizar');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
       });
-    }
-    content.querySelectorAll('.cv-answer').forEach(b=>b.addEventListener('click',()=>{
-      state.answers[b.dataset.k]=b.dataset.v;state.step++;render();
-    }));
-  }
 
-  function result(){
-    progress.style.width='100%';
-    const a=state.answers;
-    const safe=v=>String(v||'Por confirmar').replace(/[<>&"]/g,'');
-    content.innerHTML=`<div class="bg-teal-50 border border-teal-100 rounded-2xl p-5">
-      <span class="text-xs uppercase font-black text-teal-700">Orientación inicial</span>
-      <h3 class="text-xl font-black mt-2">Podemos ayudarte a coordinar el cuidado</h3>
-      <p class="text-sm text-slate-600 mt-3">Situación: <b>${safe(a.tipo)}</b><br>Necesidad: <b>${safe(a.necesidad)}</b><br>Inicio: <b>${safe(a.cuando)}</b><br>Zona: <b>${safe(a.zona)}</b></p>
-    </div>
-    <div class="grid sm:grid-cols-2 gap-3 mt-5">
-      <button id="cv-wa" class="bg-emerald-500 text-white p-4 rounded-xl font-black">Enviar por WhatsApp</button>
-      <button id="cv-go-quote" class="border p-4 rounded-xl font-black">Ir al cotizador</button>
-    </div>
-    <p class="text-xs text-slate-400 mt-4">Esta orientación no constituye diagnóstico ni indicación médica.</p>`;
-    $('cv-wa').addEventListener('click',()=>{
-      const msg=`Hola CuidadoVital, necesito orientación para contratar cuidado domiciliario.%0A%0A• Situación: ${encodeURIComponent(a.tipo||'Por confirmar')}%0A• Necesidad: ${encodeURIComponent(a.necesidad||'Por confirmar')}%0A• Inicio: ${encodeURIComponent(a.cuando||'Por confirmar')}%0A• Zona: ${encodeURIComponent(a.zona||'Por confirmar')}`;
-      window.open(`https://wa.me/${WA}?text=${msg}`,'_blank','noopener,noreferrer');close();
-    });
-    $('cv-go-quote').addEventListener('click',()=>{close();$('cotizar')?.scrollIntoView({behavior:'smooth'});});
-  }
+      // Área familiar demo
+      document.querySelectorAll('.cv-demo').forEach(btn => 
+        btn.addEventListener('click', () => toast(btn.dataset.msg))
+      );
 
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-})();
-</script>
-<!-- ================== FIN CAPA INTERACTIVA ================== -->
-
-<script id="cv-navigation-controller">
-(() => {
-  const navMap = {
-    'Empieza aquí': 'cv-orientador',
-    'Servicios': 'servicios',
-    'Seguridad': 'seguridad',
-    'Cómo funciona': 'proceso',
-    'Área familiar': 'cv-familia',
-    'Preguntas': 'faq',
-    'Preguntas frecuentes': 'faq',
-    'Solicitar atención': 'cotizar'
-  };
-
-  const header = document.querySelector('header');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuBtn = document.getElementById('menuBtn');
-
-  function goToSection(id, updateHash = true) {
-    const target = document.getElementById(id);
-    if (!target) return;
-
-    const headerHeight = header ? header.offsetHeight : 0;
-    const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
-
-    window.scrollTo({
-      top: Math.max(0, y),
-      behavior: 'smooth'
-    });
-
-    if (updateHash) {
-      history.replaceState(null, '', '#' + id);
-    }
-
-    if (mobileMenu) mobileMenu.classList.add('hidden');
-    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
-
-    document.querySelectorAll('nav a').forEach(link => link.classList.remove('cv-nav-active'));
-    document.querySelectorAll('nav a').forEach(link => {
-      const text = link.textContent.trim();
-      if (navMap[text] === id) link.classList.add('cv-nav-active');
-    });
-  }
-
-  document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-    link.addEventListener('click', event => {
-      const id = link.getAttribute('href').slice(1);
-      if (document.getElementById(id)) {
-        event.preventDefault();
-        goToSection(id);
+      // Solicitud de llamada adicional
+      if (form && !$('cv-call-extra')) {
+        const box = document.createElement('div');
+        box.id = 'cv-call-extra';
+        box.className = 'mt-3';
+        box.innerHTML = `
+          <button type="button" id="cv-call-btn" class="w-full border-2 border-teal-600 text-teal-700 font-extrabold p-4 rounded-2xl hover:bg-teal-50">
+            📞 Prefiero que me contacten por teléfono
+          </button>
+          <div id="cv-call-fields" class="hidden mt-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+            <label class="block text-sm font-bold mb-2" for="cv-phone">Número de teléfono</label>
+            <input id="cv-phone" type="tel" inputmode="tel" maxlength="20" placeholder="Ej. 999 999 999"
+              class="w-full p-3 bg-white border rounded-xl focus:outline-none focus:border-teal-500">
+            <button type="button" id="cv-send-call" class="mt-3 w-full bg-slate-900 text-white p-3 rounded-xl font-black">Enviar solicitud de llamada</button>
+          </div>`;
+        form.appendChild(box);
+        
+        $('cv-call-btn').addEventListener('click', () => $('cv-call-fields').classList.toggle('hidden'));
+        $('cv-send-call').addEventListener('click', () => {
+          const phone = $('cv-phone').value.trim();
+          if (phone.length < 7) {
+            toast('Introduce un número válido.');
+            return;
+          }
+          const zone = $('zone')?.value.trim() || 'Por confirmar';
+          const msg = `Hola CuidadoVital, quiero que me contacten por teléfono.\nTeléfono: ${phone}\nZona: ${zone}`;
+          window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+        });
       }
-    });
-  });
 
-  const sections = ['cv-orientador','servicios','seguridad','proceso','cv-familia','faq','cotizar']
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
+      // Orientador (Wizard)
+      const modal = $('cv-advisor'), content = $('cv-advisor-content'), progress = $('cv-progress');
+      let state = { step: 0, answers: {} };
+      
+      const open = () => { state = { step: 0, answers: {} }; modal.classList.add('cv-open'); render(); };
+      const close = () => modal.classList.remove('cv-open');
+      
+      if ($('cv-open-advisor')) $('cv-open-advisor').addEventListener('click', open);
+      if ($('cv-close-advisor')) $('cv-close-advisor').addEventListener('click', close);
+      if (modal) modal.addEventListener('click', e => { if (e.target === modal) close(); });
 
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries
-      .filter(entry => entry.isIntersecting)
-      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      function render() {
+        if (!progress || !content) return;
+        progress.style.width = (((state.step + 1) / 4) * 100) + '%';
+        if (state.step === 0) {
+          content.innerHTML = `<p class="text-slate-600">¿Para quién buscas apoyo?</p><div class="mt-5 grid gap-3">
+            ${['Adulto mayor','Paciente en recuperación','Persona que necesita supervisión','No estoy seguro'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
+        } else if (state.step === 1) {
+          content.innerHTML = `<p class="text-slate-600">¿Qué apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">
+            ${['Higiene y actividades diarias','Movilidad y acompañamiento','Supervisión durante varias horas','Cuidado nocturno','Necesito orientación'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="necesidad" data-v="${v}">${v}</button>`).join('')}</div>`;
+        } else if (state.step === 2) {
+          content.innerHTML = `<p class="text-slate-600">¿Cuándo necesitas comenzar?</p><div class="mt-5 grid gap-3">
+            ${['Hoy','Mañana','Esta semana','Fecha por definir'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="cuando" data-v="${v}">${v}</button>`).join('')}</div>`;
+        } else {
+          content.innerHTML = `<p class="text-slate-600">¿En qué distrito o zona?</p>
+            <input id="cv-zone" maxlength="80" class="w-full mt-5 p-4 bg-slate-50 border rounded-xl" placeholder="Ej. Castilla">
+            <button id="cv-finish" class="w-full mt-4 bg-teal-600 text-white p-4 rounded-xl font-black">Ver orientación →</button>`;
+          $('cv-finish').addEventListener('click', () => {
+            const z = $('cv-zone').value.trim();
+            if (!z) { toast('Indica el distrito o zona.'); return; }
+            state.answers.zona = z; 
+            result();
+          });
+        }
+        content.querySelectorAll('.cv-answer').forEach(b => b.addEventListener('click', () => {
+          state.answers[b.dataset.k] = b.dataset.v; 
+          state.step++; 
+          render();
+        }));
+      }
 
-    if (!visible) return;
-    document.querySelectorAll('nav a').forEach(link => {
-      link.classList.toggle('cv-nav-active', navMap[link.textContent.trim()] === visible.target.id);
-    });
-  }, {
-    rootMargin: '-115px 0px -55% 0px',
-    threshold: [0.05, 0.2, 0.5]
-  });
+      function result() {
+        if (!progress || !content) return;
+        progress.style.width = '100%';
+        const a = state.answers;
+        const safe = v => String(v || 'Por confirmar').replace(/[<>&"]/g, '');
+        content.innerHTML = `<div class="bg-teal-50 border border-teal-100 rounded-2xl p-5">
+          <span class="text-xs uppercase font-black text-teal-700">Orientación inicial</span>
+          <h3 class="text-xl font-black mt-2">Podemos ayudarte a coordinar el cuidado</h3>
+          <p class="text-sm text-slate-600 mt-3">Situación: <b>${safe(a.tipo)}</b><br>Necesidad: <b>${safe(a.necesidad)}</b><br>Inicio: <b>${safe(a.cuando)}</b><br>Zona: <b>${safe(a.zona)}</b></p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3 mt-5">
+          <button id="cv-wa" class="bg-emerald-500 text-white p-4 rounded-xl font-black">Enviar por WhatsApp</button>
+          <button id="cv-go-quote" class="border p-4 rounded-xl font-black">Ir al cotizador</button>
+        </div>
+        <p class="text-xs text-slate-400 mt-4">Esta orientación no constituye diagnóstico ni indicación médica.</p>`;
+        
+        $('cv-wa').addEventListener('click', () => {
+          const msg = `Hola CuidadoVital, necesito orientación para contratar cuidado domiciliario.\n\n• Situación: ${a.tipo || 'Por confirmar'}\n• Necesidad: ${a.necesidad || 'Por confirmar'}\n• Inicio: ${a.cuando || 'Por confirmar'}\n• Zona: ${a.zona || 'Por confirmar'}`;
+          window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+          close();
+        });
+        $('cv-go-quote').addEventListener('click', () => { 
+          close(); 
+          $('cotizar')?.scrollIntoView({ behavior: 'smooth' }); 
+        });
+      }
 
-  sections.forEach(section => observer.observe(section));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    })();
 
-  if (window.location.hash) {
-    const id = window.location.hash.slice(1);
-    if (document.getElementById(id)) {
-      setTimeout(() => goToSection(id, false), 80);
-    }
-  }
-})();
-</script>
+    // =========================================================
+    // CONTROLADOR DE NAVEGACIÓN Y RESALTADO DE SECCIONES
+    // =========================================================
+    (() => {
+      const navMap = {
+        'Empieza aquí': 'cv-orientador',
+        'Servicios': 'servicios',
+        'Seguridad': 'seguridad',
+        'Cómo funciona': 'proceso',
+        'Área familiar': 'cv-familia',
+        'Preguntas': 'faq',
+        'Preguntas frecuentes': 'faq',
+        'Solicitar atención': 'cotizar'
+      };
 
+      const header = document.querySelector('header');
+
+      function goToSection(id, updateHash = true) {
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        const headerHeight = header ? header.offsetHeight : 0;
+        const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+
+        window.scrollTo({
+          top: Math.max(0, y),
+          behavior: 'smooth'
+        });
+
+        if (updateHash) {
+          history.replaceState(null, '', '#' + id);
+        }
+
+        if (mobileMenu) mobileMenu.classList.add('hidden');
+        if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+
+        document.querySelectorAll('nav a').forEach(link => link.classList.remove('cv-nav-active'));
+        document.querySelectorAll('nav a').forEach(link => {
+          const text = link.textContent.trim();
+          if (navMap[text] === id) link.classList.add('cv-nav-active');
+        });
+      }
+
+      document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', event => {
+          const id = link.getAttribute('href').slice(1);
+          if (document.getElementById(id)) {
+            event.preventDefault();
+            goToSection(id);
+          }
+        });
+      });
+
+      const sections = ['cv-orientador','servicios','seguridad','proceso','cv-familia','faq','cotizar']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visible) return;
+        document.querySelectorAll('nav a').forEach(link => {
+          link.classList.toggle('cv-nav-active', navMap[link.textContent.trim()] === visible.target.id);
+        });
+      }, {
+        rootMargin: '-115px 0px -55% 0px',
+        threshold: [0.05, 0.2, 0.5]
+      });
+
+      sections.forEach(section => observer.observe(section));
+
+      if (window.location.hash) {
+        const id = window.location.hash.slice(1);
+        if (document.getElementById(id)) {
+          setTimeout(() => goToSection(id, false), 80);
+        }
+      }
+    })();
+  </script>
 </body>
 </html>

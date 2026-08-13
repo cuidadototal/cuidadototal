@@ -600,65 +600,254 @@
       }
     }
 
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      error.classList.add('hidden');
-      status.classList.add('hidden');
+form.addEventListener('submit', async event => {
+  event.preventDefault();
 
-      if (!form.checkValidity()) {
-        error.textContent = 'Revisa los campos obligatorios antes de continuar.';
-        error.classList.remove('hidden');
-        form.reportValidity();
-        return;
-      }
+  error.classList.add('hidden');
+  status.classList.add('hidden');
 
-      const startTime = document.getElementById('startTime').value;
-      const endTime = document.getElementById('endTime').value;
-      if (startTime >= endTime) {
-        error.textContent = 'La hora de fin debe ser posterior a la hora de inicio.';
-        error.classList.remove('hidden');
-        return;
-      }
+  // =========================================================
+  // 1. VALIDAR FORMULARIO
+  // =========================================================
 
-      const payload = buildPayload();
-      submitButton.disabled = true;
-      submitButton.textContent = 'Registrando solicitud...';
+  if (!form.checkValidity()) {
+    error.textContent = 'Revisa los campos obligatorios antes de continuar.';
+    error.classList.remove('hidden');
+    form.reportValidity();
+    return;
+  }
 
-      const result = await sendToMake(payload);
+  // =========================================================
+  // 2. VALIDAR HORAS
+  // =========================================================
 
-      // WhatsApp directo como respaldo y canal de contacto inmediato
-      const message = [
-        'Hola CuidadoVital, quiero solicitar una cotización.',
-        '',
-        `• Familiar: ${payload.nombre_familiar}`,
-        `• Teléfono: ${payload.telefono}`,
-        `• Modalidad: ${payload.servicio}`,
-        `• Cantidad: ${payload.cantidad}`,
-        `• Zona: ${payload.zona}`,
-        `• Fecha: ${payload.fecha_inicio}`,
-        `• Horario: ${payload.hora_inicio}–${payload.hora_fin}`,
-        `• Turno: ${payload.horario}`,
-        `• Necesidad general: ${payload.necesidad_general}`,
-        `• Estimado: ${payload.estimado}`,
-        '',
-        'Entiendo que el precio final y la disponibilidad deben confirmarse.'
-      ].join('\n');
+  const startTime = document.getElementById('startTime').value;
+  const endTime = document.getElementById('endTime').value;
 
-      showStatus(
-        result.sent
-          ? 'Solicitud registrada. Ahora se abrirá WhatsApp para continuar la coordinación.'
-          : 'WhatsApp se abrirá, pero primero configura el webhook de Make para activar la automatización.',
-        result.sent
-      );
+  if (startTime >= endTime) {
+    error.textContent =
+      'La hora de fin debe ser posterior a la hora de inicio.';
+    error.classList.remove('hidden');
+    return;
+  }
 
-      window.open(
-        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
-        '_blank',
-        'noopener,noreferrer'
-      );
+  // =========================================================
+  // 3. CONSTRUIR LOS DATOS
+  // =========================================================
 
-      submitButton.disabled = false;
-      submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
+  const payload = buildPayload();
+
+  // =========================================================
+  // 4. CREAR MENSAJE DE WHATSAPP
+  // =========================================================
+
+  const message = [
+    'Hola CuidadoVital, quiero solicitar una cotización.',
+    '',
+    `• Familiar: ${payload.nombre_familiar}`,
+    `• Teléfono: ${payload.telefono}`,
+    `• Modalidad: ${payload.servicio}`,
+    `• Cantidad: ${payload.cantidad}`,
+    `• Zona: ${payload.zona}`,
+    `• Fecha: ${payload.fecha_inicio}`,
+    `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
+    `• Turno: ${payload.horario}`,
+    `• Necesidad general: ${payload.necesidad_general}`,
+    `• Estimado: ${payload.estimado}`,
+    '',
+    'Entiendo que el precio final y la disponibilidad deben confirmarse.'
+  ].join('\n');
+
+  // =========================================================
+  // 5. ABRIR WHATSAPP INMEDIATAMENTE
+  // =========================================================
+  // IMPORTANTE:
+  // Esto ocurre ANTES de esperar la respuesta de Make.
+  // Así el navegador no bloquea la ventana.
+
+  const whatsappUrl =
+    `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  const whatsappWindow = window.open(
+    whatsappUrl,
+    '_blank',
+    'noopener,noreferrer'
+  );
+
+  // =========================================================
+  // 6. CAMBIAR ESTADO DEL BOTÓN
+  // =========================================================
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Registrando solicitud...';
+
+  // =========================================================
+  // 7. ENVIAR DATOS A MAKE
+  // =========================================================
+
+  const result = await sendToMake(payload);
+
+  // =========================================================
+  // 8. MOSTRAR RESULTADO
+  // =========================================================
+
+  if (result.sent) {
+
+    showStatus(
+      'Solicitud registrada correctamente. WhatsApp se abrió para continuar la coordinación.'
+    );
+
+  } else {
+
+    showStatus(
+      'WhatsApp se abrió correctamente. La solicitud aún necesita configuración del webhook de Make.'
+    );
+
+    console.error(
+      'Make no recibió la solicitud:',
+      result
+    );
+  }
+
+  // =========================================================
+  // 9. SI WHATSAPP FUE BLOQUEADO
+  // =========================================================
+
+  if (!whatsappWindow) {
+
+    error.textContent =
+      'El navegador bloqueó WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.';
+
+    error.classList.remove('hidden');
+
+  }
+
+  // =========================================================
+  // 10. RESTAURAR BOTÓN
+  // =========================================================
+
+  submitButton.disabled = false;
+
+  submitButton.textContent =
+    'Enviar solicitud y abrir WhatsApp';
+});
+}
+
+// ============================================================
+// PAYLOAD QUE RECIBIRÁ MAKE
+// ============================================================
+
+const payload = {
+  fecha_solicitud: new Date().toISOString(),
+
+  nombre_familiar: nameValue,
+  telefono: phoneValue,
+
+  modalidad: selected?.text || 'Por confirmar',
+  servicio: selected?.text || 'Por confirmar',
+
+  cantidad: quantity.value,
+
+  zona: zoneValue,
+
+  horario: horarioCompleto,
+
+  fecha_inicio: dateISO,
+  inicio_aproximado: dateDisplay,
+
+  hora_inicio: startTimeValue,
+  hora_fin: endTimeValue,
+
+  necesidad_general: detailsValue,
+
+  estimado: total.textContent,
+
+  estado: 'PENDIENTE DE CONFIRMACION',
+
+  fuente: 'Web CuidadoVital',
+
+  zona_horaria: 'America/Lima'
+};
+
+// ============================================================
+// CREAR MENSAJE DE WHATSAPP
+// ============================================================
+
+const message = [
+  'Hola CuidadoVital, quiero solicitar una cotización.',
+  '',
+  `• Nombre: ${nameValue}`,
+  `• WhatsApp: ${phoneValue}`,
+  `• Modalidad: ${selected?.text || 'Por confirmar'}`,
+  `• Cantidad: ${quantity.value}`,
+  `• Zona: ${zoneValue}`,
+  `• Fecha: ${dateDisplay}`,
+  `• Horario: ${horarioCompleto}`,
+  `• Necesidad general: ${detailsValue}`,
+  `• Estimado mostrado: ${total.textContent}`,
+  '',
+  'Entiendo que el precio final y la disponibilidad deben confirmarse.'
+].join('\n');
+
+// ============================================================
+// MUY IMPORTANTE:
+// ABRIMOS WHATSAPP PRIMERO
+// ============================================================
+
+const whatsappUrl =
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+// Esto ocurre directamente como consecuencia del clic.
+// Así el navegador no debería bloquear la ventana.
+const whatsappWindow = window.open(
+  whatsappUrl,
+  '_blank',
+  'noopener,noreferrer'
+);
+
+// ============================================================
+// ENVIAR LOS DATOS A MAKE
+// ============================================================
+
+if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
+
+  // Usamos URLSearchParams en lugar de application/json.
+  // Esto evita problemas de CORS/preflight con el navegador.
+
+  const makeData = new URLSearchParams();
+
+  Object.entries(payload).forEach(([key, value]) => {
+    makeData.append(key, String(value ?? ''));
+  });
+
+  fetch(CONFIG.API_WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: makeData
+  })
+  .then(() => {
+    console.log('Solicitud enviada a Make correctamente.');
+  })
+  .catch(error => {
+    console.error('Error enviando la solicitud a Make:', error);
+  });
+}
+
+// ============================================================
+// MENSAJE DE CONFIRMACIÓN EN LA PÁGINA
+// ============================================================
+
+error.classList.add('hidden');
+error.textContent = '';
+
+if (whatsappWindow) {
+  console.log('WhatsApp abierto correctamente.');
+} else {
+  console.warn(
+    'El navegador bloqueó la ventana de WhatsApp. ' +
+    'Permite ventanas emergentes para este sitio.'
+  );
+}
     });
   </script>
 

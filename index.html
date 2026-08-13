@@ -350,6 +350,13 @@
               </div>
             </div>
 
+            <!-- CAMPO CORREO ELECTRÓNICO (NUEVO) -->
+            <div>
+              <label for="customerEmail" class="block text-sm font-extrabold mb-2">Correo electrónico <span class="font-medium text-slate-400">(para confirmación)</span></label>
+              <input id="customerEmail" name="customerEmail" type="email" maxlength="100" autocomplete="email"
+                placeholder="ejemplo@correo.com" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
+            </div>
+
             <div>
               <label for="service" class="block text-sm font-extrabold mb-2">Modalidad</label>
               <select id="service" name="service" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
@@ -467,7 +474,7 @@
       1) El formulario abre WhatsApp inmediatamente.
       2) Los datos se envían a Make en segundo plano.
       3) Los turnos que cruzan medianoche se calculan correctamente.
-      4) Se envían campos preparados para Google Calendar.
+      4) Se envían campos preparados para Google Calendar y Gmail.
     */
     const CONFIG = {
       WHATSAPP_NUMBER: '51968495402',
@@ -598,6 +605,7 @@
       const selected = service.selectedOptions[0];
       const name = document.getElementById('customerName').value.trim();
       const phone = normalizePhone(document.getElementById('customerPhone').value.trim());
+      const email = document.getElementById('customerEmail').value.trim();
       const zone = document.getElementById('zone').value.trim();
       const schedule = document.getElementById('schedule').value;
       const startTime = document.getElementById('startTime').value;
@@ -612,6 +620,8 @@
 
         nombre_familiar: name,
         telefono: phone,
+        correo: email,
+        email: email,
 
         modalidad: selected.text,
         servicio: selected.textContent.trim(),
@@ -631,7 +641,6 @@
 
         inicio_calendario: shift.startDateTime,
         fin_calendario: shift.endDateTime,
-        // ISO con la zona horaria de Lima (-05:00), listo para Google Calendar.
         inicio_calendario_iso: `${shift.startDateTime}-05:00`,
         fin_calendario_iso: `${shift.endDateTime}-05:00`,
         zona_horaria: CONFIG.TIMEZONE,
@@ -665,7 +674,6 @@
       console.log('CuidadoVital → Make: enviando solicitud', payload);
 
       try {
-        // No usamos application/json para evitar preflight CORS desde GitHub Pages.
         await fetch(webhook, {
           method: 'POST',
           mode: 'no-cors',
@@ -726,14 +734,11 @@
       const endTime = document.getElementById('endTime').value;
       const shift = getShiftInfo(startDate.value, startTime, endTime);
 
-      // La misma hora se considera inválida porque produciría 0 horas.
       if (shift.sameTime) {
         showError('La hora de inicio y la hora de fin no pueden ser iguales.');
         return;
       }
 
-      // Si inicio > fin, NO es un error: significa que el turno termina
-      // al día siguiente. Ejemplo: 18:00 → 07:00.
       if (shift.crossesMidnight) {
         console.log('Turno nocturno detectado:', shift.startDateTime, '→', shift.endDateTime);
       }
@@ -756,6 +761,7 @@
         '',
         `• Familiar: ${payload.nombre_familiar}`,
         `• Teléfono: ${payload.telefono}`,
+        `• Correo: ${payload.correo}`,
         `• Modalidad: ${payload.servicio}`,
         `• Cantidad: ${payload.cantidad}`,
         `• Zona: ${payload.zona}`,
@@ -771,8 +777,6 @@
       // ---------------------------------------------------------
       // 5. WHATSAPP PRIMERO
       // ---------------------------------------------------------
-      // Se ejecuta directamente por el clic del usuario para evitar
-      // que el navegador bloquee la ventana.
       const whatsappUrl =
         `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 

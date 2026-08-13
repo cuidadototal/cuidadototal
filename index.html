@@ -631,7 +631,13 @@
 
         inicio_calendario: shift.startDateTime,
         fin_calendario: shift.endDateTime,
+        // ISO con la zona horaria de Lima (-05:00), listo para Google Calendar.
+        inicio_calendario_iso: `${shift.startDateTime}-05:00`,
+        fin_calendario_iso: `${shift.endDateTime}-05:00`,
         zona_horaria: CONFIG.TIMEZONE,
+
+        request_id: `CV-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        evento: 'NUEVA_SOLICITUD_COTIZACION',
 
         necesidad_general: details,
         estimado: total.textContent,
@@ -644,11 +650,10 @@
     // ENVIAR A MAKE
     // =========================================================
     async function sendToMake(payload) {
-      if (
-        !CONFIG.ENABLE_MAKE_PUSH ||
-        !CONFIG.MAKE_WEBHOOK_URL ||
-        CONFIG.MAKE_WEBHOOK_URL.includes('PEGA_AQUI')
-      ) {
+      const webhook = CONFIG.MAKE_WEBHOOK_URL;
+
+      if (!CONFIG.ENABLE_MAKE_PUSH || !webhook || webhook.includes('PEGA_AQUI')) {
+        console.error('Make: webhook no configurado');
         return { sent: false, reason: 'webhook_not_configured' };
       }
 
@@ -657,23 +662,40 @@
         body.append(key, String(value ?? ''));
       });
 
+      console.log('CuidadoVital → Make: enviando solicitud', payload);
+
       try {
-        await fetch(CONFIG.MAKE_WEBHOOK_URL, {
+        // No usamos application/json para evitar preflight CORS desde GitHub Pages.
+        await fetch(webhook, {
           method: 'POST',
           mode: 'no-cors',
-          body
+          cache: 'no-store',
+          keepalive: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          body: body.toString()
         });
 
-        // Con no-cors el navegador no permite leer la respuesta de Make.
-        // Si fetch no lanza error de red, consideramos enviado el POST.
+        console.log('CuidadoVital → Make: POST enviado');
         return { sent: true };
       } catch (err) {
-        console.error('Error enviando la solicitud a Make:', err);
-        return {
-          sent: false,
-          reason: 'network_error',
-          error: err
-        };
+        console.error('Make: fetch falló, intentando sendBeacon', err);
+
+        try {
+          const beaconBody = new Blob([body.toString()], {
+            type: 'application/x-www-form-urlencoded;charset=UTF-8'
+          });
+          const queued = navigator.sendBeacon(webhook, beaconBody);
+          if (queued) {
+            console.log('CuidadoVital → Make: sendBeacon encolado');
+            return { sent: true, method: 'beacon' };
+          }
+        } catch (beaconErr) {
+          console.error('Make: sendBeacon también falló', beaconErr);
+        }
+
+        return { sent: false, reason: 'network_error', error: err };
       }
     }
 
@@ -773,7 +795,7 @@
       // ---------------------------------------------------------
       if (result.sent) {
         showStatus(
-          'Solicitud registrada. WhatsApp se abrió para continuar la coordinación.',
+          `Solicitud registrada. WhatsApp se abrió para continuar la coordinación. Código: ${payload.request_id}`,
           true
         );
       } else {

@@ -600,256 +600,113 @@
       }
     }
 
-form.addEventListener('submit', async event => {
-  event.preventDefault();
+    // ============================================================
+    // ENVÍO DEL FORMULARIO
+    // WhatsApp se abre primero y Make recibe los datos después.
+    // ============================================================
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
 
-  error.classList.add('hidden');
-  status.classList.add('hidden');
+      error.classList.add('hidden');
+      error.textContent = '';
+      status.classList.add('hidden');
 
-  // =========================================================
-  // 1. VALIDAR FORMULARIO
-  // =========================================================
+      // 1) Validar campos obligatorios
+      if (!form.checkValidity()) {
+        error.textContent = 'Revisa los campos obligatorios antes de continuar.';
+        error.classList.remove('hidden');
+        form.reportValidity();
+        return;
+      }
 
-  if (!form.checkValidity()) {
-    error.textContent = 'Revisa los campos obligatorios antes de continuar.';
-    error.classList.remove('hidden');
-    form.reportValidity();
-    return;
-  }
+      // 2) Validar que la hora de fin sea posterior a la hora de inicio
+      const startTimeValue = document.getElementById('startTime').value;
+      const endTimeValue = document.getElementById('endTime').value;
 
-  // =========================================================
-  // 2. VALIDAR HORAS
-  // =========================================================
+      if (startTimeValue >= endTimeValue) {
+        error.textContent = 'La hora de fin debe ser posterior a la hora de inicio.';
+        error.classList.remove('hidden');
+        return;
+      }
 
-  const startTime = document.getElementById('startTime').value;
-  const endTime = document.getElementById('endTime').value;
+      // 3) Construir el payload completo
+      const payload = buildPayload();
 
-  if (startTime >= endTime) {
-    error.textContent =
-      'La hora de fin debe ser posterior a la hora de inicio.';
-    error.classList.remove('hidden');
-    return;
-  }
+      // Agregar consentimiento explícito
+      payload.consentimiento = document.getElementById('privacyConsent').checked
+        ? 'aceptado'
+        : 'no_aceptado';
 
-  // =========================================================
-  // 3. CONSTRUIR LOS DATOS
-  // =========================================================
+      payload.estado = 'PENDIENTE_DE_CONFIRMACION';
 
-  const payload = buildPayload();
+      // 4) Construir mensaje de WhatsApp
+      const message = [
+        'Hola CuidadoVital, quiero solicitar una cotización.',
+        '',
+        `• Familiar: ${payload.nombre_familiar}`,
+        `• Teléfono: ${payload.telefono}`,
+        `• Servicio: ${payload.servicio}`,
+        `• Cantidad: ${payload.cantidad}`,
+        `• Zona: ${payload.zona}`,
+        `• Fecha: ${payload.fecha_inicio}`,
+        `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
+        `• Turno: ${payload.horario}`,
+        `• Necesidad general: ${payload.necesidad_general}`,
+        `• Estimado: ${payload.estimado}`,
+        '',
+        'Entiendo que el precio final y la disponibilidad deben confirmarse.'
+      ].join('\n');
 
-  // =========================================================
-  // 4. CREAR MENSAJE DE WHATSAPP
-  // =========================================================
+      // 5) ABRIR WHATSAPP INMEDIATAMENTE.
+      // Esto se ejecuta directamente por el clic del usuario,
+      // antes de esperar cualquier respuesta de Make.
+      const whatsappUrl =
+        `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-  const message = [
-    'Hola CuidadoVital, quiero solicitar una cotización.',
-    '',
-    `• Familiar: ${payload.nombre_familiar}`,
-    `• Teléfono: ${payload.telefono}`,
-    `• Modalidad: ${payload.servicio}`,
-    `• Cantidad: ${payload.cantidad}`,
-    `• Zona: ${payload.zona}`,
-    `• Fecha: ${payload.fecha_inicio}`,
-    `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
-    `• Turno: ${payload.horario}`,
-    `• Necesidad general: ${payload.necesidad_general}`,
-    `• Estimado: ${payload.estimado}`,
-    '',
-    'Entiendo que el precio final y la disponibilidad deben confirmarse.'
-  ].join('\n');
+      const whatsappWindow = window.open(
+        whatsappUrl,
+        '_blank',
+        'noopener,noreferrer'
+      );
 
-  // =========================================================
-  // 5. ABRIR WHATSAPP INMEDIATAMENTE
-  // =========================================================
-  // IMPORTANTE:
-  // Esto ocurre ANTES de esperar la respuesta de Make.
-  // Así el navegador no bloquea la ventana.
+      // 6) Actualizar botón mientras se envían los datos
+      submitButton.disabled = true;
+      submitButton.textContent = 'Registrando solicitud...';
 
-  const whatsappUrl =
-    `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      // 7) Enviar datos a Make
+      const result = await sendToMake(payload);
 
-  const whatsappWindow = window.open(
-    whatsappUrl,
-    '_blank',
-    'noopener,noreferrer'
-  );
+      // 8) Mostrar resultado
+      if (result.sent) {
+        showStatus(
+          'Solicitud enviada a Make correctamente. WhatsApp se abrió para continuar la coordinación.',
+          true
+        );
+      } else if (result.reason === 'webhook_not_configured') {
+        showStatus(
+          'WhatsApp se abrió, pero el webhook de Make todavía no está configurado en el código.',
+          false
+        );
+      } else {
+        showStatus(
+          'WhatsApp se abrió, pero hubo un problema al enviar la solicitud a Make. Revisa la configuración del webhook.',
+          false
+        );
+        console.error('Error de Make:', result);
+      }
 
-  // =========================================================
-  // 6. CAMBIAR ESTADO DEL BOTÓN
-  // =========================================================
+      // 9) Avisar si el navegador bloqueó la ventana
+      if (!whatsappWindow) {
+        error.textContent =
+          'El navegador bloqueó WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.';
+        error.classList.remove('hidden');
+      }
 
-  submitButton.disabled = true;
-  submitButton.textContent = 'Registrando solicitud...';
-
-  // =========================================================
-  // 7. ENVIAR DATOS A MAKE
-  // =========================================================
-
-  const result = await sendToMake(payload);
-
-  // =========================================================
-  // 8. MOSTRAR RESULTADO
-  // =========================================================
-
-  if (result.sent) {
-
-    showStatus(
-      'Solicitud registrada correctamente. WhatsApp se abrió para continuar la coordinación.'
-    );
-
-  } else {
-
-    showStatus(
-      'WhatsApp se abrió correctamente. La solicitud aún necesita configuración del webhook de Make.'
-    );
-
-    console.error(
-      'Make no recibió la solicitud:',
-      result
-    );
-  }
-
-  // =========================================================
-  // 9. SI WHATSAPP FUE BLOQUEADO
-  // =========================================================
-
-  if (!whatsappWindow) {
-
-    error.textContent =
-      'El navegador bloqueó WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.';
-
-    error.classList.remove('hidden');
-
-  }
-
-  // =========================================================
-  // 10. RESTAURAR BOTÓN
-  // =========================================================
-
-  submitButton.disabled = false;
-
-  submitButton.textContent =
-    'Enviar solicitud y abrir WhatsApp';
-});
-}
-
-// ============================================================
-// PAYLOAD QUE RECIBIRÁ MAKE
-// ============================================================
-
-const payload = {
-  fecha_solicitud: new Date().toISOString(),
-
-  nombre_familiar: nameValue,
-  telefono: phoneValue,
-
-  modalidad: selected?.text || 'Por confirmar',
-  servicio: selected?.text || 'Por confirmar',
-
-  cantidad: quantity.value,
-
-  zona: zoneValue,
-
-  horario: horarioCompleto,
-
-  fecha_inicio: dateISO,
-  inicio_aproximado: dateDisplay,
-
-  hora_inicio: startTimeValue,
-  hora_fin: endTimeValue,
-
-  necesidad_general: detailsValue,
-
-  estimado: total.textContent,
-
-  estado: 'PENDIENTE DE CONFIRMACION',
-
-  fuente: 'Web CuidadoVital',
-
-  zona_horaria: 'America/Lima'
-};
-
-// ============================================================
-// CREAR MENSAJE DE WHATSAPP
-// ============================================================
-
-const message = [
-  'Hola CuidadoVital, quiero solicitar una cotización.',
-  '',
-  `• Nombre: ${nameValue}`,
-  `• WhatsApp: ${phoneValue}`,
-  `• Modalidad: ${selected?.text || 'Por confirmar'}`,
-  `• Cantidad: ${quantity.value}`,
-  `• Zona: ${zoneValue}`,
-  `• Fecha: ${dateDisplay}`,
-  `• Horario: ${horarioCompleto}`,
-  `• Necesidad general: ${detailsValue}`,
-  `• Estimado mostrado: ${total.textContent}`,
-  '',
-  'Entiendo que el precio final y la disponibilidad deben confirmarse.'
-].join('\n');
-
-// ============================================================
-// MUY IMPORTANTE:
-// ABRIMOS WHATSAPP PRIMERO
-// ============================================================
-
-const whatsappUrl =
-  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-// Esto ocurre directamente como consecuencia del clic.
-// Así el navegador no debería bloquear la ventana.
-const whatsappWindow = window.open(
-  whatsappUrl,
-  '_blank',
-  'noopener,noreferrer'
-);
-
-// ============================================================
-// ENVIAR LOS DATOS A MAKE
-// ============================================================
-
-if (CONFIG.ENABLE_API_PUSH && CONFIG.API_WEBHOOK_URL) {
-
-  // Usamos URLSearchParams en lugar de application/json.
-  // Esto evita problemas de CORS/preflight con el navegador.
-
-  const makeData = new URLSearchParams();
-
-  Object.entries(payload).forEach(([key, value]) => {
-    makeData.append(key, String(value ?? ''));
-  });
-
-  fetch(CONFIG.API_WEBHOOK_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: makeData
-  })
-  .then(() => {
-    console.log('Solicitud enviada a Make correctamente.');
-  })
-  .catch(error => {
-    console.error('Error enviando la solicitud a Make:', error);
-  });
-}
-
-// ============================================================
-// MENSAJE DE CONFIRMACIÓN EN LA PÁGINA
-// ============================================================
-
-error.classList.add('hidden');
-error.textContent = '';
-
-if (whatsappWindow) {
-  console.log('WhatsApp abierto correctamente.');
-} else {
-  console.warn(
-    'El navegador bloqueó la ventana de WhatsApp. ' +
-    'Permite ventanas emergentes para este sitio.'
-  );
-}
+      // 10) Restaurar botón
+      submitButton.disabled = false;
+      submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
     });
-  </script>
+</script>
 
 <!-- ================== CUIDADOVITAL PREMIUM: CAPA INTERACTIVA ================== -->
 <style>

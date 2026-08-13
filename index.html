@@ -462,45 +462,60 @@
 
   <script>
     /*
-      IMPORTANTE:
-      1) Crea un Custom Webhook en Make.
-      2) Pega su URL en MAKE_WEBHOOK_URL.
-      3) No uses la URL antigua si ya la compartiste públicamente: genera una nueva.
+      CUIDADOVITAL - INTEGRACIÓN WEB + WHATSAPP + MAKE
+      -------------------------------------------------
+      1) El formulario abre WhatsApp inmediatamente.
+      2) Los datos se envían a Make en segundo plano.
+      3) Los turnos que cruzan medianoche se calculan correctamente.
+      4) Se envían campos preparados para Google Calendar.
     */
     const CONFIG = {
       WHATSAPP_NUMBER: '51968495402',
       MAKE_WEBHOOK_URL: 'https://hook.us2.make.com/osrak32wnbqfolux7tghqyj1nmkv1u12',
-      ENABLE_MAKE_PUSH: true
+      ENABLE_MAKE_PUSH: true,
+      TIMEZONE: 'America/Lima'
     };
 
     const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
 
-    // Menú móvil
+    // =========================================================
+    // MENÚ MÓVIL
+    // =========================================================
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
 
-    menuBtn.addEventListener('click', () => {
-      const open = !mobileMenu.classList.contains('hidden');
-      mobileMenu.classList.toggle('hidden');
-      menuBtn.setAttribute('aria-expanded', String(!open));
-    });
-
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuBtn.setAttribute('aria-expanded', 'false');
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        const open = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        menuBtn.setAttribute('aria-expanded', String(!open));
       });
-    });
 
-    // Fecha mínima = fecha local del navegador
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // =========================================================
+    // FECHA MÍNIMA
+    // =========================================================
     const startDate = document.getElementById('startDate');
     const now = new Date();
     const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-      .toISOString().slice(0, 10);
-    startDate.min = localDate;
-    if (!startDate.value) startDate.value = localDate;
+      .toISOString()
+      .slice(0, 10);
 
-    // Cotizador
+    if (startDate) {
+      startDate.min = localDate;
+      if (!startDate.value) startDate.value = localDate;
+    }
+
+    // =========================================================
+    // ELEMENTOS DEL COTIZADOR
+    // =========================================================
     const service = document.getElementById('service');
     const quantity = document.getElementById('quantity');
     const total = document.getElementById('total');
@@ -537,12 +552,48 @@
       status.classList.remove('hidden');
     }
 
+    function showError(message) {
+      error.textContent = message;
+      error.classList.remove('hidden');
+    }
+
     function normalizePhone(value) {
       const digits = String(value || '').replace(/\D/g, '');
       if (!digits) return '';
       return digits.startsWith('51') ? `+${digits}` : `+51${digits}`;
     }
 
+    // =========================================================
+    // FECHA SIGUIENTE
+    // =========================================================
+    function addOneDay(dateString) {
+      const [year, month, day] = dateString.split('-').map(Number);
+      const d = new Date(Date.UTC(year, month - 1, day));
+      d.setUTCDate(d.getUTCDate() + 1);
+      return d.toISOString().slice(0, 10);
+    }
+
+    // =========================================================
+    // CALCULAR DATOS DEL TURNO
+    // =========================================================
+    function getShiftInfo(dateString, startTime, endTime) {
+      const crossesMidnight = startTime > endTime;
+      const sameTime = startTime === endTime;
+      const endDate = crossesMidnight ? addOneDay(dateString) : dateString;
+
+      return {
+        crossesMidnight,
+        sameTime,
+        startDate: dateString,
+        endDate,
+        startDateTime: `${dateString}T${startTime}:00`,
+        endDateTime: `${endDate}T${endTime}:00`
+      };
+    }
+
+    // =========================================================
+    // CONSTRUIR PAYLOAD PARA MAKE
+    // =========================================================
     function buildPayload() {
       const selected = service.selectedOptions[0];
       const name = document.getElementById('customerName').value.trim();
@@ -552,40 +603,59 @@
       const startTime = document.getElementById('startTime').value;
       const endTime = document.getElementById('endTime').value;
       const details = document.getElementById('details').value.trim() || 'No especificada';
+      const shift = getShiftInfo(startDate.value, startTime, endTime);
 
       return {
         tipo_solicitud: 'cotizacion_web',
+        estado: 'PENDIENTE_DE_CONFIRMACION',
         fecha_solicitud: new Date().toISOString(),
+
         nombre_familiar: name,
         telefono: phone,
+
         modalidad: selected.text,
         servicio: selected.textContent.trim(),
         precio_unitario: Number(selected.value),
         cantidad: Number(quantity.value),
-        zona,
+
+        zona: zone,
         horario: schedule,
-        fecha_inicio: startDate.value,
+
+        fecha_inicio: shift.startDate,
+        fecha_fin: shift.endDate,
         hora_inicio: startTime,
         hora_fin: endTime,
+
+        cruza_medianoche: shift.crossesMidnight ? 'SI' : 'NO',
+        turno_misma_hora: shift.sameTime ? 'SI' : 'NO',
+
+        inicio_calendario: shift.startDateTime,
+        fin_calendario: shift.endDateTime,
+        zona_horaria: CONFIG.TIMEZONE,
+
         necesidad_general: details,
         estimado: total.textContent,
         fuente: window.location.href,
-        zona_horaria: Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Lima'
+        consentimiento: document.getElementById('privacyConsent').checked ? 'SI' : 'NO'
       };
     }
 
+    // =========================================================
+    // ENVIAR A MAKE
+    // =========================================================
     async function sendToMake(payload) {
-      if (!CONFIG.ENABLE_MAKE_PUSH || !CONFIG.MAKE_WEBHOOK_URL || CONFIG.MAKE_WEBHOOK_URL.includes('PEGA_AQUI')) {
+      if (
+        !CONFIG.ENABLE_MAKE_PUSH ||
+        !CONFIG.MAKE_WEBHOOK_URL ||
+        CONFIG.MAKE_WEBHOOK_URL.includes('PEGA_AQUI')
+      ) {
         return { sent: false, reason: 'webhook_not_configured' };
       }
 
-      /*
-        Se usa application/x-www-form-urlencoded para evitar el preflight CORS
-        que suele provocar fallos cuando se envía application/json directamente
-        desde un HTML estático a un webhook externo.
-      */
       const body = new URLSearchParams();
-      Object.entries(payload).forEach(([key, value]) => body.append(key, String(value ?? '')));
+      Object.entries(payload).forEach(([key, value]) => {
+        body.append(key, String(value ?? ''));
+      });
 
       try {
         await fetch(CONFIG.MAKE_WEBHOOK_URL, {
@@ -593,75 +663,96 @@
           mode: 'no-cors',
           body
         });
+
+        // Con no-cors el navegador no permite leer la respuesta de Make.
+        // Si fetch no lanza error de red, consideramos enviado el POST.
         return { sent: true };
       } catch (err) {
         console.error('Error enviando la solicitud a Make:', err);
-        return { sent: false, reason: 'network_error', error: err };
+        return {
+          sent: false,
+          reason: 'network_error',
+          error: err
+        };
       }
     }
 
-    // ============================================================
-    // ENVÍO DEL FORMULARIO
-    // WhatsApp se abre primero y Make recibe los datos después.
-    // ============================================================
+    // =========================================================
+    // FORMULARIO PRINCIPAL
+    // =========================================================
     form.addEventListener('submit', async event => {
       event.preventDefault();
 
       error.classList.add('hidden');
       error.textContent = '';
       status.classList.add('hidden');
+      status.textContent = '';
 
-      // 1) Validar campos obligatorios
+      // ---------------------------------------------------------
+      // 1. VALIDACIÓN DE CAMPOS
+      // ---------------------------------------------------------
       if (!form.checkValidity()) {
-        error.textContent = 'Revisa los campos obligatorios antes de continuar.';
-        error.classList.remove('hidden');
+        showError('Revisa los campos obligatorios antes de continuar.');
         form.reportValidity();
         return;
       }
 
-      // 2) Validar que la hora de fin sea posterior a la hora de inicio
-      const startTimeValue = document.getElementById('startTime').value;
-      const endTimeValue = document.getElementById('endTime').value;
+      // ---------------------------------------------------------
+      // 2. VALIDACIÓN DE HORARIOS
+      // ---------------------------------------------------------
+      const startTime = document.getElementById('startTime').value;
+      const endTime = document.getElementById('endTime').value;
+      const shift = getShiftInfo(startDate.value, startTime, endTime);
 
-      if (startTimeValue >= endTimeValue) {
-        error.textContent = 'La hora de fin debe ser posterior a la hora de inicio.';
-        error.classList.remove('hidden');
+      // La misma hora se considera inválida porque produciría 0 horas.
+      if (shift.sameTime) {
+        showError('La hora de inicio y la hora de fin no pueden ser iguales.');
         return;
       }
 
-      // 3) Construir el payload completo
+      // Si inicio > fin, NO es un error: significa que el turno termina
+      // al día siguiente. Ejemplo: 18:00 → 07:00.
+      if (shift.crossesMidnight) {
+        console.log('Turno nocturno detectado:', shift.startDateTime, '→', shift.endDateTime);
+      }
+
+      // ---------------------------------------------------------
+      // 3. CONSTRUIR PAYLOAD
+      // ---------------------------------------------------------
       const payload = buildPayload();
 
-      // Agregar consentimiento explícito
-      payload.consentimiento = document.getElementById('privacyConsent').checked
-        ? 'aceptado'
-        : 'no_aceptado';
+      // ---------------------------------------------------------
+      // 4. PREPARAR WHATSAPP
+      // ---------------------------------------------------------
+      let fechaTexto = payload.fecha_inicio;
+      if (payload.cruza_medianoche === 'SI') {
+        fechaTexto = `${payload.fecha_inicio} → ${payload.fecha_fin}`;
+      }
 
-      payload.estado = 'PENDIENTE_DE_CONFIRMACION';
-
-      // 4) Construir mensaje de WhatsApp
       const message = [
         'Hola CuidadoVital, quiero solicitar una cotización.',
         '',
         `• Familiar: ${payload.nombre_familiar}`,
         `• Teléfono: ${payload.telefono}`,
-        `• Servicio: ${payload.servicio}`,
+        `• Modalidad: ${payload.servicio}`,
         `• Cantidad: ${payload.cantidad}`,
         `• Zona: ${payload.zona}`,
-        `• Fecha: ${payload.fecha_inicio}`,
+        `• Fecha: ${fechaTexto}`,
         `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
-        `• Turno: ${payload.horario}`,
+        `• Tipo de turno: ${payload.horario}${payload.cruza_medianoche === 'SI' ? ' (cruza medianoche)' : ''}`,
         `• Necesidad general: ${payload.necesidad_general}`,
         `• Estimado: ${payload.estimado}`,
         '',
         'Entiendo que el precio final y la disponibilidad deben confirmarse.'
       ].join('\n');
 
-      // 5) ABRIR WHATSAPP INMEDIATAMENTE.
-      // Esto se ejecuta directamente por el clic del usuario,
-      // antes de esperar cualquier respuesta de Make.
+      // ---------------------------------------------------------
+      // 5. WHATSAPP PRIMERO
+      // ---------------------------------------------------------
+      // Se ejecuta directamente por el clic del usuario para evitar
+      // que el navegador bloquee la ventana.
       const whatsappUrl =
-        `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
       const whatsappWindow = window.open(
         whatsappUrl,
@@ -669,44 +760,46 @@
         'noopener,noreferrer'
       );
 
-      // 6) Actualizar botón mientras se envían los datos
+      // ---------------------------------------------------------
+      // 6. ENVIAR A MAKE
+      // ---------------------------------------------------------
       submitButton.disabled = true;
       submitButton.textContent = 'Registrando solicitud...';
 
-      // 7) Enviar datos a Make
       const result = await sendToMake(payload);
 
-      // 8) Mostrar resultado
+      // ---------------------------------------------------------
+      // 7. RESULTADO
+      // ---------------------------------------------------------
       if (result.sent) {
         showStatus(
-          'Solicitud enviada a Make correctamente. WhatsApp se abrió para continuar la coordinación.',
+          'Solicitud registrada. WhatsApp se abrió para continuar la coordinación.',
           true
-        );
-      } else if (result.reason === 'webhook_not_configured') {
-        showStatus(
-          'WhatsApp se abrió, pero el webhook de Make todavía no está configurado en el código.',
-          false
         );
       } else {
         showStatus(
-          'WhatsApp se abrió, pero hubo un problema al enviar la solicitud a Make. Revisa la configuración del webhook.',
+          'WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración del webhook.',
           false
         );
-        console.error('Error de Make:', result);
+        console.error('Make:', result);
       }
 
-      // 9) Avisar si el navegador bloqueó la ventana
+      // ---------------------------------------------------------
+      // 8. AVISAR SI EL NAVEGADOR BLOQUEÓ WHATSAPP
+      // ---------------------------------------------------------
       if (!whatsappWindow) {
-        error.textContent =
-          'El navegador bloqueó WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.';
-        error.classList.remove('hidden');
+        showError(
+          'El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.'
+        );
       }
 
-      // 10) Restaurar botón
+      // ---------------------------------------------------------
+      // 9. RESTAURAR BOTÓN
+      // ---------------------------------------------------------
       submitButton.disabled = false;
       submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
     });
-</script>
+  </script>
 
 <!-- ================== CUIDADOVITAL PREMIUM: CAPA INTERACTIVA ================== -->
 <style>

@@ -655,24 +655,6 @@
       return d.toISOString().slice(0, 10);
     }
 
-    // =========================================================
-    // CALCULAR DATOS DEL TURNO
-    // =========================================================
-    function getShiftInfo(dateString, startTime, endTime) {
-      const crossesMidnight = startTime > endTime;
-      const sameTime = startTime === endTime;
-      const endDate = crossesMidnight ? addOneDay(dateString) : dateString;
-
-      return {
-        crossesMidnight,
-        sameTime,
-        startDate: dateString,
-        endDate,
-        startDateTime: `${dateString}T${startTime}:00`,
-        endDateTime: `${endDate}T${endTime}:00`
-      };
-    }
-
    // =========================================================
 // CALCULAR DATOS DEL TURNO
 // =========================================================

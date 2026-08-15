@@ -51,7 +51,7 @@
   {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
-    "name": "CuidadoVital",
+    "name": "CuidadoTotal",
     "description": "Servicios de cuidado domiciliario y acompañamiento para pacientes.",
     "areaServed": ["Piura", "Castilla", "Veintiséis de Octubre", "Catacaos"],
     "telephone": "+51 968 495 402"
@@ -88,13 +88,13 @@
   <!-- HEADER -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3 focus-ring rounded-xl" aria-label="CuidadoVital, inicio">
+      <a href="#" class="flex items-center gap-3 focus-ring rounded-xl" aria-label="CuidadoTotal, inicio">
         <span class="w-11 h-11 rounded-2xl bg-teal-600 text-white grid place-items-center shadow-lg shadow-teal-600/20">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <path d="M12 5v14M5 12h14" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
         </span>
-        <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-950">Cuidado<span class="text-teal-600">Vital</span></span>
+        <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-950">Cuidado<span class="text-teal-600">Total</span></span>
       </a>
 
       <nav class="hidden md:flex items-center gap-7 text-sm font-bold" aria-label="Navegación principal">
@@ -149,7 +149,7 @@
             <a href="#cotizar" class="focus-ring inline-flex justify-center items-center px-7 py-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold shadow-xl shadow-teal-600/20">
               Solicitar evaluación
             </a>
-            <a id="heroWhatsapp" href="https://wa.me/51968495402?text=Hola%20CuidadoVital%2C%20quisiera%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20cuidado%20domiciliario." target="_blank" rel="noopener noreferrer" class="focus-ring inline-flex justify-center items-center px-7 py-4 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-extrabold">
+            <a id="heroWhatsapp" href="https://wa.me/51968495402?text=Hola%20CuidadoTotal%2C%20quisiera%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20cuidado%20domiciliario." target="_blank" rel="noopener noreferrer" class="focus-ring inline-flex justify-center items-center px-7 py-4 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-extrabold">
               Hablar por WhatsApp
             </a>
           </div>
@@ -471,7 +471,7 @@
 
             <label class="flex gap-3 items-start text-xs text-slate-500">
               <input id="privacyConsent" type="checkbox" class="mt-0.5 w-4 h-4 accent-teal-600" required>
-              <span>Acepto que CuidadoVital use estos datos para contactarme y coordinar la solicitud de servicio.</span>
+              <span>Acepto que CuidadoTotal use estos datos para contactarme y coordinar la solicitud de servicio.</span>
             </label>
 
             <div class="rounded-2xl bg-teal-50 border border-teal-100 p-5 flex items-center justify-between gap-4">
@@ -501,7 +501,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid md:grid-cols-2 gap-8">
         <div>
-          <p class="text-xl font-black text-white">Cuidado<span class="text-teal-400">Vital</span></p>
+          <p class="text-xl font-black text-white">Cuidado<span class="text-teal-400">Total</span></p>
           <p class="mt-3 text-sm max-w-md">Cuidado domiciliario organizado alrededor de las necesidades del paciente y la tranquilidad de su familia.</p>
         </div>
         <div class="md:text-right text-sm">
@@ -511,13 +511,13 @@
         </div>
       </div>
       <div class="border-t border-white/10 mt-8 pt-6 text-xs leading-5">
-        © 2026 CuidadoVital. La información de esta página es orientativa y no sustituye una evaluación profesional ni un servicio de emergencia.
+        © 2026 CuidadoTotal. La información de esta página es orientativa y no sustituye una evaluación profesional ni un servicio de emergencia.
       </div>
     </div>
   </footer>
 
   <!-- WHATSAPP FLOTANTE -->
-  <a href="https://wa.me/51968495402?text=Hola%20CuidadoVital%2C%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20cuidado%20domiciliario."
+  <a href="https://wa.me/51968495402?text=Hola%20CuidadoTotal%2C%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20cuidado%20domiciliario."
      target="_blank" rel="noopener noreferrer"
      class="fixed right-5 bottom-5 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white grid place-items-center shadow-2xl focus-ring"
      aria-label="Contactar por WhatsApp">
@@ -959,7 +959,7 @@ async function sendToMake(payload) {
 
 
   console.log(
-    'CuidadoVital → Make: enviando solicitud',
+    'CuidadoTotal → Make: enviando solicitud',
     payload
   );
 
@@ -1036,7 +1036,7 @@ async function sendToMake(payload) {
       if (queued) {
 
         console.log(
-          'CuidadoVital → Make: sendBeacon encolado'
+          'CuidadoTotal → Make: sendBeacon encolado'
         );
 
         return {
@@ -1162,7 +1162,7 @@ form.addEventListener(
 
 
     console.log(
-      'CuidadoVital → PAYLOAD FINAL:',
+      'CuidadoTotal → PAYLOAD FINAL:',
       payload
     );
 
@@ -1186,7 +1186,7 @@ form.addEventListener(
 
     const message = [
 
-      'Hola CuidadoVital, quiero solicitar una cotización.',
+      'Hola CuidadoTotal, quiero solicitar una cotización.',
 
       '',
 
@@ -1364,7 +1364,7 @@ form.addEventListener(
             return;
           }
           const zone = $('zone')?.value.trim() || 'Por confirmar';
-          const msg = `Hola CuidadoVital, quiero que me contacten por teléfono.\nTeléfono: ${phone}\nZona: ${zone}`;
+          const msg = `Hola CuidadoTotal, quiero que me contacten por teléfono.\nTeléfono: ${phone}\nZona: ${zone}`;
           window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
         });
       }
@@ -1427,7 +1427,7 @@ form.addEventListener(
         <p class="text-xs text-slate-400 mt-4">Esta orientación no constituye diagnóstico ni indicación médica.</p>`;
         
         $('cv-wa').addEventListener('click', () => {
-          const msg = `Hola CuidadoVital, necesito orientación para contratar cuidado domiciliario.\n\n• Situación: ${a.tipo || 'Por confirmar'}\n• Necesidad: ${a.necesidad || 'Por confirmar'}\n• Inicio: ${a.cuando || 'Por confirmar'}\n• Zona: ${a.zona || 'Por confirmar'}`;
+          const msg = `Hola CuidadoTotal, necesito orientación para contratar cuidado domiciliario.\n\n• Situación: ${a.tipo || 'Por confirmar'}\n• Necesidad: ${a.necesidad || 'Por confirmar'}\n• Inicio: ${a.cuando || 'Por confirmar'}\n• Zona: ${a.zona || 'Por confirmar'}`;
           window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
           close();
         });

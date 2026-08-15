@@ -655,227 +655,656 @@
       return d.toISOString().slice(0, 10);
     }
 
-    // =========================================================
-    // CALCULAR DATOS DEL TURNO
-    // =========================================================
-    function getShiftInfo(dateString, startTime, endTime) {
-      const crossesMidnight = startTime > endTime;
-      const sameTime = startTime === endTime;
+   // =========================================================
+// CALCULAR DATOS DEL TURNO
+// =========================================================
+function getShiftInfo(dateString, startTime, endTime) {
 
-      const endDate = crossesMidnight
-        ? addOneDay(dateString)
-        : dateString;
+  const crossesMidnight = startTime > endTime;
+  const sameTime = startTime === endTime;
 
-      const startDateTime = `${dateString}T${startTime}:00-05:00`;
-      const endDateTime = `${endDate}T${endTime}:00-05:00`;
+  const endDate = crossesMidnight
+    ? addOneDay(dateString)
+    : dateString;
 
-      return {
-        crossesMidnight,
-        sameTime,
-        startDate: dateString,
-        endDate: endDate,
-        startTime: startTime,
-        endTime: endTime,
-        startDateTime: startDateTime,
-        endDateTime: endDateTime
-      };
+  // Fechas y horas locales de Perú
+  const startDateTime =
+    `${dateString}T${startTime}:00-05:00`;
+
+  const endDateTime =
+    `${endDate}T${endTime}:00-05:00`;
+
+  return {
+    crossesMidnight,
+    sameTime,
+
+    startDate: dateString,
+    endDate: endDate,
+
+    startTime: startTime,
+    endTime: endTime,
+
+    startDateTime: startDateTime,
+    endDateTime: endDateTime
+  };
+}
+
+
+// =========================================================
+// CONSTRUIR PAYLOAD PARA MAKE
+// =========================================================
+function buildPayload() {
+
+  const selected = service.selectedOptions[0];
+
+  const name =
+    document.getElementById('customerName').value.trim();
+
+  const phone =
+    normalizePhone(
+      document.getElementById('customerPhone').value.trim()
+    );
+
+  const email =
+    document.getElementById('customerEmail').value.trim();
+
+  const zone =
+    document.getElementById('zone').value.trim();
+
+  const schedule =
+    document.getElementById('schedule').value;
+
+  const startTime =
+    document.getElementById('startTime').value;
+
+  const endTime =
+    document.getElementById('endTime').value;
+
+  const details =
+    document.getElementById('details').value.trim() ||
+    'No especificada';
+
+
+  // ---------------------------------------------------------
+  // CALCULAR FECHAS Y HORAS
+  // ---------------------------------------------------------
+
+  const shift =
+    getShiftInfo(
+      startDate.value,
+      startTime,
+      endTime
+    );
+
+
+  // ---------------------------------------------------------
+  // PAYLOAD
+  // ---------------------------------------------------------
+
+  return {
+
+    // =======================================================
+    // IDENTIFICACIÓN DE LA SOLICITUD
+    // =======================================================
+
+    tipo_solicitud:
+      'cotizacion_web',
+
+    estado:
+      'PENDIENTE_DE_CONFIRMACION',
+
+    fecha_solicitud:
+      new Date().toISOString(),
+
+    request_id:
+      `CV-${Date.now()}-${Math.random()
+        .toString(36)
+        .slice(2, 8)}`,
+
+    evento:
+      'NUEVA_SOLICITUD_COTIZACION',
+
+
+    // =======================================================
+    // DATOS DEL FAMILIAR
+    // =======================================================
+
+    nombre_familiar:
+      name,
+
+    telefono:
+      phone,
+
+    correo:
+      email,
+
+    email:
+      email,
+
+
+    // =======================================================
+    // SERVICIO
+    // =======================================================
+
+    modalidad:
+      selected.text,
+
+    servicio:
+      selected.textContent.trim(),
+
+    precio_unitario:
+      Number(selected.value),
+
+    cantidad:
+      Number(quantity.value),
+
+
+    // =======================================================
+    // UBICACIÓN Y HORARIO
+    // =======================================================
+
+    zona:
+      zone,
+
+    horario:
+      schedule,
+
+
+    // =======================================================
+    // FECHAS
+    // =======================================================
+
+    fecha_inicio:
+      shift.startDate,
+
+    fecha_fin:
+      shift.endDate,
+
+
+    // =======================================================
+    // HORAS
+    // ESTOS SON LOS CAMPOS QUE MAKE DEBE USAR
+    // =======================================================
+
+    hora_inicio:
+      shift.startTime,
+
+    hora_fin:
+      shift.endTime,
+
+
+    // =======================================================
+    // CAMPOS ADICIONALES EN MAYÚSCULAS
+    // LOS ENVIAMOS TAMBIÉN PARA FACILITAR EL MAPEO EN MAKE
+    // =======================================================
+
+    FECHA_INICIO:
+      shift.startDate,
+
+    FECHA_FIN:
+      shift.endDate,
+
+    HORA_INICIO:
+      shift.startTime,
+
+    HORA_FIN:
+      shift.endTime,
+
+
+    // =======================================================
+    // CONTROL DE MEDIANOCHE
+    // =======================================================
+
+    cruza_medianoche:
+      shift.crossesMidnight
+        ? 'SI'
+        : 'NO',
+
+    turno_misma_hora:
+      shift.sameTime
+        ? 'SI'
+        : 'NO',
+
+
+    // =======================================================
+    // FECHA + HORA COMPLETA PARA GOOGLE CALENDAR
+    // =======================================================
+
+    inicio_calendario:
+      shift.startDateTime,
+
+    fin_calendario:
+      shift.endDateTime,
+
+    inicio_calendario_iso:
+      shift.startDateTime,
+
+    fin_calendario_iso:
+      shift.endDateTime,
+
+
+    // =======================================================
+    // ZONA HORARIA
+    // =======================================================
+
+    zona_horaria:
+      CONFIG.TIMEZONE,
+
+
+    // =======================================================
+    // NECESIDAD DEL PACIENTE
+    // =======================================================
+
+    necesidad_general:
+      details,
+
+    estimado:
+      total.textContent,
+
+    fuente:
+      window.location.href,
+
+    consentimiento:
+      document.getElementById('privacyConsent').checked
+        ? 'SI'
+        : 'NO'
+  };
+}
+
+
+// =========================================================
+// ENVIAR A MAKE
+// =========================================================
+async function sendToMake(payload) {
+
+  const webhook =
+    CONFIG.MAKE_WEBHOOK_URL;
+
+
+  if (
+    !CONFIG.ENABLE_MAKE_PUSH ||
+    !webhook ||
+    webhook.includes('PEGA_AQUI')
+  ) {
+
+    console.error(
+      'Make: webhook no configurado'
+    );
+
+    return {
+      sent: false,
+      reason: 'webhook_not_configured'
+    };
+  }
+
+
+  // ---------------------------------------------------------
+  // CONSTRUIR DATOS PARA MAKE
+  // ---------------------------------------------------------
+
+  const body =
+    new URLSearchParams();
+
+
+  Object.entries(payload).forEach(
+    ([key, value]) => {
+
+      body.append(
+        key,
+        String(value ?? '')
+      );
+
     }
+  );
 
-    // =========================================================
-    // CONSTRUIR PAYLOAD PARA MAKE
-    // =========================================================
-    function buildPayload() {
-      const selected = service.selectedOptions[0];
 
-      const name = document.getElementById('customerName').value.trim();
-      const phone = normalizePhone(document.getElementById('customerPhone').value.trim());
-      const email = document.getElementById('customerEmail').value.trim();
-      const zone = document.getElementById('zone').value.trim();
-      const schedule = document.getElementById('schedule').value;
-      const startTime = document.getElementById('startTime').value;
-      const endTime = document.getElementById('endTime').value;
-      const details = document.getElementById('details').value.trim() || 'No especificada';
+  console.log(
+    'CuidadoTotal → Make: enviando solicitud',
+    payload
+  );
 
-      const shift = getShiftInfo(startDate.value, startTime, endTime);
 
-      return {
-        tipo_solicitud: 'cotizacion_web',
-        estado: 'PENDIENTE_DE_CONFIRMACION',
-        fecha_solicitud: new Date().toISOString(),
-        request_id: `CV-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        evento: 'NUEVA_SOLICITUD_COTIZACION',
+  // ---------------------------------------------------------
+  // ENVIAR
+  // ---------------------------------------------------------
 
-        nombre_familiar: name,
-        telefono: phone,
-        correo: email,
-        email: email,
-        CORREO: email,
+  try {
 
-        modalidad: selected.text,
-        servicio: selected.textContent.trim(),
-        precio_unitario: Number(selected.value),
-        cantidad: Number(quantity.value),
+    await fetch(
+      webhook,
+      {
+        method: 'POST',
 
-        zona: zone,
-        horario: schedule,
+        mode: 'no-cors',
 
-        fecha_inicio: shift.startDate,
-        fecha_fin: shift.endDate,
-        hora_inicio: shift.startTime,
-        hora_fin: shift.endTime,
+        cache: 'no-store',
 
-        FECHA_INICIO: shift.startDate,
-        FECHA_FIN: shift.endDate,
-        HORA_INICIO: shift.startTime,
-        HORA_FIN: shift.endTime,
+        keepalive: true,
 
-        cruza_medianoche: shift.crossesMidnight ? 'SI' : 'NO',
-        turno_misma_hora: shift.sameTime ? 'SI' : 'NO',
+        headers: {
+          'Content-Type':
+            'application/x-www-form-urlencoded;charset=UTF-8'
+        },
 
-        inicio_calendario: shift.startDateTime,
-        fin_calendario: shift.endDateTime,
-        inicio_calendario_iso: shift.startDateTime,
-        fin_calendario_iso: shift.endDateTime,
-
-        zona_horaria: CONFIG.TIMEZONE,
-
-        necesidad_general: details,
-        estimado: total.textContent,
-        fuente: window.location.href,
-        consentimiento: document.getElementById('privacyConsent').checked ? 'SI' : 'NO'
-      };
-    }
-
-    // =========================================================
-    // ENVIAR A MAKE
-    // =========================================================
-    async function sendToMake(payload) {
-      const webhook = CONFIG.MAKE_WEBHOOK_URL;
-
-      if (!CONFIG.ENABLE_MAKE_PUSH || !webhook || webhook.includes('PEGA_AQUI')) {
-        console.error('Make: webhook no configurado');
-        return { sent: false, reason: 'webhook_not_configured' };
+        body:
+          body.toString()
       }
+    );
 
-      const body = new URLSearchParams();
-      Object.entries(payload).forEach(([key, value]) => {
-        body.append(key, String(value ?? ''));
-      });
 
-      console.log('CuidadoTotal → Make: enviando solicitud', payload);
+    console.log(
+      'CuidadoVital → Make: POST enviado'
+    );
 
-      try {
-        await fetch(webhook, {
-          method: 'POST',
-          mode: 'no-cors',
-          cache: 'no-store',
-          keepalive: true,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          },
-          body: body.toString()
-        });
 
-        console.log('CuidadoVital → Make: POST enviado');
-        return { sent: true };
-      } catch (err) {
-        console.error('Make: fetch falló, intentando sendBeacon', err);
-        try {
-          const beaconBody = new Blob([body.toString()], {
-            type: 'application/x-www-form-urlencoded;charset=UTF-8'
-          });
-          const queued = navigator.sendBeacon(webhook, beaconBody);
-          if (queued) {
-            console.log('CuidadoTotal → Make: sendBeacon encolado');
-            return { sent: true, method: 'beacon' };
+    return {
+      sent: true
+    };
+
+
+  } catch (err) {
+
+    console.error(
+      'Make: fetch falló, intentando sendBeacon',
+      err
+    );
+
+
+    // -------------------------------------------------------
+    // RESPALDO
+    // -------------------------------------------------------
+
+    try {
+
+      const beaconBody =
+        new Blob(
+          [body.toString()],
+          {
+            type:
+              'application/x-www-form-urlencoded;charset=UTF-8'
           }
-        } catch (beaconErr) {
-          console.error('Make: sendBeacon también falló', beaconErr);
-        }
-        return { sent: false, reason: 'network_error', error: err };
+        );
+
+
+      const queued =
+        navigator.sendBeacon(
+          webhook,
+          beaconBody
+        );
+
+
+      if (queued) {
+
+        console.log(
+          'CuidadoTotal → Make: sendBeacon encolado'
+        );
+
+        return {
+          sent: true,
+          method: 'beacon'
+        };
       }
+
+
+    } catch (beaconErr) {
+
+      console.error(
+        'Make: sendBeacon también falló',
+        beaconErr
+      );
+
     }
 
-    // =========================================================
-    // FORMULARIO PRINCIPAL
-    // =========================================================
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
 
-      error.classList.add('hidden');
-      error.textContent = '';
-      status.classList.add('hidden');
-      status.textContent = '';
+    return {
+      sent: false,
+      reason: 'network_error',
+      error: err
+    };
+  }
+}
 
-      if (!form.checkValidity()) {
-        showError('Revisa los campos obligatorios antes de continuar.');
-        form.reportValidity();
-        return;
-      }
 
-      const startTime = document.getElementById('startTime').value;
-      const endTime = document.getElementById('endTime').value;
+// =========================================================
+// FORMULARIO PRINCIPAL
+// =========================================================
+form.addEventListener(
+  'submit',
+  async event => {
 
-      if (!startTime || !endTime) {
-        showError('Debes indicar la hora de inicio y la hora de fin.');
-        return;
-      }
+    event.preventDefault();
 
-      const shift = getShiftInfo(startDate.value, startTime, endTime);
 
-      if (shift.sameTime) {
-        showError('La hora de inicio y la hora de fin no pueden ser iguales.');
-        return;
-      }
+    // -------------------------------------------------------
+    // LIMPIAR MENSAJES
+    // -------------------------------------------------------
 
-      const payload = buildPayload();
-      console.log('CuidadoTotal → PAYLOAD FINAL:', payload);
+    error.classList.add('hidden');
+    error.textContent = '';
 
-      let fechaTexto = payload.fecha_inicio;
-      if (payload.cruza_medianoche === 'SI') {
-        fechaTexto = `${payload.fecha_inicio} → ${payload.fecha_fin}`;
-      }
+    status.classList.add('hidden');
+    status.textContent = '';
 
-      const message = [
-        'Hola CuidadoTotal, quiero solicitar una cotización.',
-        '',
-        `• Familiar: ${payload.nombre_familiar}`,
-        `• Teléfono: ${payload.telefono}`,
-        `• Correo: ${payload.correo}`,
-        `• Modalidad: ${payload.servicio}`,
-        `• Cantidad: ${payload.cantidad}`,
-        `• Zona: ${payload.zona}`,
-        `• Fecha: ${fechaTexto}`,
-        `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
-        `• Tipo de turno: ${payload.horario}${payload.cruza_medianoche === 'SI' ? ' (cruza medianoche)' : ''}`,
-        `• Necesidad general: ${payload.necesidad_general}`,
-        `• Estimado: ${payload.estimado}`,
-        '',
-        'Entiendo que el precio final y la disponibilidad deben confirmarse.'
-      ].join('\n');
 
-      const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-      const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    // -------------------------------------------------------
+    // VALIDAR FORMULARIO
+    // -------------------------------------------------------
 
-      submitButton.disabled = true;
-      submitButton.textContent = 'Registrando solicitud...';
+    if (!form.checkValidity()) {
 
-      const result = await sendToMake(payload);
+      showError(
+        'Revisa los campos obligatorios antes de continuar.'
+      );
 
-      if (result.sent) {
-        showStatus(`Solicitud registrada. WhatsApp se abrió para continuar la coordinación. Código: ${payload.request_id}`, true);
-      } else {
-        showStatus('WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración del webhook.', false);
-      }
+      form.reportValidity();
 
-      if (!whatsappWindow) {
-        showError('El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.');
-      }
+      return;
+    }
 
-      submitButton.disabled = false;
-      submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
-    });
 
+    // -------------------------------------------------------
+    // OBTENER HORAS
+    // -------------------------------------------------------
+
+    const startTime =
+      document.getElementById('startTime').value;
+
+    const endTime =
+      document.getElementById('endTime').value;
+
+
+    // -------------------------------------------------------
+    // VALIDAR QUE EXISTAN
+    // -------------------------------------------------------
+
+    if (!startTime || !endTime) {
+
+      showError(
+        'Debes indicar la hora de inicio y la hora de fin.'
+      );
+
+      return;
+    }
+
+
+    // -------------------------------------------------------
+    // CALCULAR TURNO
+    // -------------------------------------------------------
+
+    const shift =
+      getShiftInfo(
+        startDate.value,
+        startTime,
+        endTime
+      );
+
+
+    // -------------------------------------------------------
+    // NO PERMITIR MISMA HORA
+    // -------------------------------------------------------
+
+    if (shift.sameTime) {
+
+      showError(
+        'La hora de inicio y la hora de fin no pueden ser iguales.'
+      );
+
+      return;
+    }
+
+
+    // -------------------------------------------------------
+    // CREAR PAYLOAD
+    // -------------------------------------------------------
+
+    const payload =
+      buildPayload();
+
+
+    console.log(
+      'CuidadoTotal → PAYLOAD FINAL:',
+      payload
+    );
+
+
+    // -------------------------------------------------------
+    // TEXTO PARA WHATSAPP
+    // -------------------------------------------------------
+
+    let fechaTexto =
+      payload.fecha_inicio;
+
+
+    if (
+      payload.cruza_medianoche === 'SI'
+    ) {
+
+      fechaTexto =
+        `${payload.fecha_inicio} → ${payload.fecha_fin}`;
+    }
+
+
+    const message = [
+
+      'Hola CuidadoTotal, quiero solicitar una cotización.',
+
+      '',
+
+      `• Familiar: ${payload.nombre_familiar}`,
+
+      `• Teléfono: ${payload.telefono}`,
+
+      `• Correo: ${payload.correo}`,
+
+      `• Modalidad: ${payload.servicio}`,
+
+      `• Cantidad: ${payload.cantidad}`,
+
+      `• Zona: ${payload.zona}`,
+
+      `• Fecha: ${fechaTexto}`,
+
+      `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
+
+      `• Tipo de turno: ${payload.horario}${
+        payload.cruza_medianoche === 'SI'
+          ? ' (cruza medianoche)'
+          : ''
+      }`,
+
+      `• Necesidad general: ${payload.necesidad_general}`,
+
+      `• Estimado: ${payload.estimado}`,
+
+      '',
+
+      'Entiendo que el precio final y la disponibilidad deben confirmarse.'
+
+    ].join('\n');
+
+
+    // -------------------------------------------------------
+    // ABRIR WHATSAPP
+    // -------------------------------------------------------
+
+    const whatsappUrl =
+      `https://wa.me/${WHATSAPP}?text=${
+        encodeURIComponent(message)
+      }`;
+
+
+    const whatsappWindow =
+      window.open(
+        whatsappUrl,
+        '_blank',
+        'noopener,noreferrer'
+      );
+
+
+    // -------------------------------------------------------
+    // ENVIAR A MAKE
+    // -------------------------------------------------------
+
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+      'Registrando solicitud...';
+
+
+    const result =
+      await sendToMake(payload);
+
+
+    // -------------------------------------------------------
+    // MOSTRAR RESULTADO
+    // -------------------------------------------------------
+
+    if (result.sent) {
+
+      showStatus(
+
+        `Solicitud registrada. WhatsApp se abrió para continuar la coordinación. Código: ${payload.request_id}`,
+
+        true
+      );
+
+
+    } else {
+
+      showStatus(
+
+        'WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración del webhook.',
+
+        false
+      );
+    }
+
+
+    // -------------------------------------------------------
+    // AVISO SI WHATSAPP FUE BLOQUEADO
+    // -------------------------------------------------------
+
+    if (!whatsappWindow) {
+
+      showError(
+
+        'El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.'
+
+      );
+    }
+
+
+    // -------------------------------------------------------
+    // RESTAURAR BOTÓN
+    // -------------------------------------------------------
+
+    submitButton.disabled = false;
+
+    submitButton.textContent =
+      'Enviar solicitud y abrir WhatsApp';
+
+  }
+);
     // =========================================================
     // LÓGICA DE CAPA INTERACTIVA (ORIENTADOR Y SOLICITUD DE LLAMADA)
     // =========================================================
@@ -892,6 +1321,7 @@
         window.cvToastTimer = setTimeout(() => el.classList.remove('show'), 3200);
       };
 
+      // Accesos rápidos
       document.querySelectorAll('.cv-quick').forEach(btn => {
         btn.addEventListener('click', () => {
           const select = $('service');
@@ -904,10 +1334,12 @@
         });
       });
 
+      // Área familiar demo
       document.querySelectorAll('.cv-demo').forEach(btn => 
         btn.addEventListener('click', () => toast(btn.dataset.msg))
       );
 
+      // Solicitud de llamada adicional
       if (form && !$('cv-call-extra')) {
         const box = document.createElement('div');
         box.id = 'cv-call-extra';
@@ -937,6 +1369,7 @@
         });
       }
 
+      // Orientador (Wizard)
       const modal = $('cv-advisor'), content = $('cv-advisor-content'), progress = $('cv-progress');
       let state = { step: 0, answers: {} };
       

@@ -412,7 +412,7 @@
                 placeholder="ejemplo@correo.com" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
             </div>
 
-            <!-- [LÍNEA ~369] MODALIDAD CON NUEVA OPCIÓN -->
+            <!-- MODALIDAD -->
             <div>
               <label for="service" class="block text-sm font-extrabold mb-2">Modalidad</label>
               <select id="service" name="service" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
@@ -462,35 +462,10 @@
               </div>
             </div>
 
-            <!-- [LÍNEA ~415] NECESIDAD GENERAL CON CHECKBOXES DE CUIDADOS BÁSICOS -->
+            <!-- NECESIDAD GENERAL (SOLO TEXTAREA) -->
             <div>
-              <label class="block text-sm font-extrabold mb-2">Necesidad general <span class="font-medium text-slate-400">(opcional)</span></label>
-              
-              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3 mb-3">
-                <p class="text-xs font-bold text-slate-700 uppercase tracking-wide">Cuidados básicos (marcar lo que necesites):</p>
-                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
-                  <input type="checkbox" name="cuidados_basicos" value="Administración de medicamentos" class="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500">
-                  Administración de medicamentos
-                </label>
-                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
-                  <input type="checkbox" name="cuidados_basicos" value="control de signos vitales" class="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500">
-                  Control de signos vitales
-                </label>
-                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
-                  <input type="checkbox" name="cuidados_basicos" value="apoyo en el baño/aseo" class="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500">
-                  Apoyo en el baño/aseo
-                </label>
-                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
-                  <input type="checkbox" name="cuidados_basicos" value="alimentación" class="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500">
-                  Alimentación
-                </label>
-                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
-                  <input type="checkbox" name="cuidados_basicos" value="asistencia en movilidad (silla de ruedas o cama)" class="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500">
-                  Asistencia en movilidad (silla de ruedas o cama)
-                </label>
-              </div>
-
-              <textarea id="details" name="details" rows="2" maxlength="500" placeholder="Ej. detalles adicionales que debamos conocer." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring"></textarea>
+              <label for="details" class="block text-sm font-extrabold mb-2">Necesidad general <span class="font-medium text-slate-400">(opcional)</span></label>
+              <textarea id="details" name="details" rows="3" maxlength="500" placeholder="Ej. detalles adicionales que debamos conocer." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring"></textarea>
               <p class="mt-1 text-xs text-slate-400">Máximo 500 caracteres. No incluyas datos clínicos sensibles.</p>
             </div>
 
@@ -703,7 +678,7 @@
     }
 
     // =========================================================
-    // CONSTRUIR PAYLOAD PARA MAKE (INCLUYENDO CHECKBOXES SELECCIONADOS)
+    // CONSTRUIR PAYLOAD PARA MAKE
     // =========================================================
     function buildPayload() {
       const selected = service.selectedOptions[0];
@@ -715,22 +690,8 @@
       const startTime = document.getElementById('startTime').value;
       const endTime = document.getElementById('endTime').value;
       
-      // Recopilar checkboxes seleccionados de cuidados básicos
-      const checkedCuidados = Array.from(document.querySelectorAll('input[name="cuidados_basicos"]:checked'))
-        .map(cb => cb.value);
-      
       const detailsInput = document.getElementById('details').value.trim();
-      
-      let finalDetails = '';
-      if (checkedCuidados.length > 0) {
-        finalDetails += 'Cuidados básicos seleccionados: ' + checkedCuidados.join(', ');
-      }
-      if (detailsInput) {
-        finalDetails += (finalDetails ? ' | ' : '') + detailsInput;
-      }
-      if (!finalDetails) {
-        finalDetails = 'No especificada';
-      }
+      const finalDetails = detailsInput || 'No especificada';
 
       const shift = getShiftInfo(startDate.value, startTime, endTime);
 

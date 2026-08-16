@@ -209,7 +209,7 @@
             <p class="text-slate-500 text-sm mt-1">No necesitas saber el nombre técnico del servicio.</p>
           </div>
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full lg:w-auto">
-            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="120">👵<br>Adulto mayor</button>
+            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="90">👵<br>Adulto mayor</button>
             <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="120">🏥<br>Recuperación</button>
             <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="140">🌙<br>Cuidado nocturno</button>
             <button id="cv-open-advisor" class="cv-premium-btn bg-teal-50 border border-teal-200 text-teal-800 rounded-2xl p-4 font-extrabold text-left">❓<br>No sé qué necesito</button>
@@ -562,7 +562,7 @@
                 <p class="text-xs font-black uppercase tracking-wider text-teal-700">Estimado</p>
                 <p id="estimateLabel" class="text-xs text-slate-500 mt-1">1 turno</p>
               </div>
-              <output id="total" class="text-3xl sm:text-4xl font-black text-teal-700" aria-live="polite">S/ 120</output>
+              <output id="total" class="text-3xl sm:text-4xl font-black text-teal-700" aria-live="polite">S/ 90</output>
             </div>
 
             <p id="formError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3"></p>
@@ -636,7 +636,7 @@
   <script>
     const CONFIG = {
       WHATSAPP_NUMBER: '51968495402',
-      MAKE_WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbzSGNBa_OkjFoPZZP6F8g7-YB3gqNX1acX7tjF_QQRBiLp97LhRvTM4ZHN1B0yRbBNT-g/exec',
+      MAKE_WEBHOOK_URL: 'https://hook.us2.make.com/wvb297ce2i88hlijo25sqs9492gkdc8u',
       ENABLE_MAKE_PUSH: true,
       TIMEZONE: 'America/Lima'
     };
@@ -650,6 +650,7 @@
       const el = document.getElementById(elementId);
       if (!el) return;
       el.addEventListener('input', (e) => {
+        // Remover todo lo que no sea número
         let val = e.target.value.replace(/\D/g, '');
         if (val.length > maxLength) {
           val = val.slice(0, maxLength);
@@ -662,6 +663,7 @@
     setupNumericInput('jobPhone', 9);
     setupNumericInput('jobDni', 8);
     
+    // Para el teléfono flotante del orientador si se crea dinámicamente
     document.addEventListener('input', (e) => {
       if (e.target && e.target.id === 'cv-phone') {
         let val = e.target.value.replace(/\D/g, '');
@@ -749,6 +751,12 @@
     function showError(message) {
       error.textContent = message;
       error.classList.remove('hidden');
+    }
+
+    function normalizePhone(value) {
+      const digits = String(value || '').replace(/\D/g, '');
+      if (!digits) return '';
+      return digits.startsWith('51') ? `+${digits}` : `+51${digits}`;
     }
 
     function addOneDay(dateString) {
@@ -986,6 +994,7 @@
           return;
         }
 
+        // Obtener zonas marcadas
         const checkedZones = Array.from(jobForm.querySelectorAll('input[name="jobZones"]:checked'))
           .map(cb => cb.value);
 
@@ -1128,7 +1137,7 @@
         if (!progress || !content) return;
         progress.style.width = (((state.step + 1) / 4) * 100) + '%';
         if (state.step === 0) {
-          content.innerHTML = `<p class="text-slate-600">¿Para quién buscas apoyo?</p><div class="mt-5 grid gap-3">
+          content.innerHTML = `<p class="text-slate-600">¿Для quién buscas apoyo?</p><div class="mt-5 grid gap-3">
             ${['Adulto mayor','Paciente en recuperación','Persona que necesita supervisión','No estoy seguro'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
         } else if (state.step === 1) {
           content.innerHTML = `<p class="text-slate-600">¿Qué apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">
@@ -1189,7 +1198,6 @@
     // =========================================================
     (() => {
       const navMap = {
-        'Empieza alta': 'cv-orientador',
         'Empieza aquí': 'cv-orientador',
         'Servicios': 'servicios',
         'Seguridad': 'seguridad',

@@ -60,7 +60,7 @@
 
   <style id="cv-navigation-fix">
     html { scroll-behavior: smooth; }
-    #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
+    #cv-orientador, #vital-health, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
       scroll-margin-top: 105px;
     }
     .cv-nav-active {
@@ -68,7 +68,7 @@
       font-weight: 800;
     }
     @media (max-width: 767px) {
-      #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
+      #cv-orientador, #vital-health, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
         scroll-margin-top: 82px;
       }
     }
@@ -103,6 +103,7 @@
 
       <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600" aria-label="Navegación principal">
         <a href="#cv-orientador" class="hover:text-sky-700 focus-ring rounded transition">Empieza aquí</a>
+        <a href="#vital-health" class="hover:text-sky-700 focus-ring rounded transition font-bold text-sky-600">Laboratorio Vital Health</a>
         <a href="#servicios" class="hover:text-sky-700 focus-ring rounded transition">Servicios</a>
         <a href="#seguridad" class="hover:text-sky-700 focus-ring rounded transition">Confianza</a>
         <a href="#proceso" class="hover:text-sky-700 focus-ring rounded transition">Cómo funciona</a>
@@ -120,6 +121,7 @@
     <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur">
       <nav class="px-5 py-5 grid gap-3 text-sm font-bold text-slate-700">
         <a href="#cv-orientador" class="py-2 border-b border-slate-50">Empieza aquí</a>
+        <a href="#vital-health" class="py-2 border-b border-slate-50 text-sky-600">Laboratorio Vital Health</a>
         <a href="#servicios" class="py-2 border-b border-slate-50">Servicios</a>
         <a href="#seguridad" class="py-2 border-b border-slate-50">Confianza y Seguridad</a>
         <a href="#proceso" class="py-2 border-b border-slate-50">Cómo funciona</a>
@@ -242,6 +244,47 @@
               <span class="text-2xl block mb-1">❓</span>
               <span class="text-xs text-sky-900 block font-black">Asesor Virtual</span>
             </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN A LA VISTA: ALIANZA LABORATORIO VITAL HEALTH -->
+    <section id="vital-health" class="py-16 bg-gradient-to-r from-sky-900 via-sky-800 to-blue-900 text-white relative overflow-hidden">
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-sky-400/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <span class="bg-sky-500/30 text-sky-200 border border-sky-400/30 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">Alianza Estratégica</span>
+            <h2 class="text-3xl sm:text-4xl font-black mt-4">Laboratorio Vital Health</h2>
+            <p class="mt-4 text-slate-200 text-base leading-relaxed">
+              Gracias a nuestra alianza estratégica, ahora cuentas con <strong class="text-white">descuentos especiales en análisis clínicos</strong> y la facilidad de programar exámenes preventivos o de control <strong class="text-white">en la comodidad de tu hogar</strong>.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <button type="button" id="openVitalModalMain" class="px-7 py-3.5 rounded-xl bg-white text-sky-900 font-extrabold hover:bg-sky-50 shadow-lg transition transform hover:-translate-y-0.5">
+                🌐 Ver Sitio y Beneficios
+              </button>
+              <a href="https://centro-medico-vital-health.my.canva.site/inicio" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 rounded-xl bg-sky-700/60 hover:bg-sky-700 border border-sky-400/40 text-white font-extrabold transition">
+                Abrir Web Oficial ↗
+              </a>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md border border-white/20 p-6 sm:p-8 rounded-[2rem] shadow-xl">
+            <h3 class="text-xl font-black text-white mb-4">Beneficios de la Alianza:</h3>
+            <ul class="space-y-3 text-sm text-slate-200">
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-400 font-bold text-base">✓</span>
+                <span>Descuentos exclusivos en pruebas y análisis de laboratorio clínico[cite: 4].</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-400 font-bold text-base">✓</span>
+                <span>Toma de muestras y exámenes profesionales en la comodidad de tu hogar[cite: 4].</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-400 font-bold text-base">✓</span>
+                <span>Coordinación directa con los cuidados domiciliarios para mayor comodidad del paciente.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -674,6 +717,12 @@
     </div>
   </footer>
 
+  <!-- BOTÓN FLOTANTE VITAL HEALTH (ESQUINA INFERIOR IZQUIERDA) -->
+  <button id="openVitalModalFloat" type="button" class="fixed left-5 bottom-5 z-40 bg-white hover:bg-sky-50 text-sky-900 border border-sky-200 px-4 py-3 rounded-full shadow-2xl flex items-center gap-2.5 font-extrabold text-xs sm:text-sm transition transform hover:scale-105 group focus-ring" aria-label="Abrir información de Laboratorio Vital Health">
+    <span class="w-3 h-3 rounded-full bg-sky-600 animate-pulse"></span>
+    <span>🧪 Vital Health (Descuentos)</span>
+  </button>
+
   <!-- WHATSAPP FLOTANTE MEJORADO -->
   <a href="https://wa.me/51968495402?text=Hola%20CuidadoTotal%2C%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20cuidado%20domiciliario."
      target="_blank" rel="noopener noreferrer"
@@ -684,6 +733,47 @@
     </svg>
     <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow animate-bounce">¡Ayuda!</span>
   </a>
+
+  <!-- VENTANA MODAL: LABORATORIO VITAL HEALTH -->
+  <div id="vitalModal" class="cv-modal fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-[2.5rem] p-7 md:p-9 shadow-2xl border border-sky-100 relative overflow-hidden">
+      <div class="flex justify-between gap-4 items-center border-b border-slate-100 pb-4">
+        <div>
+          <span class="text-sky-700 font-black text-xs uppercase bg-sky-50 px-2.5 py-1 rounded-full">Alianza Estratégica</span>
+          <h2 class="text-2xl font-black mt-2 text-slate-900">Laboratorio Vital Health</h2>
+        </div>
+        <button id="closeVitalModal" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 grid place-items-center text-xl font-bold transition" aria-label="Cerrar">×</button>
+      </div>
+
+      <div class="mt-6 space-y-4 text-slate-600 text-sm leading-relaxed">
+        <p>
+          Tenemos una alianza estratégica con <strong class="text-slate-900">Laboratorio Vital Health</strong> para brindarte beneficios exclusivos en el cuidado integral de tu salud[cite: 4]:
+        </p>
+        <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl space-y-2">
+          <div class="flex items-start gap-2">
+            <span class="text-sky-600 font-bold">✓</span>
+            <span><strong>Descuentos preferenciales</strong> en una amplia gama de análisis clínicos[cite: 4].</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="text-sky-600 font-bold">✓</span>
+            <span><strong>Exámenes en la comodidad de tu hogar</strong>, evitando traslados innecesarios para el paciente[cite: 4].</span>
+          </div>
+        </div>
+        <p>
+          Puedes revisar todos los detalles, catálogo de exámenes y servicios directamente en su plataforma oficial.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href="https://centro-medico-vital-health.my.canva.site/inicio" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-6 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-black text-center shadow-lg shadow-sky-600/20 transition">
+          Visitar Sitio Web de Vital Health ↗
+        </a>
+        <button type="button" id="closeVitalModalBtn" class="py-3.5 px-6 rounded-xl border border-slate-200 hover:bg-slate-50 font-bold text-slate-700 transition">
+          Cerrar Ventana
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL ORIENTADOR (WIZARD) -->
   <div id="cv-advisor" class="cv-modal fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-sm items-center justify-center p-4">
@@ -723,6 +813,26 @@
     };
 
     const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
+
+    // CONTROL DE VENTANA MODAL VITAL HEALTH
+    const vitalModal = document.getElementById('vitalModal');
+    const openVitalModalFloat = document.getElementById('openVitalModalFloat');
+    const openVitalModalMain = document.getElementById('openVitalModalMain');
+    const closeVitalModal = document.getElementById('closeVitalModal');
+    const closeVitalModalBtn = document.getElementById('closeVitalModalBtn');
+
+    function openVitalModalFunc() { if (vitalModal) vitalModal.classList.add('cv-open'); }
+    function closeVitalModalFunc() { if (vitalModal) vitalModal.classList.remove('cv-open'); }
+
+    if (openVitalModalFloat) openVitalModalFloat.addEventListener('click', openVitalModalFunc);
+    if (openVitalModalMain) openVitalModalMain.addEventListener('click', openVitalModalFunc);
+    if (closeVitalModal) closeVitalModal.addEventListener('click', closeVitalModalFunc);
+    if (closeVitalModalBtn) closeVitalModalBtn.addEventListener('click', closeVitalModalFunc);
+    if (vitalModal) {
+      vitalModal.addEventListener('click', (e) => {
+        if (e.target === vitalModal) closeVitalModalFunc();
+      });
+    }
 
     function setupNumericInput(elementId, maxLength) {
       const el = document.getElementById(elementId);
@@ -1193,7 +1303,7 @@
         if (!progress || !content) return;
         progress.style.width = (((state.step + 1) / 4) * 100) + '%';
         if (state.step === 0) {
-          content.innerHTML = `<p class="text-slate-600 font-medium">¿Para quién buscas apoyo en casa?</p><div class="mt-5 grid gap-3">
+          content.innerHTML = `<p class="text-slate-600 font-medium">¿Для quién buscas apoyo en casa?</p><div class="mt-5 grid gap-3">
             ${['Adulto mayor','Paciente en recuperación postoperatoria','Persona con enfermedad crónica','No estoy seguro / Necesito orientación'].map(v => `<button class="cv-answer text-left p-4 border border-slate-200 rounded-2xl font-bold hover:border-sky-400 hover:bg-sky-50 transition text-slate-800" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
         } else if (state.step === 1) {
           content.innerHTML = `<p class="text-slate-600 font-medium">¿Qué tipo de apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">
@@ -1252,6 +1362,7 @@
     (() => {
       const navMap = {
         'Empieza aquí': 'cv-orientador',
+        'Laboratorio Vital Health': 'vital-health',
         'Servicios': 'servicios',
         'Confianza': 'seguridad',
         'Cómo funciona': 'proceso',
@@ -1300,7 +1411,7 @@
         });
       });
 
-      const sections = ['cv-orientador','servicios','seguridad','proceso','cv-familia','trabaja','faq','cotizar']
+      const sections = ['cv-orientador','vital-health','servicios','seguridad','proceso','cv-familia','trabaja','faq','cotizar']
         .map(id => document.getElementById(id))
         .filter(Boolean);
 

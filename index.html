@@ -94,7 +94,7 @@
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-sky-100/60 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 focus-ring rounded-xl group" aria-label="CuidadoTotal, inicio">
-        <!-- AQUí COLOCAS TU LOGO -->
+        <!-- AQUÍ COLOCAS TU LOGO -->
         <div class="w-11 h-11 rounded-2xl overflow-hidden border border-sky-200 shadow-sm group-hover:scale-105 transition flex items-center justify-center bg-white">
           <img src="logo.png" alt="Logo CuidadoTotal" class="w-full h-full object-contain">
         </div>
@@ -136,7 +136,6 @@
   <!-- HERO EMPÁTICO Y HUMANO -->
   <main>
     <section class="relative overflow-hidden bg-gradient-to-br from-sky-50/80 via-white to-blue-50/60 py-16 lg:py-24">
-      <!-- Elemento visual decorativo suave -->
       <div class="absolute -top-40 -right-40 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl pointer-events-none"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 relative grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-center">
@@ -260,12 +259,10 @@
             <p class="mt-4 text-slate-200 text-base leading-relaxed">
               Gracias a nuestra alianza estratégica, ahora cuentas con <strong class="text-white">descuentos especiales en análisis clínicos</strong> y la facilidad de programar exámenes preventivos o de control <strong class="text-white">en la comodidad de tu hogar</strong>.
             </p>
-            <div class="mt-8 flex flex-wrap gap-4">
-              <button type="button" id="openVitalModalMain" class="px-7 py-3.5 rounded-xl bg-white text-sky-900 font-extrabold hover:bg-sky-50 shadow-lg transition transform hover:-translate-y-0.5">
-                🌐 Ver Sitio y Beneficios
-              </button>
-              <a href="https://centro-medico-vital-health.my.canva.site/inicio" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 rounded-xl bg-sky-700/60 hover:bg-sky-700 border border-sky-400/40 text-white font-extrabold transition">
-                Abrir Web Oficial ↗
+            <div class="mt-8">
+              <a href="https://centro-medico-vital-health.my.canva.site/inicio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-sky-900 font-extrabold hover:bg-sky-50 shadow-xl transition transform hover:-translate-y-0.5">
+                <span>Abrir Web Oficial</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </a>
             </div>
           </div>
@@ -817,7 +814,6 @@
     // CONTROL DE VENTANA MODAL VITAL HEALTH
     const vitalModal = document.getElementById('vitalModal');
     const openVitalModalFloat = document.getElementById('openVitalModalFloat');
-    const openVitalModalMain = document.getElementById('openVitalModalMain');
     const closeVitalModal = document.getElementById('closeVitalModal');
     const closeVitalModalBtn = document.getElementById('closeVitalModalBtn');
 
@@ -825,7 +821,6 @@
     function closeVitalModalFunc() { if (vitalModal) vitalModal.classList.remove('cv-open'); }
 
     if (openVitalModalFloat) openVitalModalFloat.addEventListener('click', openVitalModalFunc);
-    if (openVitalModalMain) openVitalModalMain.addEventListener('click', openVitalModalFunc);
     if (closeVitalModal) closeVitalModal.addEventListener('click', closeVitalModalFunc);
     if (closeVitalModalBtn) closeVitalModalBtn.addEventListener('click', closeVitalModalFunc);
     if (vitalModal) {
@@ -1303,7 +1298,7 @@
         if (!progress || !content) return;
         progress.style.width = (((state.step + 1) / 4) * 100) + '%';
         if (state.step === 0) {
-          content.innerHTML = `<p class="text-slate-600 font-medium">¿Для quién buscas apoyo en casa?</p><div class="mt-5 grid gap-3">
+          content.innerHTML = `<p class="text-slate-600 font-medium">¿Para quién buscas apoyo en casa?</p><div class="mt-5 grid gap-3">
             ${['Adulto mayor','Paciente en recuperación postoperatoria','Persona con enfermedad crónica','No estoy seguro / Necesito orientación'].map(v => `<button class="cv-answer text-left p-4 border border-slate-200 rounded-2xl font-bold hover:border-sky-400 hover:bg-sky-50 transition text-slate-800" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
         } else if (state.step === 1) {
           content.innerHTML = `<p class="text-slate-600 font-medium">¿Qué tipo de apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">

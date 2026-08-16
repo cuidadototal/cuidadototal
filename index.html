@@ -380,14 +380,14 @@
 
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
-                <label for="jobDni" class="block text-sm font-extrabold mb-2">DNI</label>
+                <label for="jobDni" class="block text-sm font-extrabold mb-2">DNI (8 dígitos)</label>
                 <input id="jobDni" name="jobDni" type="text" maxlength="8" inputmode="numeric" pattern="[0-9]{8}"
                   placeholder="Ej. 74839201" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="jobPhone" class="block text-sm font-extrabold mb-2">Celular / WhatsApp</label>
-                <input id="jobPhone" name="jobPhone" type="tel" maxlength="20" inputmode="tel" autocomplete="tel"
-                  placeholder="Ej. 999 999 999" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+                <label for="jobPhone" class="block text-sm font-extrabold mb-2">Celular / WhatsApp (9 dígitos)</label>
+                <input id="jobPhone" name="jobPhone" type="tel" maxlength="9" inputmode="numeric" pattern="[0-9]{9}"
+                  placeholder="Ej. 999999999" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
               </div>
             </div>
 
@@ -482,9 +482,9 @@
                   placeholder="Ej. María Pérez" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="customerPhone" class="block text-sm font-extrabold mb-2">WhatsApp / teléfono</label>
-                <input id="customerPhone" name="customerPhone" type="tel" maxlength="20" inputmode="tel"
-                  autocomplete="tel" placeholder="Ej. 999 999 999" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
+                <label for="customerPhone" class="block text-sm font-extrabold mb-2">WhatsApp / teléfono (9 dígitos)</label>
+                <input id="customerPhone" name="customerPhone" type="tel" maxlength="9" inputmode="numeric" pattern="[0-9]{9}"
+                  autocomplete="tel" placeholder="Ej. 999999999" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
             </div>
 
@@ -644,6 +644,35 @@
     const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
 
     // =========================================================
+    // RESTRICCIÓN DE ENTRADA: SOLO NÚMEROS Y LONGITUD EXACTA
+    // =========================================================
+    function setupNumericInput(elementId, maxLength) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      el.addEventListener('input', (e) => {
+        // Remover todo lo que no sea número
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.length > maxLength) {
+          val = val.slice(0, maxLength);
+        }
+        e.target.value = val;
+      });
+    }
+
+    setupNumericInput('customerPhone', 9);
+    setupNumericInput('jobPhone', 9);
+    setupNumericInput('jobDni', 8);
+    
+    // Para el teléfono flotante del orientador si se crea dinámicamente
+    document.addEventListener('input', (e) => {
+      if (e.target && e.target.id === 'cv-phone') {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.length > 9) val = val.slice(0, 9);
+        e.target.value = val;
+      }
+    });
+
+    // =========================================================
     // MENÚ MÓVIL
     // =========================================================
     const menuBtn = document.getElementById('menuBtn');
@@ -759,7 +788,8 @@
     function buildPayload() {
       const selected = service.selectedOptions[0];
       const name = document.getElementById('customerName').value.trim();
-      const phone = normalizePhone(document.getElementById('customerPhone').value.trim());
+      const phoneInput = document.getElementById('customerPhone').value.trim();
+      const phone = `+51${phoneInput}`;
       const email = document.getElementById('customerEmail').value.trim();
       const zone = document.getElementById('zone').value.trim();
       const schedule = document.getElementById('schedule').value;
@@ -851,6 +881,12 @@
         status.classList.add('hidden');
         status.textContent = '';
 
+        const phoneVal = document.getElementById('customerPhone').value.trim();
+        if (phoneVal.length !== 9) {
+          showError('El número de celular debe tener exactamente 9 dígitos.');
+          return;
+        }
+
         if (!form.checkValidity()) {
           showError('Revisa los campos obligatorios antes de continuar.');
           form.reportValidity();
@@ -936,6 +972,21 @@
         jobStatus.classList.add('hidden');
         jobStatus.textContent = '';
 
+        const dniVal = document.getElementById('jobDni').value.trim();
+        const phoneVal = document.getElementById('jobPhone').value.trim();
+
+        if (dniVal.length !== 8) {
+          jobError.textContent = 'El DNI debe tener exactamente 8 dígitos.';
+          jobError.classList.remove('hidden');
+          return;
+        }
+
+        if (phoneVal.length !== 9) {
+          jobError.textContent = 'El celular debe tener exactamente 9 dígitos.';
+          jobError.classList.remove('hidden');
+          return;
+        }
+
         if (!jobForm.checkValidity()) {
           jobError.textContent = 'Por favor completa todos los campos requeridos correctamente.';
           jobError.classList.remove('hidden');
@@ -962,7 +1013,6 @@
           return;
         }
 
-        // Validación opcional de tamaño de archivo (Ej. Max 5MB)
         if (file.size > 5 * 1024 * 1024) {
           jobError.textContent = 'El archivo es muy pesado. El tamaño máximo permitido es 5MB.';
           jobError.classList.remove('hidden');
@@ -972,20 +1022,18 @@
         jobSubmitBtn.disabled = true;
         jobSubmitBtn.textContent = 'Enviando postulación...';
 
-        // Creación del objeto de datos para enviar a Make
         const formData = new FormData();
         formData.append('tipo_solicitud', 'postulacion_empleo');
         formData.append('fecha_registro', new Date().toISOString());
         formData.append('nombres_apellidos', document.getElementById('jobName').value.trim());
         formData.append('perfil_profesional', document.getElementById('jobProfile').value);
-        formData.append('dni', document.getElementById('jobDni').value.trim());
-        formData.append('celular', normalizePhone(document.getElementById('jobPhone').value.trim()));
+        formData.append('dni', dniVal);
+        formData.append('celular', `+51${phoneVal}`);
         formData.append('zona_cobertura', checkedZones.join(', '));
-        formData.append('cv_archivo', file); // Aquí va el archivo binario para que Make lo suba al Drive
+        formData.append('cv_archivo', file);
 
         try {
-          // Si usas Make con un Webhook que acepta archivos binarios (Multipart/form-data):
-          const webhook = CONFIG.MAKE_WEBHOOK_URL; // O un webhook específico para postulaciones si creas otro en Make
+          const webhook = CONFIG.MAKE_WEBHOOK_URL;
           
           if (!CONFIG.ENABLE_MAKE_PUSH || !webhook || webhook.includes('PEGA_AQUI')) {
             throw new Error('Webhook no configurado');
@@ -1003,7 +1051,6 @@
           jobForm.reset();
 
         } catch (err) {
-          // Si ocurre un error de red pero quieres asegurar simulación de éxito o mostrar error:
           jobStatus.textContent = '¡Postulación registrada correctamente!';
           jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800';
           jobStatus.classList.remove('hidden');
@@ -1056,8 +1103,8 @@
             📞 Prefiero que me contacten por teléfono
           </button>
           <div id="cv-call-fields" class="hidden mt-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
-            <label class="block text-sm font-bold mb-2" for="cv-phone">Número de teléfono</label>
-            <input id="cv-phone" type="tel" inputmode="tel" maxlength="20" placeholder="Ej. 999 999 999"
+            <label class="block text-sm font-bold mb-2" for="cv-phone">Número de teléfono (9 dígitos)</label>
+            <input id="cv-phone" type="tel" inputmode="numeric" maxlength="9" placeholder="Ej. 999999999"
               class="w-full p-3 bg-white border rounded-xl focus:outline-none focus:border-teal-500">
             <button type="button" id="cv-send-call" class="mt-3 w-full bg-slate-900 text-white p-3 rounded-xl font-black">Enviar solicitud de llamada</button>
           </div>`;
@@ -1066,12 +1113,12 @@
         $('cv-call-btn').addEventListener('click', () => $('cv-call-fields').classList.toggle('hidden'));
         $('cv-send-call').addEventListener('click', () => {
           const phone = $('cv-phone').value.trim();
-          if (phone.length < 7) {
-            toast('Introduce un número válido.');
+          if (phone.length !== 9) {
+            toast('El número de celular debe tener exactamente 9 dígitos.');
             return;
           }
           const zone = $('zone')?.value.trim() || 'Por confirmar';
-          const msg = `Hola CuidadoTotal, quiero que me contacten por teléfono.\nTeléfono: ${phone}\nZona: ${zone}`;
+          const msg = `Hola CuidadoTotal, quiero que me contacten por teléfono.\nTeléfono: +51${phone}\nZona: ${zone}`;
           window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
         });
       }
@@ -1090,7 +1137,7 @@
         if (!progress || !content) return;
         progress.style.width = (((state.step + 1) / 4) * 100) + '%';
         if (state.step === 0) {
-          content.innerHTML = `<p class="text-slate-600">¿Para quién buscas apoyo?</p><div class="mt-5 grid gap-3">
+          content.innerHTML = `<p class="text-slate-600">¿Для quién buscas apoyo?</p><div class="mt-5 grid gap-3">
             ${['Adulto mayor','Paciente en recuperación','Persona que necesita supervisión','No estoy seguro'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
         } else if (state.step === 1) {
           content.innerHTML = `<p class="text-slate-600">¿Qué apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">

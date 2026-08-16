@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CuidadoTotal brinda servicios de cuidado domiciliario y acompañamiento para pacientes en Piura y alrededores. Solicita una evaluación y cotización.">
-  <meta name="theme-color" content="#0f766e">
-  <title>CuidadoTotal | Cuidado domiciliario profesional</title>
+  <meta name="description" content="CuidadoTotal brinda servicios de cuidado domiciliario y acompañamiento humano para pacientes en Piura y alrededores. Solicita una evaluación y cotización con calidez.">
+  <meta name="theme-color" content="#0d9488">
+  <title>CuidadoTotal | Cuidado Domiciliario Humano y Profesional</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,10 +18,10 @@
         extend: {
           colors: {
             brand: {
-              teal: '#0f766e',
+              teal: '#0d9488',
               teal2: '#14b8a6',
-              mint: '#10b981',
-              blue: '#2563eb',
+              mint: '#34d399',
+              blue: '#0ea5e9',
               ink: '#0f172a',
               ice: '#f0fdfa'
             }
@@ -37,11 +37,11 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .bg-pattern {
       background-color: #f8fafc;
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 22px 22px;
+      background-image: radial-gradient(#99f6e4 1px, transparent 1px);
+      background-size: 24px 24px;
     }
     .focus-ring:focus-visible {
-      outline: 3px solid rgba(20,184,166,.35);
+      outline: 3px solid rgba(13,148,136,.35);
       outline-offset: 3px;
     }
   </style>
@@ -52,243 +52,285 @@
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "CuidadoTotal",
-    "description": "Servicios de cuidado domiciliario y acompañamiento para pacientes.",
+    "description": "Servicios de cuidado domiciliario, acompañamiento y salud humanizada para pacientes.",
     "areaServed": ["Piura", "Castilla", "Veintiséis de Octubre", "Catacaos"],
     "telephone": "+51 968 495 402"
   }
   </script>
 
-<style id="cv-navigation-fix">
-  html { scroll-behavior: smooth; }
-  #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
-    scroll-margin-top: 105px;
-  }
-  .cv-nav-active {
-    color: #0f766e !important;
-  }
-  @media (max-width: 767px) {
+  <style id="cv-navigation-fix">
+    html { scroll-behavior: smooth; }
     #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
-      scroll-margin-top: 82px;
+      scroll-margin-top: 105px;
     }
-  }
-</style>
-
+    .cv-nav-active {
+      color: #0d9488 !important;
+      font-weight: 800;
+    }
+    @media (max-width: 767px) {
+      #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
+        scroll-margin-top: 82px;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50/70 text-slate-800 antialiased">
 
-  <!-- AVISO SUPERIOR -->
-  <div class="bg-slate-950 text-white text-xs sm:text-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-col sm:flex-row gap-1 sm:gap-6 justify-center sm:justify-between text-center">
-      <span>Atención domiciliaria programada y sujeta a disponibilidad</span>
-      <a href="tel:+51968495402" class="font-bold text-teal-300 hover:underline focus-ring">Central: +51 968 495 402</a>
+  <!-- AVISO SUPERIOR CON TOQUE HUMANO -->
+  <div class="bg-teal-900 text-teal-50 text-xs sm:text-sm font-medium shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-col sm:flex-row gap-1 sm:gap-6 justify-center sm:justify-between text-center items-center">
+      <span class="flex items-center justify-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Atención domiciliaria con calidez, paciencia y profesionalismo en Piura
+      </span>
+      <a href="tel:+51968495402" class="font-bold text-white hover:underline focus-ring flex items-center gap-1.5 bg-teal-800/80 px-3 py-1 rounded-full">
+        📞 Central: +51 968 495 402
+      </a>
     </div>
   </div>
 
   <!-- HEADER -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-teal-100/60 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3 focus-ring rounded-xl" aria-label="CuidadoTotal, inicio">
-        <img src="logo.png" alt="Logo CuidadoTotal" class="w-11 h-11 object-contain rounded-xl">
+      <a href="#" class="flex items-center gap-3 focus-ring rounded-xl group" aria-label="CuidadoTotal, inicio">
+        <div class="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-200 grid place-items-center text-teal-700 shadow-sm group-hover:scale-105 transition">
+          <span class="text-xl">❤️</span>
+        </div>
         <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-950">Cuidado<span class="text-teal-600">Total</span></span>
       </a>
 
-      <nav class="hidden md:flex items-center gap-6 text-sm font-bold" aria-label="Navegación principal">
-        <a href="#cv-orientador" class="hover:text-teal-700 focus-ring rounded">Empieza aquí</a>
-        <a href="#servicios" class="hover:text-teal-700 focus-ring rounded">Servicios</a>
-        <a href="#seguridad" class="hover:text-teal-700 focus-ring rounded">Seguridad</a>
-        <a href="#proceso" class="hover:text-teal-700 focus-ring rounded">Cómo funciona</a>
-        <a href="#cv-familia" class="hover:text-teal-700 focus-ring rounded">Área familiar</a>
-        <a href="#trabaja" class="hover:text-teal-700 focus-ring rounded">Trabaja con nosotros</a>
-        <a href="#faq" class="hover:text-teal-700 focus-ring rounded">Preguntas</a>
-        <a href="#cotizar" class="bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700 focus-ring shadow-md shadow-teal-600/20">Solicitar atención</a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600" aria-label="Navegación principal">
+        <a href="#cv-orientador" class="hover:text-teal-700 focus-ring rounded transition">Empieza aquí</a>
+        <a href="#servicios" class="hover:text-teal-700 focus-ring rounded transition">Servicios</a>
+        <a href="#seguridad" class="hover:text-teal-700 focus-ring rounded transition">Confianza</a>
+        <a href="#proceso" class="hover:text-teal-700 focus-ring rounded transition">Cómo funciona</a>
+        <a href="#cv-familia" class="hover:text-teal-700 focus-ring rounded transition">Área familiar</a>
+        <a href="#trabaja" class="hover:text-teal-700 focus-ring rounded transition">Únete</a>
+        <a href="#faq" class="hover:text-teal-700 focus-ring rounded transition">Dudas</a>
+        <a href="#cotizar" class="bg-teal-600 text-white px-4.5 py-2.5 rounded-xl hover:bg-teal-700 focus-ring shadow-lg shadow-teal-600/25 font-bold transition transform hover:-translate-y-0.5">Solicitar atención</a>
       </nav>
 
-      <button id="menuBtn" type="button" class="md:hidden p-2 rounded-xl border border-slate-200 focus-ring" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <button id="menuBtn" type="button" class="md:hidden p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus-ring" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
 
-    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white">
-      <nav class="px-5 py-4 grid gap-3 text-sm font-bold">
-        <a href="#cv-orientador" class="py-2">Empieza aquí</a>
-        <a href="#servicios" class="py-2">Servicios</a>
-        <a href="#seguridad" class="py-2">Seguridad</a>
-        <a href="#proceso" class="py-2">Cómo funciona</a>
-        <a href="#cv-familia" class="py-2">Área familiar</a>
-        <a href="#trabaja" class="py-2">Trabaja con nosotros</a>
-        <a href="#faq" class="py-2">Preguntas frecuentes</a>
-        <a href="#cotizar" class="py-3 text-center rounded-xl bg-teal-600 text-white">Solicitar atención</a>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white/95 backdrop-blur">
+      <nav class="px-5 py-5 grid gap-3 text-sm font-bold text-slate-700">
+        <a href="#cv-orientador" class="py-2 border-b border-slate-50">Empieza aquí</a>
+        <a href="#servicios" class="py-2 border-b border-slate-50">Servicios</a>
+        <a href="#seguridad" class="py-2 border-b border-slate-50">Confianza y Seguridad</a>
+        <a href="#proceso" class="py-2 border-b border-slate-50">Cómo funciona</a>
+        <a href="#cv-familia" class="py-2 border-b border-slate-50">Área familiar</a>
+        <a href="#trabaja" class="py-2 border-b border-slate-50">Trabaja con nosotros</a>
+        <a href="#faq" class="py-2 border-b border-slate-50">Preguntas frecuentes</a>
+        <a href="#cotizar" class="py-3 mt-2 text-center rounded-xl bg-teal-600 text-white shadow-md">Solicitar atención</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- HERO EMPÁTICO Y HUMANO -->
   <main>
-    <section class="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-blue-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24 grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-center">
+    <section class="relative overflow-hidden bg-gradient-to-br from-teal-50/80 via-white to-sky-50/60 py-16 lg:py-24">
+      <!-- Elemento visual decorativo suave -->
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-teal-200/30 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-center">
         <div>
-          <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white border border-teal-100 text-teal-800 text-xs font-extrabold uppercase tracking-wider shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-teal-500"></span>
-            Cuidado humano, seguro y personalizado
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-teal-100/70 border border-teal-200 text-teal-900 text-xs font-extrabold uppercase tracking-wider shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-600 animate-pulse"></span>
+            Cuidado humano, seguro y con profundo respeto
           </div>
 
-          <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-slate-950">
-            Cuidamos a tu familiar
-            <span class="text-teal-700">con atención y respeto</span>
-            en casa
+          <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-slate-950">
+            Cuidamos a tu ser querido
+            <span class="text-teal-600 block mt-1">como si fuera de nuestra familia</span>
           </h1>
 
-          <p class="mt-6 text-lg leading-8 text-slate-600 max-w-2xl">
-            Acompañamiento y cuidados domiciliarios adaptados a las necesidades del paciente y a las indicaciones del equipo de salud tratante.
+          <p class="mt-6 text-lg sm:text-xl leading-relaxed text-slate-600 max-w-2xl font-normal">
+            Brindamos compañía profesional, dignidad y tranquilidad en el hogar. Tu familiar merece sentirse atendido con paciencia, afecto y rigor clínico.
           </p>
 
-          <div class="mt-8 flex flex-col sm:flex-row gap-3">
-            <a href="#cotizar" class="focus-ring inline-flex justify-center items-center px-7 py-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold shadow-xl shadow-teal-600/20">
-              Solicitar Servicio
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <a href="#cotizar" class="focus-ring inline-flex justify-center items-center px-8 py-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold shadow-xl shadow-teal-600/25 transition transform hover:-translate-y-0.5">
+              ✨ Solicitar Servicio con Cariño
             </a>
-            <a id="heroWhatsapp" href="https://wa.me/51968495402?text=Hola%20CuidadoTotal%2C%20quisiera%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20cuidado%20domiciliario." target="_blank" rel="noopener noreferrer" class="focus-ring inline-flex justify-center items-center px-7 py-4 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-extrabold">
-              Hablar por WhatsApp
+            <a id="heroWhatsapp" href="https://wa.me/51968495402?text=Hola%20CuidadoTotal%2C%20necesito%20orientación%20con%20mucha%20urgencia%20para%20el%20cuidado%20de%20mi%20familiar." target="_blank" rel="noopener noreferrer" class="focus-ring inline-flex justify-center items-center px-7 py-4 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-extrabold shadow-sm transition">
+              💬 Hablar por WhatsApp
             </a>
           </div>
 
-          <div class="mt-7 grid sm:grid-cols-3 gap-3 max-w-2xl">
-            <div class="bg-white/80 border border-slate-200 rounded-2xl p-4">
-              <p class="font-black text-slate-950">Evaluación</p>
-              <p class="text-xs text-slate-500 mt-1">Antes de asignar el servicio</p>
+          <div class="mt-10 grid sm:grid-cols-3 gap-4 max-w-2xl">
+            <div class="bg-white/90 backdrop-blur border border-teal-100 rounded-2xl p-4 shadow-sm">
+              <p class="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">🩺 Evaluación Previa</p>
+              <p class="text-xs text-slate-500 mt-1">Entendemos el caso antes de asignar personal.</p>
             </div>
-            <div class="bg-white/80 border border-slate-200 rounded-2xl p-4">
-              <p class="font-black text-slate-950">Seguimiento</p>
-              <p class="text-xs text-slate-500 mt-1">Registro de incidencias y novedades</p>
+            <div class="bg-white/90 backdrop-blur border border-teal-100 rounded-2xl p-4 shadow-sm">
+              <p class="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">📋 Seguimiento</p>
+              <p class="text-xs text-slate-500 mt-1">Bitácora constante y comunicación abierta.</p>
             </div>
-            <div class="bg-white/80 border border-slate-200 rounded-2xl p-4">
-              <p class="font-black text-slate-950">Continuidad</p>
-              <p class="text-xs text-slate-500 mt-1">Coordinación ante cambios</p>
+            <div class="bg-white/90 backdrop-blur border border-teal-100 rounded-2xl p-4 shadow-sm">
+              <p class="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">🤝 Tranquilidad</p>
+              <p class="text-xs text-slate-500 mt-1">Apoyo real para que la familia descanse.</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-white rounded-[2rem] border border-slate-200 shadow-2xl shadow-slate-300/30 p-7 sm:p-9">
+        <div class="bg-white/90 backdrop-blur rounded-[2.5rem] border border-teal-100 shadow-2xl shadow-teal-900/10 p-8 sm:p-10 relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-teal-600 text-white text-xs font-black px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider">
+            Compromiso Vital
+          </div>
+
           <div class="flex items-start gap-4">
-            <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center text-2xl">🛡️</div>
+            <div class="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 grid place-items-center text-2xl shadow-inner">🛡️</div>
             <div>
-              <h2 class="text-xl font-black text-slate-950">Nuestro estándar de cuidado</h2>
-              <p class="text-sm text-slate-500 mt-1">Procesos claros para la familia y el paciente</p>
+              <h2 class="text-xl font-black text-slate-950">Nuestro Estándar de Cuidado</h2>
+              <p class="text-sm text-slate-500 mt-0.5">Seguridad, empatía y procesos transparentes</p>
             </div>
           </div>
 
-          <div class="mt-7 space-y-5">
-            <div class="flex gap-4">
-              <span class="mt-1 w-7 h-7 rounded-lg bg-teal-50 text-teal-700 grid place-items-center font-black">✓</span>
-              <div><strong class="text-slate-950">Personal validado</strong><p class="text-sm text-slate-600 mt-1">Verificación de identidad, referencias y documentación según el perfil requerido.</p></div>
+          <div class="mt-8 space-y-6">
+            <div class="flex gap-4 items-start">
+              <span class="mt-0.5 w-7 h-7 rounded-xl bg-teal-100 text-teal-800 grid place-items-center font-black text-sm shrink-0">✓</span>
+              <div><strong class="text-slate-950 text-base">Personal rigurosamente validado</strong><p class="text-sm text-slate-600 mt-1">Verificación de antecedentes, referencias y sensibilidad humana para el trato diario.</p></div>
             </div>
-            <div class="flex gap-4">
-              <span class="mt-1 w-7 h-7 rounded-lg bg-teal-50 text-teal-700 grid place-items-center font-black">✓</span>
-              <div><strong class="text-slate-950">Plan de atención</strong><p class="text-sm text-slate-600 mt-1">Se definen tareas, horarios, límites del servicio y señales que deben comunicarse.</p></div>
+            <div class="flex gap-4 items-start">
+              <span class="mt-0.5 w-7 h-7 rounded-xl bg-teal-100 text-teal-800 grid place-items-center font-black text-sm shrink-0">✓</span>
+              <div><strong class="text-slate-950 text-base">Plan de atención a la medida</strong><p class="text-sm text-slate-600 mt-1">Horarios, pautas de medicación y rutinas específicas alineadas con el médico tratante.</p></div>
             </div>
-            <div class="flex gap-4">
-              <span class="mt-1 w-7 h-7 rounded-lg bg-teal-50 text-teal-700 grid place-items-center font-black">✓</span>
-              <div><strong class="text-slate-950">Comunicación con la familia</strong><p class="text-sm text-slate-600 mt-1">La familia recibe novedades relevantes y se escala cualquier cambio importante.</p></div>
+            <div class="flex gap-4 items-start">
+              <span class="mt-0.5 w-7 h-7 rounded-xl bg-teal-100 text-teal-800 grid place-items-center font-black text-sm shrink-0">✓</span>
+              <div><strong class="text-slate-950 text-base">Acompañamiento a la familia</strong><p class="text-sm text-slate-600 mt-1">Estamos en constante contacto para resolver dudas y coordinar cualquier necesidad urgente.</p></div>
             </div>
           </div>
 
-          <div class="mt-7 rounded-2xl bg-amber-50 border border-amber-200 p-4 text-xs text-amber-900 leading-5">
-            <strong>Importante:</strong> este servicio no sustituye una evaluación médica ni está diseñado para emergencias. Ante una emergencia, contacta con el servicio de emergencias correspondiente.
+          <div class="mt-8 rounded-2xl bg-amber-50/80 border border-amber-200/80 p-4 text-xs text-amber-900 leading-relaxed flex gap-3 items-start">
+            <span class="text-base">⚠️</span>
+            <div><strong>Nota importante:</strong> Nuestro servicio está enfocado en el bienestar y asistencia domiciliaria; no reemplaza la atención de emergencias médicas graves.</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ACCESOS RÁPIDOS (EMPIEZA AQUÍ) -->
-    <section id="cv-orientador" class="py-12 bg-white border-y border-slate-200">
-      <div class="max-w-7xl mx-auto px-6">
+    <section id="cv-orientador" class="py-12 bg-white border-y border-slate-100 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-col lg:flex-row gap-6 items-center justify-between">
           <div>
-            <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Empieza aquí</span>
-            <h2 class="text-2xl md:text-3xl font-black text-slate-900 mt-2">¿Qué necesitas para tu familiar?</h2>
-            <p class="text-slate-500 text-sm mt-1">No necesitas saber el nombre técnico del servicio.</p>
+            <div class="inline-flex items-center gap-1.5 text-teal-700 font-black text-xs uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full mb-2">
+              🧭 Orientación Rápida
+            </div>
+            <h2 class="text-2xl md:text-3xl font-black text-slate-900">¿Qué tipo de cuidado necesita tu familiar hoy?</h2>
+            <p class="text-slate-500 text-sm mt-1">Selecciona una opción para autocompletar tu cotización o permítenos guiarte.</p>
           </div>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full lg:w-auto">
-            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="90">👵<br>Adulto mayor</button>
-            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="120">🏥<br>Recuperación</button>
-            <button class="cv-premium-btn cv-quick bg-slate-50 border border-slate-200 rounded-2xl p-4 font-extrabold text-left" data-service="140">🌙<br>Cuidado nocturno</button>
-            <button id="cv-open-advisor" class="cv-premium-btn bg-teal-50 border border-teal-200 text-teal-800 rounded-2xl p-4 font-extrabold text-left">❓<br>No sé qué necesito</button>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full lg:w-auto">
+            <button class="cv-premium-btn cv-quick bg-slate-50 hover:bg-teal-50/70 border border-slate-200 hover:border-teal-300 rounded-2xl p-4 font-extrabold text-left transition group" data-service="120">
+              <span class="text-2xl block mb-1">👵</span>
+              <span class="text-xs text-slate-700 group-hover:text-teal-900 block">Adulto Mayor</span>
+            </button>
+            <button class="cv-premium-btn cv-quick bg-slate-50 hover:bg-teal-50/70 border border-slate-200 hover:border-teal-300 rounded-2xl p-4 font-extrabold text-left transition group" data-service="120">
+              <span class="text-2xl block mb-1">🏥</span>
+              <span class="text-xs text-slate-700 group-hover:text-teal-900 block">Recuperación</span>
+            </button>
+            <button class="cv-premium-btn cv-quick bg-slate-50 hover:bg-teal-50/70 border border-slate-200 hover:border-teal-300 rounded-2xl p-4 font-extrabold text-left transition group" data-service="140">
+              <span class="text-2xl block mb-1">🌙</span>
+              <span class="text-xs text-slate-700 group-hover:text-teal-900 block">Cuidado Nocturno</span>
+            </button>
+            <button id="cv-open-advisor" class="cv-premium-btn bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-900 rounded-2xl p-4 font-extrabold text-left transition group shadow-sm">
+              <span class="text-2xl block mb-1">❓</span>
+              <span class="text-xs text-teal-900 block font-black">Asesor Virtual</span>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- SERVICIOS -->
-    <section id="servicios" class="py-20 bg-white">
+    <section id="servicios" class="py-20 bg-gradient-to-b from-white to-slate-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="max-w-3xl mx-auto text-center">
-          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Servicios</span>
-          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Una atención definida según cada paciente</h2>
-          <p class="mt-4 text-slate-600">No todos los pacientes necesitan lo mismo. Primero identificamos el tipo de apoyo requerido y después proponemos la modalidad adecuada.</p>
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full">Nuestros Servicios</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-black text-slate-950">Atención especializada con un trato humano excepcional</h2>
+          <p class="mt-4 text-slate-600 text-base leading-relaxed">Cada paciente es único. Escuchamos primero la situación de salud y proponemos el acompañamiento exacto que brinde paz a todos en casa.</p>
         </div>
 
-        <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <article class="p-6 rounded-3xl border border-slate-200 hover:border-teal-300 hover:-translate-y-1 transition bg-slate-50">
-            <div class="w-12 h-12 rounded-2xl bg-teal-100 grid place-items-center text-2xl">👵</div>
-            <h3 class="mt-5 text-lg font-black text-slate-950">Adulto mayor</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600">Apoyo en higiene, alimentación, movilidad, compañía, prevención de riesgos y seguimiento de indicaciones.</p>
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article class="p-7 rounded-[2rem] border border-slate-200/80 hover:border-teal-300 hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 bg-white group">
+            <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center text-2xl group-hover:bg-teal-600 group-hover:text-white transition shadow-sm">👵</div>
+            <h3 class="mt-6 text-xl font-black text-slate-950">Adulto Mayor</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">Apoyo integral en higiene personal, alimentación asistida, movilidad segura, compañía afectiva y prevención de caídas.</p>
           </article>
 
-          <article class="p-6 rounded-3xl border border-slate-200 hover:border-blue-300 hover:-translate-y-1 transition bg-slate-50">
-            <div class="w-12 h-12 rounded-2xl bg-blue-100 grid place-items-center text-2xl">🩹</div>
-            <h3 class="mt-5 text-lg font-black text-slate-950">Recuperación</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600">Apoyo domiciliario durante la recuperación, siempre de acuerdo con las indicaciones del profesional responsable.</p>
+          <article class="p-7 rounded-[2rem] border border-slate-200/80 hover:border-teal-300 hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 bg-white group">
+            <div class="w-14 h-14 rounded-2xl bg-sky-50 text-sky-700 grid place-items-center text-2xl group-hover:bg-sky-600 group-hover:text-white transition shadow-sm">🩹</div>
+            <h3 class="mt-6 text-xl font-black text-slate-950">Recuperación Postoperatoria</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">Cuidado domiciliario tras cirugías o intervenciones, cumpliendo estrictamente con las pautas indicadas por el médico tratante.</p>
           </article>
 
-          <article class="p-6 rounded-3xl border border-slate-200 hover:border-teal-300 hover:-translate-y-1 transition bg-slate-50">
-            <div class="w-12 h-12 rounded-2xl bg-teal-100 grid place-items-center text-2xl">🩺</div>
-            <h3 class="mt-5 text-lg font-black text-slate-950">Cuidado continuo</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600">Turnos diurnos o nocturnos para pacientes que necesitan supervisión y acompañamiento frecuente.</p>
+          <article class="p-7 rounded-[2rem] border border-slate-200/80 hover:border-teal-300 hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 bg-white group">
+            <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-700 grid place-items-center text-2xl group-hover:bg-teal-600 group-hover:text-white transition shadow-sm">🩺</div>
+            <h3 class="mt-6 text-xl font-black text-slate-950">Cuidado Continuo</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">Turnos diurnos o nocturnos dedicados para pacientes que requieren supervisión constante y control permanente de su bienestar.</p>
           </article>
 
-          <article class="p-6 rounded-3xl border border-slate-200 hover:border-blue-300 hover:-translate-y-1 transition bg-slate-50">
-            <div class="w-12 h-12 rounded-2xl bg-blue-100 grid place-items-center text-2xl">📋</div>
-            <h3 class="mt-5 text-lg font-black text-slate-950">Procedimientos</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600">Servicios puntuales únicamente cuando correspondan al perfil profesional, indicación y normativa aplicable.</p>
+          <article class="p-7 rounded-[2rem] border border-slate-200/80 hover:border-teal-300 hover:shadow-xl hover:shadow-teal-900/5 transition-all duration-300 bg-white group">
+            <div class="w-14 h-14 rounded-2xl bg-sky-50 text-sky-700 grid place-items-center text-2xl group-hover:bg-sky-600 group-hover:text-white transition shadow-sm">📋</div>
+            <h3 class="mt-6 text-xl font-black text-slate-950">Procedimientos Puntuales</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">Asistencia especializada temporal según indicación profesional, garantizando pulcritud, respeto y total seguridad en el hogar.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- SEGURIDAD -->
-    <section id="seguridad" class="py-20 bg-pattern border-y border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
+    <!-- SEGURIDAD Y CONFIANZA -->
+    <section id="seguridad" class="py-20 bg-pattern border-y border-slate-200/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Seguridad y confianza</span>
-          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">La familia también forma parte del cuidado</h2>
-          <p class="mt-5 text-slate-600 leading-7">Una buena atención domiciliaria necesita comunicación, límites claros y documentación. Por eso el servicio debe estar organizado, no improvisado.</p>
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest bg-teal-100/70 px-3 py-1 rounded-full">Seguridad y Confianza</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-black text-slate-950">La familia también merece descansar con tranquilidad</h2>
+          <p class="mt-5 text-slate-600 leading-relaxed text-base">Sabemos el desgaste emocional que implica cuidar a un ser querido enfermo. Por eso organizamos cada turno de forma transparente, estructurada y sin improvisaciones.</p>
 
-          <div class="mt-7 grid sm:grid-cols-2 gap-4">
-            <div class="bg-white rounded-2xl p-5 border border-slate-200">
-              <h3 class="font-black">Identificación</h3>
-              <p class="text-sm text-slate-600 mt-1">Personal identificado y asignación registrada.</p>
+          <div class="mt-8 grid sm:grid-cols-2 gap-4">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+              <span class="text-xl">🪪</span>
+              <h3 class="font-black text-slate-900 mt-2">Identidad Verificada</h3>
+              <p class="text-sm text-slate-600 mt-1">Personal con filtros estrictos y referencias comprobadas.</p>
             </div>
-            <div class="bg-white rounded-2xl p-5 border border-slate-200">
-              <h3 class="font-black">Incidencias</h3>
-              <p class="text-sm text-slate-600 mt-1">Registro de novedades relevantes del turno.</p>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+              <span class="text-xl">📝</span>
+              <h3 class="font-black text-slate-900 mt-2">Bitácora de Novedades</h3>
+              <p class="text-sm text-slate-600 mt-1">Registro claro del estado del paciente en cada turno.</p>
             </div>
-            <div class="bg-white rounded-2xl p-5 border border-slate-200">
-              <h3 class="font-black">Escalamiento</h3>
-              <p class="text-sm text-slate-600 mt-1">Criterios para comunicar cambios a la familia.</p>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+              <span class="text-xl">🚨</span>
+              <h3 class="font-black text-slate-900 mt-2">Protocolo de Escalamiento</h3>
+              <p class="text-sm text-slate-600 mt-1">Canales directos para avisar cualquier cambio a la familia.</p>
             </div>
-            <div class="bg-white rounded-2xl p-5 border border-slate-200">
-              <h3 class="font-black">Privacidad</h3>
-              <p class="text-sm text-slate-600 mt-1">Recogida mínima de información para coordinar el servicio.</p>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+              <span class="text-xl">🔒</span>
+              <h3 class="font-black text-slate-900 mt-2">Discreción y Respeto</h3>
+              <p class="text-sm text-slate-600 mt-1">Manejo responsable y ético de la privacidad del hogar.</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-white rounded-3xl border border-slate-200 shadow-xl p-7">
-          <h3 class="text-xl font-black text-slate-950">Antes de iniciar un servicio</h3>
-          <ol class="mt-6 space-y-5">
-            <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-xl bg-teal-600 text-white grid place-items-center font-black">1</span><div><strong>Conocemos la necesidad</strong><p class="text-sm text-slate-600 mt-1">Horario, ubicación, tipo de apoyo y situación general.</p></div></li>
-            <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-xl bg-teal-600 text-white grid place-items-center font-black">2</span><div><strong>Verificamos compatibilidad</strong><p class="text-sm text-slate-600 mt-1">Perfil del paciente, tareas solicitadas y disponibilidad del personal.</p></div></li>
-            <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-xl bg-teal-600 text-white grid place-items-center font-black">3</span><div><strong>Confirmamos condiciones</strong><p class="text-sm text-slate-600 mt-1">Precio, horario, responsabilidades, insumos y canal de comunicación.</p></div></li>
+        <div class="bg-white rounded-[2.5rem] border border-slate-200/80 shadow-xl p-8 sm:p-10">
+          <h3 class="text-2xl font-black text-slate-950">Paso a paso para iniciar el cuidado</h3>
+          <p class="text-slate-500 text-sm mt-1">Un proceso simple pensado en facilitarte las cosas.</p>
+          <ol class="mt-8 space-y-6">
+            <li class="flex gap-4 items-start">
+              <span class="w-9 h-9 shrink-0 rounded-2xl bg-teal-600 text-white grid place-items-center font-black shadow-md">1</span>
+              <div><strong class="text-slate-950 text-base">Nos cuentas tu necesidad</strong><p class="text-sm text-slate-600 mt-1">Ubicación, horarios y tipo de apoyo requerido para el paciente.</p></div>
+            </li>
+            <li class="flex gap-4 items-start">
+              <span class="w-9 h-9 shrink-0 rounded-2xl bg-teal-600 text-white grid place-items-center font-black shadow-md">2</span>
+              <div><strong class="text-slate-950 text-base">Validamos el perfil ideal</strong><p class="text-sm text-slate-600 mt-1">Alineamos las competencias del profesional con el estado de salud del paciente.</p></div>
+            </li>
+            <li class="flex gap-4 items-start">
+              <span class="w-9 h-9 shrink-0 rounded-2xl bg-teal-600 text-white grid place-items-center font-black shadow-md">3</span>
+              <div><strong class="text-slate-950 text-base">Confirmamos y comenzamos</strong><p class="text-sm text-slate-600 mt-1">Definimos precio, condiciones, acuerdos y damos inicio al acompañamiento.</p></div>
+            </li>
           </ol>
         </div>
       </div>
@@ -297,54 +339,88 @@
     <!-- PROCESO -->
     <section id="proceso" class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="text-center">
-          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Proceso</span>
-          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Así puedes contratar</h2>
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full">Proceso Simple</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-black text-slate-950">¿Cómo contratar el servicio?</h2>
+          <p class="mt-3 text-slate-600">Queremos que sientas acompañamiento desde el primer clic.</p>
         </div>
 
-        <div class="mt-12 grid md:grid-cols-4 gap-5">
-          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">1</div><h3 class="mt-4 font-black">Solicita</h3><p class="mt-2 text-sm text-slate-600">Cuéntanos qué necesitas y dónde.</p></div>
-          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">2</div><h3 class="mt-4 font-black">Evaluamos</h3><p class="mt-2 text-sm text-slate-600">Precisamos modalidad, duración y perfil requerido.</p></div>
-          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">3</div><h3 class="mt-4 font-black">Confirmamos</h3><p class="mt-2 text-sm text-slate-600">Acordamos condiciones y disponibilidad.</p></div>
-          <div class="text-center p-6"><div class="mx-auto w-12 h-12 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-lg">4</div><h3 class="mt-4 font-black">Iniciamos</h3><p class="mt-2 text-sm text-slate-600">Se asigna el personal y comienza el servicio.</p></div>
+        <div class="mt-14 grid md:grid-cols-4 gap-6">
+          <div class="text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:border-teal-200 transition">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-xl shadow-lg shadow-teal-600/20">1</div>
+            <h3 class="mt-5 font-black text-lg text-slate-900">Solicitas</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">Completa la cotización o escríbenos directamente por WhatsApp.</p>
+          </div>
+          <div class="text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:border-teal-200 transition">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-xl shadow-lg shadow-teal-600/20">2</div>
+            <h3 class="mt-5 font-black text-lg text-slate-900">Evaluamos</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">Precisamos la modalidad, duración exacta y el perfil idóneo.</p>
+          </div>
+          <div class="text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:border-teal-200 transition">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-xl shadow-lg shadow-teal-600/20">3</div>
+            <h3 class="mt-5 font-black text-lg text-slate-900">Confirmamos</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">Acordamos condiciones transparentes y disponibilidad en tu zona.</p>
+          </div>
+          <div class="text-center p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:border-teal-200 transition">
+            <div class="mx-auto w-14 h-14 rounded-2xl bg-teal-600 text-white grid place-items-center font-black text-xl shadow-lg shadow-teal-600/20">4</div>
+            <h3 class="mt-5 font-black text-lg text-slate-900">Iniciamos</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">El profesional se presenta en casa y comienza la atención con calidez.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ÁREA FAMILIAR (DEMO) -->
-    <section id="cv-familia" class="py-20 bg-slate-50 border-y border-slate-200">
-      <div class="max-w-7xl mx-auto px-6">
+    <section id="cv-familia" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+      <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
         <div class="max-w-3xl">
-          <span class="text-blue-600 font-black text-xs uppercase tracking-widest">Área familiar</span>
-          <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3">La familia puede saber qué está pasando sin complicarse</h2>
-          <p class="text-slate-600 mt-4">Esta es una interfaz demostrativa; todavía no es un área privada conectada a datos reales.</p>
+          <span class="text-teal-400 font-black text-xs uppercase tracking-widest bg-teal-950 px-3 py-1 rounded-full border border-teal-800">Área Familiar Interactiva</span>
+          <h2 class="text-3xl md:text-4xl font-black text-white mt-4">La familia informada y conectada, sin complicaciones</h2>
+          <p class="text-slate-300 mt-4 text-base leading-relaxed">Visualiza cómo operará tu espacio de control privado para conocer el estado y novedades de los turnos de cuidado de tu familiar.</p>
         </div>
-        <div class="mt-10 grid lg:grid-cols-[.8fr_1.2fr] gap-6">
-          <div class="bg-slate-950 text-white rounded-3xl p-7 shadow-xl">
-            <p class="text-xs uppercase font-black text-slate-400">Servicio activo</p>
-            <h3 class="text-2xl font-black mt-2">Familiar registrado</h3>
-            <div class="mt-6 p-4 rounded-2xl bg-white/5 border border-white/10">
-              <p class="text-xs text-slate-400">Estado</p>
-              <p class="text-xl font-black text-emerald-300">● Activo</p>
+
+        <div class="mt-12 grid lg:grid-cols-[.9fr_1.1fr] gap-8 items-center">
+          <div class="bg-slate-950 text-white rounded-3xl p-8 border border-slate-800 shadow-2xl">
+            <p class="text-xs uppercase font-black text-teal-400 tracking-wider">Estado del Servicio</p>
+            <h3 class="text-2xl font-black mt-2">Paciente Protegido</h3>
+            <div class="mt-6 p-4 rounded-2xl bg-teal-950/60 border border-teal-800/60 flex items-center justify-between">
+              <div>
+                <p class="text-xs text-slate-400">Estado Actual</p>
+                <p class="text-lg font-black text-emerald-400 flex items-center gap-1.5 mt-0.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> Turno Activo
+                </p>
+              </div>
+              <span class="text-3xl">🛡️</span>
             </div>
-            <div class="mt-3 p-4 rounded-2xl bg-white/5 border border-white/10">
-              <p class="text-xs text-slate-400">Próximo turno</p>
-              <p class="font-black mt-1">Mañana · 08:00–20:00</p>
-              <p class="text-xs text-slate-400 mt-1">Personal asignado · Confirmado</p>
+            <div class="mt-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+              <p class="text-xs text-slate-400">Próximo Turno Asignado</p>
+              <p class="font-black mt-1 text-white">Mañana · 08:00 – 20:00 hrs</p>
+              <p class="text-xs text-teal-300 mt-1">Personal: Profesional en Enfermería (Confirmado)</p>
             </div>
           </div>
+
           <div class="grid sm:grid-cols-2 gap-4">
-            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería la bitácora de novedades del turno.">
-              <span class="text-2xl">📋</span><h3 class="font-black mt-3">Novedades</h3><p class="text-sm text-slate-600 mt-2">Actualizaciones relevantes y fáciles de leer.</p>
+            <button class="cv-demo bg-slate-800/70 hover:bg-slate-800 border border-slate-700/80 rounded-3xl p-6 text-left transition group shadow-lg" data-msg="Aquí podrás revisar la bitácora detallada con novedades, alimentos y descanso del turno.">
+              <span class="text-3xl block mb-2">📋</span>
+              <h3 class="font-black text-white text-lg group-hover:text-teal-300 transition">Bitácora de Novedades</h3>
+              <p class="text-sm text-slate-400 mt-2">Actualizaciones claras y sencillas al finalizar cada jornada.</p>
             </button>
-            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería el perfil del personal asignado.">
-              <span class="text-2xl">👩‍⚕️</span><h3 class="font-black mt-3">Personal asignado</h3><p class="text-sm text-slate-600 mt-2">Perfil, turno, zona y estado de asignación.</p>
+            <button class="cv-demo bg-slate-800/70 hover:bg-slate-800 border border-slate-700/80 rounded-3xl p-6 text-left transition group shadow-lg" data-msg="Aquí verás la credencial, datos y especialidad del cuidador asignado a tu hogar.">
+              <span class="text-3xl block mb-2">👩‍⚕️</span>
+              <h3 class="font-black text-white text-lg group-hover:text-teal-300 transition">Personal Asignado</h3>
+              <p class="text-sm text-slate-400 mt-2">Conoce quién acompaña a tu familiar con total transparencia.</p>
             </button>
-            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería el resumen de pagos y pendientes.">
-              <span class="text-2xl">💳</span><h3 class="font-black mt-3">Pagos</h3><p class="text-sm text-slate-600 mt-2">Contratado, pagado y pendiente.</p>
+            <button class="cv-demo bg-slate-800/70 hover:bg-slate-800 border border-slate-700/80 rounded-3xl p-6 text-left transition group shadow-lg" data-msg="Aquí podrás revisar los pagos realizados y programar futuros turnos de forma segura.">
+              <span class="text-3xl block mb-2">💳</span>
+              <h3 class="font-black text-white text-lg group-hover:text-teal-300 transition">Gestión de Pagos</h3>
+              <p class="text-sm text-slate-400 mt-2">Historial de servicios contratados y comprobantes.</p>
             </button>
-            <button class="cv-demo bg-white border border-slate-200 rounded-3xl p-6 text-left hover:border-teal-300 transition" data-msg="Aquí aparecería la evaluación del servicio.">
-              <span class="text-2xl">⭐</span><h3 class="font-black mt-3">Evaluar servicio</h3><p class="text-sm text-slate-600 mt-2">Puntualidad, trato y satisfacción.</p>
+            <button class="cv-demo bg-slate-800/70 hover:bg-slate-800 border border-slate-700/80 rounded-3xl p-6 text-left transition group shadow-lg" data-msg="Aquí podrás calificar la calidad humana, puntualidad y calidez del servicio recibido.">
+              <span class="text-3xl block mb-2">⭐</span>
+              <h3 class="font-black text-white text-lg group-hover:text-teal-300 transition">Evaluar Calidad</h3>
+              <p class="text-sm text-slate-400 mt-2">Tu opinión nos ayuda a mantener la excelencia y empatía.</p>
             </button>
           </div>
         </div>
@@ -355,22 +431,22 @@
     <section id="trabaja" class="py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto">
-          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Únete al equipo</span>
-          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Trabaja con Nosotros</h2>
-          <p class="mt-4 text-slate-600">Forma parte de nuestra red de profesionales en cuidado domiciliario. Completa tus datos y adjunta tu currículum.</p>
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full">Únete al Equipo</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-black text-slate-950">Trabaja con Nosotros</h2>
+          <p class="mt-3 text-slate-600">Si eres profesional de la salud o técnico con vocación de servicio y amor por el cuidado, esta es tu oportunidad en Piura.</p>
         </div>
 
-        <div class="mt-12 bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl">
+        <div class="mt-12 bg-slate-50 border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-10 shadow-xl">
           <form id="jobForm" class="space-y-6" novalidate>
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
-                <label for="jobName" class="block text-sm font-extrabold mb-2">Nombres y Apellidos</label>
+                <label for="jobName" class="block text-sm font-extrabold mb-2 text-slate-700">Nombres y Apellidos</label>
                 <input id="jobName" name="jobName" type="text" maxlength="100" autocomplete="name"
-                  placeholder="Ej. Ana María Gómez" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+                  placeholder="Ej. Ana María Gómez" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring text-slate-800" required>
               </div>
               <div>
-                <label for="jobProfile" class="block text-sm font-extrabold mb-2">Perfil Profesional</label>
-                <select id="jobProfile" name="jobProfile" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+                <label for="jobProfile" class="block text-sm font-extrabold mb-2 text-slate-700">Perfil Profesional</label>
+                <select id="jobProfile" name="jobProfile" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring text-slate-800" required>
                   <option value="" disabled selected>Selecciona tu perfil</option>
                   <option value="Licenciada en Enfermería">Licenciada en Enfermería</option>
                   <option value="Enfermera Técnica">Enfermera Técnica</option>
@@ -380,52 +456,50 @@
 
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
-                <label for="jobDni" class="block text-sm font-extrabold mb-2">DNI (8 dígitos)</label>
+                <label for="jobDni" class="block text-sm font-extrabold mb-2 text-slate-700">DNI (8 dígitos)</label>
                 <input id="jobDni" name="jobDni" type="text" maxlength="8" inputmode="numeric" pattern="[0-9]{8}"
-                  placeholder="Ej. 74839201" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+                  placeholder="Ej. 74839201" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring text-slate-800" required>
               </div>
               <div>
-                <label for="jobPhone" class="block text-sm font-extrabold mb-2">Celular / WhatsApp (9 dígitos)</label>
+                <label for="jobPhone" class="block text-sm font-extrabold mb-2 text-slate-700">Celular / WhatsApp (9 dígitos)</label>
                 <input id="jobPhone" name="jobPhone" type="tel" maxlength="9" inputmode="numeric" pattern="[0-9]{9}"
-                  placeholder="Ej. 999999999" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+                  placeholder="Ej. 999999999" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring text-slate-800" required>
               </div>
             </div>
 
-            <!-- ZONA DE COBERTURA (CHECKBOXES) -->
             <div>
-              <label class="block text-sm font-extrabold mb-3">Zona de cobertura (Marca las zonas que podrías cubrir)</label>
+              <label class="block text-sm font-extrabold mb-3 text-slate-700">Zona de cobertura (Marca las zonas que puedes cubrir)</label>
               <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
-                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-400 transition">
                   <input type="checkbox" name="jobZones" value="Piura" class="w-4 h-4 accent-teal-600">
-                  <span class="text-sm font-bold">Piura</span>
+                  <span class="text-sm font-bold text-slate-700">Piura</span>
                 </label>
-                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-400 transition">
                   <input type="checkbox" name="jobZones" value="Castilla" class="w-4 h-4 accent-teal-600">
-                  <span class="text-sm font-bold">Castilla</span>
+                  <span class="text-sm font-bold text-slate-700">Castilla</span>
                 </label>
-                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-400 transition">
                   <input type="checkbox" name="jobZones" value="26 de Octubre" class="w-4 h-4 accent-teal-600">
-                  <span class="text-sm font-bold">26 de Octubre</span>
+                  <span class="text-sm font-bold text-slate-700">26 de Octubre</span>
                 </label>
-                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-400 transition">
                   <input type="checkbox" name="jobZones" value="Catacaos" class="w-4 h-4 accent-teal-600">
-                  <span class="text-sm font-bold">Catacaos</span>
+                  <span class="text-sm font-bold text-slate-700">Catacaos</span>
                 </label>
               </div>
             </div>
 
-            <!-- SUBIR CV -->
             <div>
-              <label for="jobCv" class="block text-sm font-extrabold mb-2">Curriculum Vitae (CV) <span class="text-xs font-normal text-slate-500">Formatos PDF o Word (Máx. 5MB)</span></label>
+              <label for="jobCv" class="block text-sm font-extrabold mb-2 text-slate-700">Currículum Vitae (CV) <span class="text-xs font-normal text-slate-500">(PDF o Word, Máx. 5MB)</span></label>
               <input id="jobCv" name="jobCv" type="file" accept=".pdf,.doc,.docx"
-                class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer focus-ring" required>
+                class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer focus-ring" required>
             </div>
 
             <p id="jobFormError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3"></p>
             <p id="jobFormStatus" class="hidden text-sm rounded-xl p-3"></p>
 
-            <button id="jobSubmit" type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring">
-              Enviar Postulación
+            <button id="jobSubmit" type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring transition">
+              Enviar Postulación Profesional
             </button>
           </form>
         </div>
@@ -433,99 +507,99 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-20 bg-slate-50">
+    <section id="faq" class="py-20 bg-slate-50 border-t border-slate-200/60">
       <div class="max-w-3xl mx-auto px-4 sm:px-6">
         <div class="text-center">
-          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Preguntas frecuentes</span>
-          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Lo que conviene saber antes de contratar</h2>
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest bg-teal-100/70 px-3 py-1 rounded-full">Preguntas Frecuentes</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-black text-slate-950">Lo que necesitas saber para estar totalmente tranquilo</h2>
         </div>
 
-        <div class="mt-10 space-y-3">
-          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
-            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿Atienden emergencias?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
-            <p class="mt-3 text-sm leading-6 text-slate-600">No somos un servicio de emergencias. Si existe riesgo inmediato para la vida o una situación aguda, debe utilizarse el sistema de emergencias correspondiente.</p>
+        <div class="mt-12 space-y-4">
+          <details class="group bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4 text-slate-900 text-base">¿Atienden emergencias médicas?<span class="text-teal-600 group-open:rotate-45 transition text-xl font-bold">+</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">No somos un servicio de emergencias. Si tu familiar se encuentra en una situación crítica o de riesgo vital inmediato, debes acudir o llamar al sistema de emergencias médicas correspondiente.</p>
           </details>
-          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
-            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿El precio mostrado es definitivo?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
-            <p class="mt-3 text-sm leading-6 text-slate-600">La calculadora muestra un estimado. El precio final puede depender de horario, duración, ubicación, complejidad y recursos requeridos.</p>
+          <details class="group bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4 text-slate-900 text-base">¿El precio de la calculadora es definitivo?<span class="text-teal-600 group-open:rotate-45 transition text-xl font-bold">+</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">La calculadora arroja un estimado muy cercano. El precio final puede ajustarse tras conversar sobre los detalles específicos del paciente, horarios concretos o necesidades particulares.</p>
           </details>
-          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
-            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿Qué información debo enviar?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
-            <p class="mt-3 text-sm leading-6 text-slate-600">Para una primera cotización basta con ubicación, horario, modalidad de cuidado y una descripción general de la necesidad. Evita enviar por WhatsApp datos clínicos innecesarios.</p>
+          <details class="group bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4 text-slate-900 text-base">¿Qué información debo compartir inicialmente?<span class="text-teal-600 group-open:rotate-45 transition text-xl font-bold">+</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">Para una primera coordinación solo requerimos saber el distrito, horario, modalidad y una breve descripción general de la ayuda que necesitas. Evita enviar historias clínicas o datos muy sensibles por WhatsApp.</p>
           </details>
-          <details class="group bg-white border border-slate-200 rounded-2xl p-5">
-            <summary class="cursor-pointer font-black list-none flex justify-between gap-4">¿Puedo solicitar un reemplazo?<span class="text-teal-700 group-open:rotate-45 transition">+</span></summary>
-            <p class="mt-3 text-sm leading-6 text-slate-600">La continuidad y los reemplazos dependen de disponibilidad. La condición concreta debe quedar establecida en la contratación; evita promesas automáticas de tiempos que no puedas garantizar.</p>
+          <details class="group bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm">
+            <summary class="cursor-pointer font-black list-none flex justify-between gap-4 text-slate-900 text-base">¿Puedo solicitar un cambio de personal si lo requiero?<span class="text-teal-600 group-open:rotate-45 transition text-xl font-bold">+</span></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">Sí. Buscamos siempre la mejor química y comodidad entre el paciente y el cuidador. Evaluamos cualquier solicitud de ajuste con total apertura y empatía.</p>
           </details>
         </div>
       </div>
     </section>
 
     <!-- COTIZADOR -->
-    <section id="cotizar" class="py-20 bg-slate-950 text-white">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-start">
+    <section id="cotizar" class="py-20 bg-slate-950 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 relative grid lg:grid-cols-[.9fr_1.1fr] gap-12 items-start">
         <div class="lg:sticky lg:top-28">
-          <span class="text-teal-300 font-black text-xs uppercase tracking-widest">Cotización</span>
-          <h2 class="mt-3 text-3xl sm:text-4xl font-black">Cuéntanos qué necesitas</h2>
-          <p class="mt-4 text-slate-300 leading-7">La estimación es orientativa. Después podremos confirmar disponibilidad, modalidad y precio final.</p>
-          <div class="mt-7 rounded-2xl bg-white/5 border border-white/10 p-5 text-sm text-slate-300">
-            <strong class="text-white">Privacidad:</strong> no introduzcas aquí DNI, historia clínica, fotografías, recetas ni otros datos sensibles. Para la primera coordinación solo necesitamos información general.
+          <span class="text-teal-400 font-black text-xs uppercase tracking-widest bg-teal-950 px-3 py-1 rounded-full border border-teal-800">Cotización Inmediata</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-black text-white">Cuéntanos sobre tu familiar y organicemos el cuidado</h2>
+          <p class="mt-4 text-slate-300 leading-relaxed text-base">Calcula un estimado en segundos y conéctate directo con nuestra central por WhatsApp para confirmar todo con calma.</p>
+          <div class="mt-8 rounded-2xl bg-white/5 border border-white/10 p-5 text-sm text-slate-300 leading-relaxed">
+            <strong class="text-white block mb-1">🔒 Cuidado de tu Privacidad:</strong> No ingreses aquí números de DNI, historias clínicas o recetas confidenciales. Solo necesitamos datos generales para empezar la coordinación.
           </div>
         </div>
 
-        <div class="bg-white text-slate-800 rounded-3xl p-6 sm:p-9 shadow-2xl">
+        <div class="bg-white text-slate-800 rounded-[2.5rem] p-8 sm:p-10 shadow-2xl">
           <form id="quoteForm" class="space-y-5" novalidate>
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
-                <label for="customerName" class="block text-sm font-extrabold mb-2">Nombre del familiar</label>
+                <label for="customerName" class="block text-sm font-extrabold mb-2 text-slate-700">Nombre del familiar</label>
                 <input id="customerName" name="customerName" type="text" maxlength="100" autocomplete="name"
                   placeholder="Ej. María Pérez" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="customerPhone" class="block text-sm font-extrabold mb-2">WhatsApp / teléfono (9 dígitos)</label>
+                <label for="customerPhone" class="block text-sm font-extrabold mb-2 text-slate-700">WhatsApp / teléfono (9 dígitos)</label>
                 <input id="customerPhone" name="customerPhone" type="tel" maxlength="9" inputmode="numeric" pattern="[0-9]{9}"
                   autocomplete="tel" placeholder="Ej. 999999999" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
             </div>
 
-            <!-- CAMPO CORREO ELECTRÓNICO -->
             <div>
-              <label for="customerEmail" class="block text-sm font-extrabold mb-2">Correo electrónico <span class="font-medium text-slate-400">(para confirmación)</span></label>
+              <label for="customerEmail" class="block text-sm font-extrabold mb-2 text-slate-700">Correo electrónico <span class="font-medium text-slate-400 text-xs">(para confirmación)</span></label>
               <input id="customerEmail" name="customerEmail" type="email" maxlength="100" autocomplete="email"
                 placeholder="ejemplo@correo.com" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
             </div>
 
-            <!-- MODALIDAD -->
             <div>
-              <label for="service" class="block text-sm font-extrabold mb-2">Modalidad</label>
+              <label for="service" class="block text-sm font-extrabold mb-2 text-slate-700">Modalidad de Cuidado</label>
               <select id="service" name="service" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
                 <option value="120" data-unit="turno">Cuidado Adulto Mayor — S/ 120 por turno</option>
                 <option value="120" data-unit="turno">Cuidado Postoperatorio — S/ 120 por turno</option>
-                 <option value="100" data-unit="turno">Cuidados Básicos — S/ 100 por turno</option>
+                <option value="100" data-unit="turno">Cuidados Básicos — S/ 100 por turno</option>
                 <option value="140" data-unit="turno">Turno Nocturno — S/ 140 por turno</option>
                 <option value="60" data-unit="servicio">Procedimiento puntual — S/ 60 por servicio</option>
-                <option value="100" data-unit="turno">Cuidado de pacientes con enfermedades crónicas — S/ 100 por turno</option>
+                <option value="100" data-unit="turno">Cuidado de enfermedades crónicas — S/ 100 por turno</option>
               </select>
             </div>
 
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
-                <label for="quantity" class="block text-sm font-extrabold mb-2">Cantidad</label>
+                <label for="quantity" class="block text-sm font-extrabold mb-2 text-slate-700">Cantidad (Turnos / Días)</label>
                 <input id="quantity" name="quantity" type="number" min="1" max="31" value="1" inputmode="numeric" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="zone" class="block text-sm font-extrabold mb-2">Distrito / zona</label>
-                <input id="zone" name="zone" maxlength="80" placeholder="Ej. Castilla" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
+                <label for="zone" class="block text-sm font-extrabold mb-2 text-slate-700">Distrito o zona en Piura</label>
+                <input id="zone" name="zone" maxlength="80" placeholder="Ej. Castilla, Piura" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
             </div>
 
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
-                <label for="startDate" class="block text-sm font-extrabold mb-2">Fecha de inicio</label>
+                <label for="startDate" class="block text-sm font-extrabold mb-2 text-slate-700">Fecha de inicio</label>
                 <input id="startDate" name="startDate" type="date" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="schedule" class="block text-sm font-extrabold mb-2">Horario</label>
+                <label for="schedule" class="block text-sm font-extrabold mb-2 text-slate-700">Jornada</label>
                 <select id="schedule" name="schedule" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring">
                   <option value="Diurno">Diurno</option>
                   <option value="Nocturno">Nocturno</option>
@@ -536,43 +610,42 @@
 
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
-                <label for="startTime" class="block text-sm font-extrabold mb-2">Hora de inicio</label>
+                <label for="startTime" class="block text-sm font-extrabold mb-2 text-slate-700">Hora de inicio</label>
                 <input id="startTime" name="startTime" type="time" value="08:00" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
               <div>
-                <label for="endTime" class="block text-sm font-extrabold mb-2">Hora de fin</label>
+                <label for="endTime" class="block text-sm font-extrabold mb-2 text-slate-700">Hora de fin</label>
                 <input id="endTime" name="endTime" type="time" value="20:00" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring" required>
               </div>
             </div>
 
-            <!-- NECESIDAD GENERAL (SOLO TEXTAREA) -->
             <div>
-              <label for="details" class="block text-sm font-extrabold mb-2">Necesidad general <span class="font-medium text-slate-400">(opcional)</span></label>
-              <textarea id="details" name="details" rows="3" maxlength="500" placeholder="Ej. detalles adicionales que debamos conocer." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring"></textarea>
-              <p class="mt-1 text-xs text-slate-400">Máximo 500 caracteres. No incluyas datos clínicos sensibles.</p>
+              <label for="details" class="block text-sm font-extrabold mb-2 text-slate-700">Breve descripción de la necesidad <span class="font-normal text-slate-400 text-xs">(opcional)</span></label>
+              <textarea id="details" name="details" rows="3" maxlength="500" placeholder="Ej. Necesitamos apoyo con movilidad y paciencia." class="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl focus-ring"></textarea>
+              <p class="mt-1 text-xs text-slate-400">Máximo 500 caracteres. Sin información médica delicada.</p>
             </div>
 
-            <label class="flex gap-3 items-start text-xs text-slate-500">
-              <input id="privacyConsent" type="checkbox" class="mt-0.5 w-4 h-4 accent-teal-600" required>
-              <span>Acepto que CuidadoTotal use estos datos para contactarme y coordinar la solicitud de servicio.</span>
+            <label class="flex gap-3 items-start text-xs text-slate-600 cursor-pointer">
+              <input id="privacyConsent" type="checkbox" class="mt-0.5 w-4 h-4 accent-teal-600 rounded" required>
+              <span>Acepto que CuidadoTotal utilice estos datos para contactarme y coordinar la atención domiciliaria.</span>
             </label>
 
-            <div class="rounded-2xl bg-teal-50 border border-teal-100 p-5 flex items-center justify-between gap-4">
+            <div class="rounded-2xl bg-teal-50 border border-teal-200 p-5 flex items-center justify-between gap-4 shadow-sm">
               <div>
-                <p class="text-xs font-black uppercase tracking-wider text-teal-700">Estimado</p>
-                <p id="estimateLabel" class="text-xs text-slate-500 mt-1">1 turno</p>
+                <p class="text-xs font-black uppercase tracking-wider text-teal-800">Estimado Orientativo</p>
+                <p id="estimateLabel" class="text-xs text-slate-600 mt-0.5 font-medium">1 turno</p>
               </div>
-              <output id="total" class="text-3xl sm:text-4xl font-black text-teal-700" aria-live="polite">S/ 90</output>
+              <output id="total" class="text-3xl sm:text-4xl font-black text-teal-700" aria-live="polite">S/ 120</output>
             </div>
 
             <p id="formError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3"></p>
             <p id="formStatus" class="hidden text-sm rounded-xl p-3"></p>
 
-            <button id="quoteSubmit" type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring">
-              Enviar solicitud y abrir WhatsApp
+            <button id="quoteSubmit" type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/25 focus-ring transition transform hover:-translate-y-0.5">
+              🚀 Enviar solicitud y abrir WhatsApp
             </button>
 
-            <p class="text-xs text-slate-400 text-center">La solicitud se registrará en Make. Después podrás automatizar la notificación y el evento de Google Calendar.</p>
+            <p class="text-xs text-slate-400 text-center">La solicitud se registrará automáticamente en nuestro sistema de coordinación.</p>
           </form>
         </div>
       </div>
@@ -580,56 +653,63 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-950 text-slate-400 py-10">
+  <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
         <div>
-          <p class="text-xl font-black text-white">Cuidado<span class="text-teal-400">Total</span></p>
-          <p class="mt-3 text-sm max-w-md">Cuidado domiciliario organizado alrededor de las necesidades del paciente y la tranquilidad de su familia.</p>
+          <p class="text-2xl font-black text-white">Cuidado<span class="text-teal-400">Total</span></p>
+          <p class="mt-3 text-sm max-w-md text-slate-300 leading-relaxed">Cuidado domiciliario profesional y humano, diseñado para brindar paz a las familias y dignidad a los pacientes en Piura.</p>
         </div>
-        <div class="md:text-right text-sm">
-          <p class="font-bold text-white">Contacto</p>
-          <a href="tel:+51968495402" class="block mt-2 hover:text-white">+51 968 495 402</a>
-          <a href="https://wa.me/51968495402" target="_blank" rel="noopener noreferrer" class="block mt-1 hover:text-white">WhatsApp</a>
+        <div class="md:text-right text-sm space-y-2">
+          <p class="font-bold text-white text-base">Contáctanos</p>
+          <a href="tel:+51968495402" class="block hover:text-white transition">+51 968 495 402</a>
+          <a href="https://wa.me/51968495402" target="_blank" rel="noopener noreferrer" class="block hover:text-white transition">Atención inmediata por WhatsApp</a>
         </div>
       </div>
-      <div class="border-t border-white/10 mt-8 pt-6 text-xs leading-5">
-        © 2026 CuidadoTotal. La información de esta página es orientativa y no sustituye una evaluación profesional ni un servicio de emergencia.
+      <div class="border-t border-slate-800 mt-10 pt-6 text-xs leading-5 text-slate-500 text-center md:text-left flex flex-col md:flex-row justify-between gap-4">
+        <span>© 2026 CuidadoTotal. Todos los derechos reservados.</span>
+        <span>La información es orientativa y no sustituye evaluaciones clínicas o emergencias médicas.</span>
       </div>
     </div>
   </footer>
 
-  <!-- WHATSAPP FLOTANTE -->
+  <!-- WHATSAPP FLOTANTE MEJORADO -->
   <a href="https://wa.me/51968495402?text=Hola%20CuidadoTotal%2C%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20cuidado%20domiciliario."
      target="_blank" rel="noopener noreferrer"
-     class="fixed right-5 bottom-5 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white grid place-items-center shadow-2xl focus-ring"
+     class="fixed right-5 bottom-5 z-50 w-15 h-15 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white grid place-items-center shadow-2xl focus-ring transition transform hover:scale-110 group"
      aria-label="Contactar por WhatsApp">
-    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12.04 2a9.93 9.93 0 0 0-8.52 15.03L2 22l5.12-1.47A9.94 9.94 0 1 0 12.04 2Zm5.83 14.08c-.24.68-1.18 1.24-1.91 1.4-.5.1-1.15.18-3.76-.78-3.15-1.16-5.17-4.38-5.33-4.58-.16-.21-1.28-1.7-1.28-3.24s.81-2.3 1.1-2.62c.29-.32.63-.4.84-.4h.61c.2 0 .46-.08.72.55.27.63.91 2.18.99 2.34.08.16.13.35.03.56-.1.2-.15.33-.29.5-.14.17-.3.37-.43.5-.14.14-.29.29-.12.58.17.29.76 1.25 1.63 2.02 1.12.99 2.07 1.3 2.36 1.45.29.14.46.12.63-.08.17-.2.72-.84.91-1.13.19-.29.38-.24.64-.14.27.1 1.69.8 1.98.94.29.14.48.22.55.34.07.12.07.7-.17 1.38Z"/>
     </svg>
+    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow animate-bounce">¡Ayuda!</span>
   </a>
 
   <!-- MODAL ORIENTADOR (WIZARD) -->
   <div id="cv-advisor" class="cv-modal fixed inset-0 z-[80] bg-slate-950/70 backdrop-blur-sm items-center justify-center p-4">
-    <div class="bg-white w-full max-w-xl rounded-3xl p-6 md:p-8 shadow-2xl">
-      <div class="flex justify-between gap-4">
-        <div><span class="text-teal-700 font-black text-xs uppercase">Orientador</span><h2 class="text-2xl font-black mt-1">Encuentra el cuidado adecuado</h2></div>
-        <button id="cv-close-advisor" class="text-2xl" aria-label="Cerrar">×</button>
+    <div class="bg-white w-full max-w-xl rounded-[2.5rem] p-7 md:p-9 shadow-2xl border border-teal-100">
+      <div class="flex justify-between gap-4 items-center">
+        <div>
+          <span class="text-teal-700 font-black text-xs uppercase bg-teal-50 px-2.5 py-1 rounded-full">Asesor Inteligente</span>
+          <h2 class="text-2xl font-black mt-2 text-slate-900">Encuentra el cuidado ideal</h2>
+        </div>
+        <button id="cv-close-advisor" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 grid place-items-center text-xl font-bold transition" aria-label="Cerrar">×</button>
       </div>
-      <div class="h-2 bg-slate-100 rounded-full mt-6"><div id="cv-progress" class="h-2 bg-teal-600 rounded-full transition-all" style="width:25%"></div></div>
+      <div class="h-2.5 bg-slate-100 rounded-full mt-6 overflow-hidden"><div id="cv-progress" class="h-full bg-teal-600 rounded-full transition-all duration-300" style="width:25%"></div></div>
       <div id="cv-advisor-content" class="mt-7"></div>
     </div>
   </div>
 
   <!-- TOAST NOTIFICACIÓN -->
-  <div id="cv-toast" class="cv-toast fixed left-5 bottom-5 z-[90] bg-slate-950 text-white rounded-2xl px-5 py-4 shadow-2xl text-sm max-w-sm"></div>
+  <div id="cv-toast" class="cv-toast fixed left-5 bottom-5 z-[90] bg-slate-900 text-white rounded-2xl px-5 py-4 shadow-2xl text-sm max-w-sm border border-slate-800"></div>
 
   <!-- ESTILOS ADICIONALES PARA COMPONENTES DINÁMICOS -->
   <style>
-    .cv-premium-btn{transition:.2s}.cv-premium-btn:hover{transform:translateY(-2px)}
-    .cv-modal{display:none}.cv-modal.cv-open{display:flex}
-    .cv-toast{transform:translateY(130px);transition:.3s}.cv-toast.show{transform:translateY(0)}
-    .cv-step{display:none}.cv-step.active{display:block}
+    .cv-premium-btn { transition: all .2s ease; }
+    .cv-premium-btn:hover { transform: translateY(-2px); }
+    .cv-modal { display: none; }
+    .cv-modal.cv-open { display: flex; }
+    .cv-toast { transform: translateY(150px); transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .cv-toast.show { transform: translateY(0); }
   </style>
 
   <!-- LÓGICA DE NEGOCIO Y COMPORTAMIENTO -->
@@ -643,18 +723,12 @@
 
     const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
 
-    // =========================================================
-    // RESTRICCIÓN DE ENTRADA: SOLO NÚMEROS Y LONGITUD EXACTA
-    // =========================================================
     function setupNumericInput(elementId, maxLength) {
       const el = document.getElementById(elementId);
       if (!el) return;
       el.addEventListener('input', (e) => {
-        // Remover todo lo que no sea número
         let val = e.target.value.replace(/\D/g, '');
-        if (val.length > maxLength) {
-          val = val.slice(0, maxLength);
-        }
+        if (val.length > maxLength) val = val.slice(0, maxLength);
         e.target.value = val;
       });
     }
@@ -663,7 +737,6 @@
     setupNumericInput('jobPhone', 9);
     setupNumericInput('jobDni', 8);
     
-    // Para el teléfono flotante del orientador si se crea dinámicamente
     document.addEventListener('input', (e) => {
       if (e.target && e.target.id === 'cv-phone') {
         let val = e.target.value.replace(/\D/g, '');
@@ -672,9 +745,6 @@
       }
     });
 
-    // =========================================================
-    // MENÚ MÓVIL
-    // =========================================================
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -693,9 +763,6 @@
       });
     }
 
-    // =========================================================
-    // FECHA MÍNIMA
-    // =========================================================
     const startDate = document.getElementById('startDate');
     const now = new Date();
     const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
@@ -707,9 +774,6 @@
       if (!startDate.value) startDate.value = localDate;
     }
 
-    // =========================================================
-    // ELEMENTOS DEL COTIZADOR
-    // =========================================================
     const service = document.getElementById('service');
     const quantity = document.getElementById('quantity');
     const total = document.getElementById('total');
@@ -743,20 +807,14 @@
     function showStatus(message, ok = true) {
       status.textContent = message;
       status.className = ok
-        ? 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800'
-        : 'text-sm rounded-xl p-3 bg-red-50 border border-red-200 text-red-800';
+        ? 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium'
+        : 'text-sm rounded-xl p-3 bg-red-50 border border-red-200 text-red-800 font-medium';
       status.classList.remove('hidden');
     }
 
     function showError(message) {
       error.textContent = message;
       error.classList.remove('hidden');
-    }
-
-    function normalizePhone(value) {
-      const digits = String(value || '').replace(/\D/g, '');
-      if (!digits) return '';
-      return digits.startsWith('51') ? `+${digits}` : `+51${digits}`;
     }
 
     function addOneDay(dateString) {
@@ -829,8 +887,6 @@
         turno_misma_hora: shift.sameTime ? 'SI' : 'NO',
         inicio_calendario: shift.startDateTime,
         fin_calendario: shift.endDateTime,
-        inicio_calendario_iso: shift.startDateTime,
-        fin_calendario_iso: shift.endDateTime,
         zona_horaria: CONFIG.TIMEZONE,
         necesidad_general: finalDetails,
         estimado: total.textContent,
@@ -870,9 +926,6 @@
       }
     }
 
-    // =========================================================
-    // FORMULARIO PRINCIPAL (COTIZACIÓN)
-    // =========================================================
     if (form) {
       form.addEventListener('submit', async event => {
         event.preventDefault();
@@ -944,27 +997,22 @@
         if (result.sent) {
           showStatus(`Solicitud registrada. WhatsApp se abrió para continuar la coordinación. Código: ${payload.request_id}`, true);
         } else {
-          showStatus('WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración del webhook.', false);
+          showStatus('WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración.', false);
         }
 
         if (!whatsappWindow) {
-          showError('El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.');
+          showError('El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio.');
         }
 
         submitButton.disabled = false;
-        submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
+        submitButton.textContent = '🚀 Enviar solicitud y abrir WhatsApp';
       });
     }
 
-   // =========================================================
-    // FORMULARIO TRABAJA CON NOSOTROS (POSTULACIONES) - ACTUALIZADO
-    // =========================================================
     const jobForm = document.getElementById('jobForm');
     const jobError = document.getElementById('jobFormError');
     const jobStatus = document.getElementById('jobFormStatus');
     const jobSubmitBtn = document.getElementById('jobSubmit');
-
-    // PEGA AQUÍ LA URL DE TU WEB APP DE GOOGLE APPS SCRIPT
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxL3AkyQqQcPE1_pgKSjaLsSm_2PoS7CKkP9hLJAoFC12GxJ_2ypRwfyMYd4naLWqHAiw/exec';
 
     if (jobForm) {
@@ -1024,12 +1072,11 @@
         jobSubmitBtn.disabled = true;
         jobSubmitBtn.textContent = 'Enviando postulación y subiendo CV...';
 
-        // Convertir archivo a Base64 para enviarlo de manera segura vía Fetch
         const reader = new FileReader();
         reader.readAsDataURL(file);
         
         reader.onload = async () => {
-          const base64Content = reader.result.split(',')[1]; // Extraer solo los datos Base64
+          const base64Content = reader.result.split(',')[1];
 
           const payload = {
             nombres_apellidos: document.getElementById('jobName').value.trim(),
@@ -1050,8 +1097,8 @@
               body: JSON.stringify(payload)
             });
 
-            jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos y tu CV han sido registrados correctamente en el sistema.';
-            jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800';
+            jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos y tu CV han sido registrados correctamente.';
+            jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium';
             jobStatus.classList.remove('hidden');
             jobForm.reset();
 
@@ -1060,7 +1107,7 @@
             jobError.classList.remove('hidden');
           } finally {
             jobSubmitBtn.disabled = false;
-            jobSubmitBtn.textContent = 'Enviar Postulación';
+            jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
           }
         };
 
@@ -1068,14 +1115,11 @@
           jobError.textContent = 'No se pudo leer el archivo adjunto.';
           jobError.classList.remove('hidden');
           jobSubmitBtn.disabled = false;
-          jobSubmitBtn.textContent = 'Enviar Postulación';
+          jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
         };
       });
     }
 
-    // =========================================================
-    // LÓGICA DE CAPA INTERACTIVA (ORIENTADOR Y LLAMADAS)
-    // =========================================================
     (() => {
       const WA = CONFIG.WHATSAPP_NUMBER;
       const $ = id => document.getElementById(id);
@@ -1086,7 +1130,7 @@
         el.textContent = t; 
         el.classList.add('show');
         clearTimeout(window.cvToastTimer); 
-        window.cvToastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+        window.cvToastTimer = setTimeout(() => el.classList.remove('show'), 3500);
       };
 
       document.querySelectorAll('.cv-quick').forEach(btn => {
@@ -1108,16 +1152,16 @@
       if (form && !$('cv-call-extra')) {
         const box = document.createElement('div');
         box.id = 'cv-call-extra';
-        box.className = 'mt-3';
+        box.className = 'mt-4';
         box.innerHTML = `
-          <button type="button" id="cv-call-btn" class="w-full border-2 border-teal-600 text-teal-700 font-extrabold p-4 rounded-2xl hover:bg-teal-50">
-            📞 Prefiero que me contacten por teléfono
+          <button type="button" id="cv-call-btn" class="w-full border-2 border-teal-600 text-teal-700 font-extrabold p-4 rounded-2xl hover:bg-teal-50 transition">
+            📞 Prefiero que me contacten por llamada telefónica
           </button>
           <div id="cv-call-fields" class="hidden mt-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
-            <label class="block text-sm font-bold mb-2" for="cv-phone">Número de teléfono (9 dígitos)</label>
+            <label class="block text-sm font-bold mb-2 text-slate-700" for="cv-phone">Número de teléfono (9 dígitos)</label>
             <input id="cv-phone" type="tel" inputmode="numeric" maxlength="9" placeholder="Ej. 999999999"
-              class="w-full p-3 bg-white border rounded-xl focus:outline-none focus:border-teal-500">
-            <button type="button" id="cv-send-call" class="mt-3 w-full bg-slate-900 text-white p-3 rounded-xl font-black">Enviar solicitud de llamada</button>
+              class="w-full p-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500">
+            <button type="button" id="cv-send-call" class="mt-3 w-full bg-slate-900 text-white p-3 rounded-xl font-black hover:bg-slate-800 transition">Solicitar llamada inmediata</button>
           </div>`;
         form.appendChild(box);
         
@@ -1148,21 +1192,21 @@
         if (!progress || !content) return;
         progress.style.width = (((state.step + 1) / 4) * 100) + '%';
         if (state.step === 0) {
-          content.innerHTML = `<p class="text-slate-600">¿Для quién buscas apoyo?</p><div class="mt-5 grid gap-3">
-            ${['Adulto mayor','Paciente en recuperación','Persona que necesita supervisión','No estoy seguro'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
+          content.innerHTML = `<p class="text-slate-600 font-medium">¿Para quién buscas apoyo en casa?</p><div class="mt-5 grid gap-3">
+            ${['Adulto mayor','Paciente en recuperación postoperatoria','Persona con enfermedad crónica','No estoy seguro / Necesito orientación'].map(v => `<button class="cv-answer text-left p-4 border border-slate-200 rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50 transition text-slate-800" data-k="tipo" data-v="${v}">${v}</button>`).join('')}</div>`;
         } else if (state.step === 1) {
-          content.innerHTML = `<p class="text-slate-600">¿Qué apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">
-            ${['Higiene y actividades diarias','Movilidad y acompañamiento','Supervisión durante varias horas','Cuidado nocturno','Necesito orientación'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="necesidad" data-v="${v}">${v}</button>`).join('')}</div>`;
+          content.innerHTML = `<p class="text-slate-600 font-medium">¿Qué tipo de apoyo necesitas principalmente?</p><div class="mt-5 grid gap-3">
+            ${['Higiene y actividades diarias','Movilidad y compañía cercana','Supervisión durante varias horas','Cuidado nocturno continuo'].map(v => `<button class="cv-answer text-left p-4 border border-slate-200 rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50 transition text-slate-800" data-k="necesidad" data-v="${v}">${v}</button>`).join('')}</div>`;
         } else if (state.step === 2) {
-          content.innerHTML = `<p class="text-slate-600">¿Cuándo necesitas comenzar?</p><div class="mt-5 grid gap-3">
-            ${['Hoy','Mañana','Esta semana','Fecha por definir'].map(v => `<button class="cv-answer text-left p-4 border rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50" data-k="cuando" data-v="${v}">${v}</button>`).join('')}</div>`;
+          content.innerHTML = `<p class="text-slate-600 font-medium">¿Cuándo necesitas que comience la atención?</p><div class="mt-5 grid gap-3">
+            ${['Lo antes posible (Hoy)','Mañana','Durante esta semana','Fecha por definir'].map(v => `<button class="cv-answer text-left p-4 border border-slate-200 rounded-2xl font-bold hover:border-teal-400 hover:bg-teal-50 transition text-slate-800" data-k="cuando" data-v="${v}">${v}</button>`).join('')}</div>`;
         } else {
-          content.innerHTML = `<p class="text-slate-600">¿En qué distrito o zona?</p>
-            <input id="cv-zone" maxlength="80" class="w-full mt-5 p-4 bg-slate-50 border rounded-xl" placeholder="Ej. Castilla">
-            <button id="cv-finish" class="w-full mt-4 bg-teal-600 text-white p-4 rounded-xl font-black">Ver orientación →</button>`;
+          content.innerHTML = `<p class="text-slate-600 font-medium">¿En qué distrito o zona de Piura te encuentras?</p>
+            <input id="cv-zone" maxlength="80" class="w-full mt-4 p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500" placeholder="Ej. Castilla, Piura, 26 de Octubre">
+            <button id="cv-finish" class="w-full mt-5 bg-teal-600 hover:bg-teal-700 text-white p-4 rounded-xl font-black transition shadow-lg shadow-teal-600/20">Ver recomendación sugerida →</button>`;
           $('cv-finish').addEventListener('click', () => {
             const z = $('cv-zone').value.trim();
-            if (!z) { toast('Indica el distrito o zona.'); return; }
+            if (!z) { toast('Por favor indica el distrito o zona.'); return; }
             state.answers.zona = z; 
             result();
           });
@@ -1179,19 +1223,19 @@
         progress.style.width = '100%';
         const a = state.answers;
         const safe = v => String(v || 'Por confirmar').replace(/[<>&"]/g, '');
-        content.innerHTML = `<div class="bg-teal-50 border border-teal-100 rounded-2xl p-5">
-          <span class="text-xs uppercase font-black text-teal-700">Orientación inicial</span>
-          <h3 class="text-xl font-black mt-2">Podemos ayudarte a coordinar el cuidado</h3>
-          <p class="text-sm text-slate-600 mt-3">Situación: <b>${safe(a.tipo)}</b><br>Necesidad: <b>${safe(a.necesidad)}</b><br>Inicio: <b>${safe(a.cuando)}</b><br>Zona: <b>${safe(a.zona)}</b></p>
+        content.innerHTML = `<div class="bg-teal-50 border border-teal-200 rounded-2xl p-5 shadow-sm">
+          <span class="text-xs uppercase font-black text-teal-800">Orientación Inicial Sugerida</span>
+          <h3 class="text-xl font-black mt-1 text-slate-900">Estamos listos para ayudarte a coordinar</h3>
+          <p class="text-sm text-slate-600 mt-3 space-y-1">• Situación: <b>${safe(a.tipo)}</b><br>• Apoyo: <b>${safe(a.necesidad)}</b><br>• Inicio: <b>${safe(a.cuando)}</b><br>• Zona: <b>${safe(a.zona)}</b></p>
         </div>
-        <div class="grid sm:grid-cols-2 gap-3 mt-5">
-          <button id="cv-wa" class="bg-emerald-500 text-white p-4 rounded-xl font-black">Enviar por WhatsApp</button>
-          <button id="cv-go-quote" class="border p-4 rounded-xl font-black">Ir al cotizador</button>
+        <div class="grid sm:grid-cols-2 gap-3 mt-6">
+          <button id="cv-wa" class="bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-xl font-black transition shadow-md">💬 Enviar por WhatsApp</button>
+          <button id="cv-go-quote" class="border border-slate-300 hover:bg-slate-50 p-4 rounded-xl font-black transition text-slate-800">Ir al cotizador completo</button>
         </div>
-        <p class="text-xs text-slate-400 mt-4">Esta orientación no constituye diagnóstico ni indicación médica.</p>`;
+        <p class="text-xs text-slate-400 mt-4 text-center">Esta orientación facilita el primer contacto y no constituye diagnóstico médico.</p>`;
         
         $('cv-wa').addEventListener('click', () => {
-          const msg = `Hola CuidadoTotal, necesito orientación para contratar cuidado domiciliario.\n\n• Situación: ${a.tipo || 'Por confirmar'}\n• Necesidad: ${a.necesidad || 'Por confirmar'}\n• Inicio: ${a.cuando || 'Por confirmar'}\n• Zona: ${a.zona || 'Por confirmar'}`;
+          const msg = `Hola CuidadoTotal, necesito orientación basada en vuestro asesor virtual:\n\n• Situación: ${a.tipo || 'Por confirmar'}\n• Necesidad: ${a.necesidad || 'Por confirmar'}\n• Inicio: ${a.cuando || 'Por confirmar'}\n• Zona: ${a.zona || 'Por confirmar'}`;
           window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
           close();
         });
@@ -1204,18 +1248,15 @@
       document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     })();
 
-    // =========================================================
-    // CONTROLADOR DE NAVEGACIÓN Y RESALTADO DE SECCIONES
-    // =========================================================
     (() => {
       const navMap = {
         'Empieza aquí': 'cv-orientador',
         'Servicios': 'servicios',
-        'Seguridad': 'seguridad',
+        'Confianza': 'seguridad',
         'Cómo funciona': 'proceso',
         'Área familiar': 'cv-familia',
-        'Trabaja con nosotros': 'trabaja',
-        'Preguntas': 'faq',
+        'Únete': 'trabaja',
+        'Dudas': 'faq',
         'Preguntas frecuentes': 'faq',
         'Solicitar atención': 'cotizar'
       };

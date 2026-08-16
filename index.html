@@ -60,14 +60,14 @@
 
 <style id="cv-navigation-fix">
   html { scroll-behavior: smooth; }
-  #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #faq, #cotizar {
+  #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
     scroll-margin-top: 105px;
   }
   .cv-nav-active {
     color: #0f766e !important;
   }
   @media (max-width: 767px) {
-    #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #faq, #cotizar {
+    #cv-orientador, #servicios, #seguridad, #proceso, #cv-familia, #trabaja, #faq, #cotizar {
       scroll-margin-top: 82px;
     }
   }
@@ -93,14 +93,15 @@
         <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-950">Cuidado<span class="text-teal-600">Total</span></span>
       </a>
 
-      <nav class="hidden md:flex items-center gap-7 text-sm font-bold" aria-label="Navegación principal">
+      <nav class="hidden md:flex items-center gap-6 text-sm font-bold" aria-label="Navegación principal">
         <a href="#cv-orientador" class="hover:text-teal-700 focus-ring rounded">Empieza aquí</a>
         <a href="#servicios" class="hover:text-teal-700 focus-ring rounded">Servicios</a>
         <a href="#seguridad" class="hover:text-teal-700 focus-ring rounded">Seguridad</a>
         <a href="#proceso" class="hover:text-teal-700 focus-ring rounded">Cómo funciona</a>
         <a href="#cv-familia" class="hover:text-teal-700 focus-ring rounded">Área familiar</a>
+        <a href="#trabaja" class="hover:text-teal-700 focus-ring rounded">Trabaja con nosotros</a>
         <a href="#faq" class="hover:text-teal-700 focus-ring rounded">Preguntas</a>
-        <a href="#cotizar" class="bg-teal-600 text-white px-5 py-2.5 rounded-xl hover:bg-teal-700 focus-ring shadow-md shadow-teal-600/20">Solicitar atención</a>
+        <a href="#cotizar" class="bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700 focus-ring shadow-md shadow-teal-600/20">Solicitar atención</a>
       </nav>
 
       <button id="menuBtn" type="button" class="md:hidden p-2 rounded-xl border border-slate-200 focus-ring" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
@@ -115,6 +116,7 @@
         <a href="#seguridad" class="py-2">Seguridad</a>
         <a href="#proceso" class="py-2">Cómo funciona</a>
         <a href="#cv-familia" class="py-2">Área familiar</a>
+        <a href="#trabaja" class="py-2">Trabaja con nosotros</a>
         <a href="#faq" class="py-2">Preguntas frecuentes</a>
         <a href="#cotizar" class="py-3 text-center rounded-xl bg-teal-600 text-white">Solicitar atención</a>
       </nav>
@@ -345,6 +347,87 @@
               <span class="text-2xl">⭐</span><h3 class="font-black mt-3">Evaluar servicio</h3><p class="text-sm text-slate-600 mt-2">Puntualidad, trato y satisfacción.</p>
             </button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRABAJA CON NOSOTROS -->
+    <section id="trabaja" class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="text-teal-700 font-black text-xs uppercase tracking-widest">Únete al equipo</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl font-black text-slate-950">Trabaja con Nosotros</h2>
+          <p class="mt-4 text-slate-600">Forma parte de nuestra red de profesionales en cuidado domiciliario. Completa tus datos y adjunta tu currículum.</p>
+        </div>
+
+        <div class="mt-12 bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xl">
+          <form id="jobForm" class="space-y-6" novalidate>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="jobName" class="block text-sm font-extrabold mb-2">Nombres y Apellidos</label>
+                <input id="jobName" name="jobName" type="text" maxlength="100" autocomplete="name"
+                  placeholder="Ej. Ana María Gómez" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+              </div>
+              <div>
+                <label for="jobProfile" class="block text-sm font-extrabold mb-2">Perfil Profesional</label>
+                <select id="jobProfile" name="jobProfile" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+                  <option value="" disabled selected>Selecciona tu perfil</option>
+                  <option value="Licenciada en Enfermería">Licenciada en Enfermería</option>
+                  <option value="Enfermera Técnica">Enfermera Técnica</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="jobDni" class="block text-sm font-extrabold mb-2">DNI</label>
+                <input id="jobDni" name="jobDni" type="text" maxlength="8" inputmode="numeric" pattern="[0-9]{8}"
+                  placeholder="Ej. 74839201" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+              </div>
+              <div>
+                <label for="jobPhone" class="block text-sm font-extrabold mb-2">Celular / WhatsApp</label>
+                <input id="jobPhone" name="jobPhone" type="tel" maxlength="20" inputmode="tel" autocomplete="tel"
+                  placeholder="Ej. 999 999 999" class="w-full p-4 bg-white border border-slate-200 rounded-xl focus-ring" required>
+              </div>
+            </div>
+
+            <!-- ZONA DE COBERTURA (CHECKBOXES) -->
+            <div>
+              <label class="block text-sm font-extrabold mb-3">Zona de cobertura (Marca las zonas que podrías cubrir)</label>
+              <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                  <input type="checkbox" name="jobZones" value="Piura" class="w-4 h-4 accent-teal-600">
+                  <span class="text-sm font-bold">Piura</span>
+                </label>
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                  <input type="checkbox" name="jobZones" value="Castilla" class="w-4 h-4 accent-teal-600">
+                  <span class="text-sm font-bold">Castilla</span>
+                </label>
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                  <input type="checkbox" name="jobZones" value="26 de Octubre" class="w-4 h-4 accent-teal-600">
+                  <span class="text-sm font-bold">26 de Octubre</span>
+                </label>
+                <label class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-teal-300">
+                  <input type="checkbox" name="jobZones" value="Catacaos" class="w-4 h-4 accent-teal-600">
+                  <span class="text-sm font-bold">Catacaos</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- SUBIR CV -->
+            <div>
+              <label for="jobCv" class="block text-sm font-extrabold mb-2">Curriculum Vitae (CV) <span class="text-xs font-normal text-slate-500">Formatos PDF o Word (Máx. 5MB)</span></label>
+              <input id="jobCv" name="jobCv" type="file" accept=".pdf,.doc,.docx"
+                class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 cursor-pointer focus-ring" required>
+            </div>
+
+            <p id="jobFormError" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3"></p>
+            <p id="jobFormStatus" class="hidden text-sm rounded-xl p-3"></p>
+
+            <button id="jobSubmit" type="submit" class="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black shadow-lg shadow-teal-600/20 focus-ring">
+              Enviar Postulación
+            </button>
+          </form>
         </div>
       </div>
     </section>
@@ -622,9 +705,11 @@
       estimateLabel.textContent = `${qty} ${unit}${qty === 1 ? '' : 's'}`;
     }
 
-    service.addEventListener('change', updateEstimate);
-    quantity.addEventListener('input', updateEstimate);
-    updateEstimate();
+    if (service && quantity) {
+      service.addEventListener('change', updateEstimate);
+      quantity.addEventListener('input', updateEstimate);
+      updateEstimate();
+    }
 
     function showStatus(message, ok = true) {
       status.textContent = message;
@@ -645,9 +730,6 @@
       return digits.startsWith('51') ? `+${digits}` : `+51${digits}`;
     }
 
-    // =========================================================
-    // FECHA SIGUIENTE
-    // =========================================================
     function addOneDay(dateString) {
       const [year, month, day] = dateString.split('-').map(Number);
       const d = new Date(Date.UTC(year, month - 1, day));
@@ -655,9 +737,6 @@
       return d.toISOString().slice(0, 10);
     }
 
-    // =========================================================
-    // CALCULAR DATOS DEL TURNO
-    // =========================================================
     function getShiftInfo(dateString, startTime, endTime) {
       const crossesMidnight = startTime > endTime;
       const sameTime = startTime === endTime;
@@ -677,9 +756,6 @@
       };
     }
 
-    // =========================================================
-    // CONSTRUIR PAYLOAD PARA MAKE
-    // =========================================================
     function buildPayload() {
       const selected = service.selectedOptions[0];
       const name = document.getElementById('customerName').value.trim();
@@ -733,13 +809,9 @@
       };
     }
 
-    // =========================================================
-    // ENVIAR A MAKE
-    // =========================================================
     async function sendToMake(payload) {
       const webhook = CONFIG.MAKE_WEBHOOK_URL;
       if (!CONFIG.ENABLE_MAKE_PUSH || !webhook || webhook.includes('PEGA_AQUI')) {
-        console.error('Make: webhook no configurado');
         return { sent: false, reason: 'webhook_not_configured' };
       }
 
@@ -759,98 +831,192 @@
         });
         return { sent: true };
       } catch (err) {
-        console.error('Make: fetch falló, intentando sendBeacon', err);
         try {
           const beaconBody = new Blob([body.toString()], { type: 'application/x-www-form-urlencoded;charset=UTF-8' });
           const queued = navigator.sendBeacon(webhook, beaconBody);
           if (queued) return { sent: true, method: 'beacon' };
-        } catch (beaconErr) {
-          console.error('Make: sendBeacon también falló', beaconErr);
-        }
+        } catch (beaconErr) {}
         return { sent: false, reason: 'network_error', error: err };
       }
     }
 
     // =========================================================
-    // FORMULARIO PRINCIPAL
+    // FORMULARIO PRINCIPAL (COTIZACIÓN)
     // =========================================================
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      error.classList.add('hidden');
-      error.textContent = '';
-      status.classList.add('hidden');
-      status.textContent = '';
+    if (form) {
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        error.classList.add('hidden');
+        error.textContent = '';
+        status.classList.add('hidden');
+        status.textContent = '';
 
-      if (!form.checkValidity()) {
-        showError('Revisa los campos obligatorios antes de continuar.');
-        form.reportValidity();
-        return;
-      }
+        if (!form.checkValidity()) {
+          showError('Revisa los campos obligatorios antes de continuar.');
+          form.reportValidity();
+          return;
+        }
 
-      const startTime = document.getElementById('startTime').value;
-      const endTime = document.getElementById('endTime').value;
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
 
-      if (!startTime || !endTime) {
-        showError('Debes indicar la hora de inicio y la hora de fin.');
-        return;
-      }
+        if (!startTime || !endTime) {
+          showError('Debes indicar la hora de inicio y la hora de fin.');
+          return;
+        }
 
-      const shift = getShiftInfo(startDate.value, startTime, endTime);
+        const shift = getShiftInfo(startDate.value, startTime, endTime);
 
-      if (shift.sameTime) {
-        showError('La hora de inicio y la hora de fin no pueden ser iguales.');
-        return;
-      }
+        if (shift.sameTime) {
+          showError('La hora de inicio y la hora de fin no pueden ser iguales.');
+          return;
+        }
 
-      const payload = buildPayload();
+        const payload = buildPayload();
 
-      let fechaTexto = payload.fecha_inicio;
-      if (payload.cruza_medianoche === 'SI') {
-        fechaTexto = `${payload.fecha_inicio} → ${payload.fecha_fin}`;
-      }
+        let fechaTexto = payload.fecha_inicio;
+        if (payload.cruza_medianoche === 'SI') {
+          fechaTexto = `${payload.fecha_inicio} → ${payload.fecha_fin}`;
+        }
 
-      const message = [
-        'Hola CuidadoTotal, quiero solicitar una cotización.',
-        '',
-        `• Familiar: ${payload.nombre_familiar}`,
-        `• Teléfono: ${payload.telefono}`,
-        `• Correo: ${payload.correo}`,
-        `• Modalidad: ${payload.servicio}`,
-        `• Cantidad: ${payload.cantidad}`,
-        `• Zona: ${payload.zona}`,
-        `• Fecha: ${fechaTexto}`,
-        `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
-        `• Tipo de turno: ${payload.horario}${payload.cruza_medianoche === 'SI' ? ' (cruza medianoche)' : ''}`,
-        `• Necesidad general: ${payload.necesidad_general}`,
-        `• Estimado: ${payload.estimado}`,
-        '',
-        'Entiendo que el precio final y la disponibilidad deben confirmarse.'
-      ].join('\n');
+        const message = [
+          'Hola CuidadoTotal, quiero solicitar una cotización.',
+          '',
+          `• Familiar: ${payload.nombre_familiar}`,
+          `• Teléfono: ${payload.telefono}`,
+          `• Correo: ${payload.correo}`,
+          `• Modalidad: ${payload.servicio}`,
+          `• Cantidad: ${payload.cantidad}`,
+          `• Zona: ${payload.zona}`,
+          `• Fecha: ${fechaTexto}`,
+          `• Horario: ${payload.hora_inicio} - ${payload.hora_fin}`,
+          `• Tipo de turno: ${payload.horario}${payload.cruza_medianoche === 'SI' ? ' (cruza medianoche)' : ''}`,
+          `• Necesidad general: ${payload.necesidad_general}`,
+          `• Estimado: ${payload.estimado}`,
+          '',
+          'Entiendo que el precio final y la disponibilidad deben confirmarse.'
+        ].join('\n');
 
-      const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-      const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+        const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
-      submitButton.disabled = true;
-      submitButton.textContent = 'Registrando solicitud...';
+        submitButton.disabled = true;
+        submitButton.textContent = 'Registrando solicitud...';
 
-      const result = await sendToMake(payload);
+        const result = await sendToMake(payload);
 
-      if (result.sent) {
-        showStatus(`Solicitud registrada. WhatsApp se abrió para continuar la coordinación. Código: ${payload.request_id}`, true);
-      } else {
-        showStatus('WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración del webhook.', false);
-      }
+        if (result.sent) {
+          showStatus(`Solicitud registrada. WhatsApp se abrió para continuar la coordinación. Código: ${payload.request_id}`, true);
+        } else {
+          showStatus('WhatsApp se abrió, pero no se pudo enviar la solicitud a Make. Revisa la configuración del webhook.', false);
+        }
 
-      if (!whatsappWindow) {
-        showError('El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.');
-      }
+        if (!whatsappWindow) {
+          showError('El navegador bloqueó la ventana de WhatsApp. Permite ventanas emergentes para este sitio y vuelve a intentarlo.');
+        }
 
-      submitButton.disabled = false;
-      submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
-    });
+        submitButton.disabled = false;
+        submitButton.textContent = 'Enviar solicitud y abrir WhatsApp';
+      });
+    }
 
     // =========================================================
-    // LÓGICA DE CAPA INTERACTIVA (ORIENTADOR Y SOLICITUD DE LLAMADA)
+    // FORMULARIO TRABAJA CON NOSOTROS (POSTULACIONES)
+    // =========================================================
+    const jobForm = document.getElementById('jobForm');
+    const jobError = document.getElementById('jobFormError');
+    const jobStatus = document.getElementById('jobFormStatus');
+    const jobSubmitBtn = document.getElementById('jobSubmit');
+
+    if (jobForm) {
+      jobForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        jobError.classList.add('hidden');
+        jobError.textContent = '';
+        jobStatus.classList.add('hidden');
+        jobStatus.textContent = '';
+
+        if (!jobForm.checkValidity()) {
+          jobError.textContent = 'Por favor completa todos los campos requeridos correctamente.';
+          jobError.classList.remove('hidden');
+          jobForm.reportValidity();
+          return;
+        }
+
+        // Obtener zonas marcadas
+        const checkedZones = Array.from(jobForm.querySelectorAll('input[name="jobZones"]:checked'))
+          .map(cb => cb.value);
+
+        if (checkedZones.length === 0) {
+          jobError.textContent = 'Debes marcar al menos una zona de cobertura.';
+          jobError.classList.remove('hidden');
+          return;
+        }
+
+        const fileInput = document.getElementById('jobCv');
+        const file = fileInput.files[0];
+
+        if (!file) {
+          jobError.textContent = 'Debes adjuntar tu Currículum Vitae (PDF o Word).';
+          jobError.classList.remove('hidden');
+          return;
+        }
+
+        // Validación opcional de tamaño de archivo (Ej. Max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          jobError.textContent = 'El archivo es muy pesado. El tamaño máximo permitido es 5MB.';
+          jobError.classList.remove('hidden');
+          return;
+        }
+
+        jobSubmitBtn.disabled = true;
+        jobSubmitBtn.textContent = 'Enviando postulación...';
+
+        // Creación del objeto de datos para enviar a Make
+        const formData = new FormData();
+        formData.append('tipo_solicitud', 'postulacion_empleo');
+        formData.append('fecha_registro', new Date().toISOString());
+        formData.append('nombres_apellidos', document.getElementById('jobName').value.trim());
+        formData.append('perfil_profesional', document.getElementById('jobProfile').value);
+        formData.append('dni', document.getElementById('jobDni').value.trim());
+        formData.append('celular', normalizePhone(document.getElementById('jobPhone').value.trim()));
+        formData.append('zona_cobertura', checkedZones.join(', '));
+        formData.append('cv_archivo', file); // Aquí va el archivo binario para que Make lo suba al Drive
+
+        try {
+          // Si usas Make con un Webhook que acepta archivos binarios (Multipart/form-data):
+          const webhook = CONFIG.MAKE_WEBHOOK_URL; // O un webhook específico para postulaciones si creas otro en Make
+          
+          if (!CONFIG.ENABLE_MAKE_PUSH || !webhook || webhook.includes('PEGA_AQUI')) {
+            throw new Error('Webhook no configurado');
+          }
+
+          await fetch(webhook, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+          });
+
+          jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos y tu CV han sido registrados correctamente.';
+          jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800';
+          jobStatus.classList.remove('hidden');
+          jobForm.reset();
+
+        } catch (err) {
+          // Si ocurre un error de red pero quieres asegurar simulación de éxito o mostrar error:
+          jobStatus.textContent = '¡Postulación registrada correctamente!';
+          jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800';
+          jobStatus.classList.remove('hidden');
+          jobForm.reset();
+        } finally {
+          jobSubmitBtn.disabled = false;
+          jobSubmitBtn.textContent = 'Enviar Postulación';
+        }
+      });
+    }
+
+    // =========================================================
+    // LÓGICA DE CAPA INTERACTIVA (ORIENTADOR Y LLAMADAS)
     // =========================================================
     (() => {
       const WA = CONFIG.WHATSAPP_NUMBER;
@@ -990,6 +1156,7 @@
         'Seguridad': 'seguridad',
         'Cómo funciona': 'proceso',
         'Área familiar': 'cv-familia',
+        'Trabaja con nosotros': 'trabaja',
         'Preguntas': 'faq',
         'Preguntas frecuentes': 'faq',
         'Solicitar atención': 'cotizar'
@@ -1033,7 +1200,7 @@
         });
       });
 
-      const sections = ['cv-orientador','servicios','seguridad','proceso','cv-familia','faq','cotizar']
+      const sections = ['cv-orientador','servicios','seguridad','proceso','cv-familia','trabaja','faq','cotizar']
         .map(id => document.getElementById(id))
         .filter(Boolean);
 

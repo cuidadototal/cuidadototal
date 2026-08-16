@@ -956,13 +956,16 @@
       });
     }
 
-    // =========================================================
-    // FORMULARIO TRABAJA CON NOSOTROS (POSTULACIONES)
+   // =========================================================
+    // FORMULARIO TRABAJA CON NOSOTROS (POSTULACIONES) - ACTUALIZADO
     // =========================================================
     const jobForm = document.getElementById('jobForm');
     const jobError = document.getElementById('jobFormError');
     const jobStatus = document.getElementById('jobFormStatus');
     const jobSubmitBtn = document.getElementById('jobSubmit');
+
+    // PEGA AQUÍ LA URL DE TU WEB APP DE GOOGLE APPS SCRIPT
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/TU_URL_DE_APPS_SCRIPT_AQUI/exec';
 
     if (jobForm) {
       jobForm.addEventListener('submit', async e => {
@@ -994,7 +997,6 @@
           return;
         }
 
-        // Obtener zonas marcadas
         const checkedZones = Array.from(jobForm.querySelectorAll('input[name="jobZones"]:checked'))
           .map(cb => cb.value);
 
@@ -1020,45 +1022,54 @@
         }
 
         jobSubmitBtn.disabled = true;
-        jobSubmitBtn.textContent = 'Enviando postulación...';
+        jobSubmitBtn.textContent = 'Enviando postulación y subiendo CV...';
 
-        const formData = new FormData();
-        formData.append('tipo_solicitud', 'postulacion_empleo');
-        formData.append('fecha_registro', new Date().toISOString());
-        formData.append('nombres_apellidos', document.getElementById('jobName').value.trim());
-        formData.append('perfil_profesional', document.getElementById('jobProfile').value);
-        formData.append('dni', dniVal);
-        formData.append('celular', `+51${phoneVal}`);
-        formData.append('zona_cobertura', checkedZones.join(', '));
-        formData.append('cv_archivo', file);
+        // Convertir archivo a Base64 para enviarlo de manera segura vía Fetch
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        
+        reader.onload = async () => {
+          const base64Content = reader.result.split(',')[1]; // Extraer solo los datos Base64
 
-        try {
-          const webhook = CONFIG.MAKE_WEBHOOK_URL;
-          
-          if (!CONFIG.ENABLE_MAKE_PUSH || !webhook || webhook.includes('PEGA_AQUI')) {
-            throw new Error('Webhook no configurado');
+          const payload = {
+            nombres_apellidos: document.getElementById('jobName').value.trim(),
+            perfil_profesional: document.getElementById('jobProfile').value,
+            dni: dniVal,
+            celular: `+51${phoneVal}`,
+            zona_cobertura: checkedZones.join(', '),
+            cv_filename: file.name,
+            cv_mimetype: file.type,
+            cv_base64: base64Content
+          };
+
+          try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify(payload)
+            });
+
+            jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos y tu CV han sido registrados correctamente en el sistema.';
+            jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800';
+            jobStatus.classList.remove('hidden');
+            jobForm.reset();
+
+          } catch (err) {
+            jobError.textContent = 'Ocurrió un error al conectar con el servidor. Inténtalo de nuevo.';
+            jobError.classList.remove('hidden');
+          } finally {
+            jobSubmitBtn.disabled = false;
+            jobSubmitBtn.textContent = 'Enviar Postulación';
           }
+        };
 
-          await fetch(webhook, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: formData
-          });
-
-          jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos y tu CV han sido registrados correctamente.';
-          jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800';
-          jobStatus.classList.remove('hidden');
-          jobForm.reset();
-
-        } catch (err) {
-          jobStatus.textContent = '¡Postulación registrada correctamente!';
-          jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800';
-          jobStatus.classList.remove('hidden');
-          jobForm.reset();
-        } finally {
+        reader.onerror = () => {
+          jobError.textContent = 'No se pudo leer el archivo adjunto.';
+          jobError.classList.remove('hidden');
           jobSubmitBtn.disabled = false;
           jobSubmitBtn.textContent = 'Enviar Postulación';
-        }
+        };
       });
     }
 

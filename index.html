@@ -967,15 +967,15 @@
     const jobSubmitBtn = document.getElementById('jobSubmit');
 
     if (jobForm) {
-      jobForm.addEventListener('submit', async e => {
-        e.preventDefault();
-        jobError.classList.add('hidden');
-        jobError.textContent = '';
-        jobStatus.classList.add('hidden');
-        jobStatus.textContent = '';
+    jobForm.addEventListener('submit', async event => {
+      event.preventDefault(); // <--- ESTO EVITA QUE SE RECARGUE LA PÁGINA
+      
+      jobError.classList.add('hidden');
+      jobError.textContent = '';
+      jobStatus.classList.add('hidden');
+      jobStatus.textContent = '';
 
-        const dniVal = document.getElementById('jobDni').value.trim();
-        const phoneVal = document.getElementById('jobPhone').value.trim();
+      const phoneVal = document.getElementById('jobPhone').value.trim();
 
         if (dniVal.length !== 8) {
           jobError.textContent = 'El DNI debe tener exactamente 8 dígitos.';

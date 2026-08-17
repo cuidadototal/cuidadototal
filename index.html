@@ -1017,51 +1017,51 @@
         jobSubmitBtn.textContent = 'Enviando postulación...';
 
         const reader = new FileReader();
-        
-        reader.onload = async () => {
-          // Datos mapeados estrictamente a las columnas de la pestaña "POSTULANTES"
-          const payload = {
-            tipo_formulario: "postulante", 
-            nombres: document.getElementById('jobName').value.trim(),
-            perfil: document.getElementById('jobProfile').value,
-            dni: dniVal,
-            celular: `+51${phoneVal}`,
-            zona: checkedZones.join(', '),
-            cv_link: `Archivo adjunto: ${file.name}`
-          };
+    
+    reader.onload = async () => {
+      // Datos mapeados para subir el archivo a Drive y guardar el link
+      const payload = {
+        tipo_formulario: "postulante",
+        nombres: document.getElementById('jobName').value.trim(),
+        perfil: document.getElementById('jobProfile').value,
+        dni: dniVal,
+        celular: `+51${phoneVal}`,
+        zona: checkedZones.join(', '),
+        fileData: reader.result.split(',')[1], // Contenido del archivo en base64
+        fileName: file.name,
+        mimeType: file.type
+      };
 
-          try {
-            await fetch(GOOGLE_SCRIPT_URL, {
-              method: 'POST',
-              mode: 'no-cors',
-              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-              body: JSON.stringify(payload)
-            });
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
 
-            jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos han sido registrados en nuestra base de datos.';
-            jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium';
-            jobStatus.classList.remove('hidden');
-            jobForm.reset();
+        jobStatus.textContent = '¡Postulación enviada con éxito! Tu CV ha sido guardado y tus datos registrados.';
+        jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium';
+        jobStatus.classList.remove('hidden');
+        jobForm.reset();
 
-          } catch (err) {
-            jobError.textContent = 'Ocurrió un error al conectar con el servidor. Inténtalo de nuevo.';
-            jobError.classList.remove('hidden');
-          } finally {
-            jobSubmitBtn.disabled = false;
-            jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
-          }
-        };
+      } catch (err) {
+        jobError.textContent = 'Ocurrió un error al conectar con el servidor. Inténtalo de nuevo.';
+        jobError.classList.remove('hidden');
+      } finally {
+        jobSubmitBtn.disabled = false;
+        jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
+      }
+    };
 
-        reader.onerror = () => {
-          jobError.textContent = 'No se pudo leer el archivo adjunto.';
-          jobError.classList.remove('hidden');
-          jobSubmitBtn.disabled = false;
-          jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
-        };
+    reader.onerror = () => {
+      jobError.textContent = 'No se pudo leer el archivo adjunto.';
+      jobError.classList.remove('hidden');
+      jobSubmitBtn.disabled = false;
+      jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
+    };
 
-        reader.readAsDataURL(file);
-      });
-    }
+    reader.readAsDataURL(file);
 
     // Funcionalidades secundarias (Modales, Asesor, Navegación)
     (() => {

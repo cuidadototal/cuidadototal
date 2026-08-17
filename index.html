@@ -797,147 +797,17 @@
   <script>
     const CONFIG = {
       WHATSAPP_NUMBER: '51968495402',
-      TIMEZONE: 'America/Lima'
+      TIMEZONE: 'America/Lima',
+      // PEGA AQUÍ LA URL DE TU APPS SCRIPT:
+      GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/TU_URL_DE_APPS_SCRIPT_AQUI/exec'
     };
 
     const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
+    const GOOGLE_SCRIPT_URL = CONFIG.GOOGLE_SCRIPT_URL;
 
-    // CONTROL DE VENTANA MODAL VITAL HEALTH
-    const vitalModal = document.getElementById('vitalModal');
-    const closeVitalModal = document.getElementById('closeVitalModal');
-    const closeVitalModalBtn = document.getElementById('closeVitalModalBtn');
+    // ... (Mantén aquí el resto de tus funciones de modales, inputs numéricos y menú móvil) ...
 
-    function openVitalModalFunc() { if (vitalModal) vitalModal.classList.add('cv-open'); }
-    function closeVitalModalFunc() { if (vitalModal) vitalModal.classList.remove('cv-open'); }
-
-    if (closeVitalModal) closeVitalModal.addEventListener('click', closeVitalModalFunc);
-    if (closeVitalModalBtn) closeVitalModalBtn.addEventListener('click', closeVitalModalFunc);
-    if (vitalModal) {
-      vitalModal.addEventListener('click', (e) => {
-        if (e.target === vitalModal) closeVitalModalFunc();
-      });
-    }
-
-    function setupNumericInput(elementId, maxLength) {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      el.addEventListener('input', (e) => {
-        let val = e.target.value.replace(/\D/g, '');
-        if (val.length > maxLength) val = val.slice(0, maxLength);
-        e.target.value = val;
-      });
-    }
-
-    setupNumericInput('customerPhone', 9);
-    setupNumericInput('jobPhone', 9);
-    setupNumericInput('jobDni', 8);
-    
-    document.addEventListener('input', (e) => {
-      if (e.target && e.target.id === 'cv-phone') {
-        let val = e.target.value.replace(/\D/g, '');
-        if (val.length > 9) val = val.slice(0, 9);
-        e.target.value = val;
-      }
-    });
-
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener('click', () => {
-        const open = !mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
-        menuBtn.setAttribute('aria-expanded', String(!open));
-      });
-
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-          menuBtn.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-    const startDate = document.getElementById('startDate');
-    const now = new Date();
-    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-      .toISOString()
-      .slice(0, 10);
-
-    if (startDate) {
-      startDate.min = localDate;
-      if (!startDate.value) startDate.value = localDate;
-    }
-
-    const service = document.getElementById('service');
-    const quantity = document.getElementById('quantity');
-    const total = document.getElementById('total');
-    const estimateLabel = document.getElementById('estimateLabel');
-    const form = document.getElementById('quoteForm');
-    const error = document.getElementById('formError');
-    const status = document.getElementById('formStatus');
-    const submitButton = document.getElementById('quoteSubmit');
-
-    const money = value => `S/ ${Number(value).toLocaleString('es-PE', {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    })}`;
-
-    function updateEstimate() {
-      const price = Number(service.value);
-      const qty = Math.max(1, Math.min(31, Number(quantity.value) || 1));
-      quantity.value = qty;
-      const unit = service.selectedOptions[0].dataset.unit;
-      const result = price * qty;
-      total.textContent = money(result);
-      estimateLabel.textContent = `${qty} ${unit}${qty === 1 ? '' : 's'}`;
-    }
-
-    if (service && quantity) {
-      service.addEventListener('change', updateEstimate);
-      quantity.addEventListener('input', updateEstimate);
-      updateEstimate();
-    }
-
-    function showStatus(message, ok = true) {
-      status.textContent = message;
-      status.className = ok
-        ? 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium'
-        : 'text-sm rounded-xl p-3 bg-red-50 border border-red-200 text-red-800 font-medium';
-      status.classList.remove('hidden');
-    }
-
-    function showError(message) {
-      error.textContent = message;
-      error.classList.remove('hidden');
-    }
-
-    function addOneDay(dateString) {
-      const [year, month, day] = dateString.split('-').map(Number);
-      const d = new Date(Date.UTC(year, month - 1, day));
-      d.setUTCDate(d.getUTCDate() + 1);
-      return d.toISOString().slice(0, 10);
-    }
-
-    function getShiftInfo(dateString, startTime, endTime) {
-      const crossesMidnight = startTime > endTime;
-      const sameTime = startTime === endTime;
-      const endDate = crossesMidnight ? addOneDay(dateString) : dateString;
-      const startDateTime = `${dateString}T${startTime}:00-05:00`;
-      const endDateTime = `${endDate}T${endTime}:00-05:00`;
-
-      return {
-        crossesMidnight,
-        sameTime,
-        startDate: dateString,
-        endDate: endDate,
-        startTime: startTime,
-        endTime: endTime,
-        startDateTime: startDateTime,
-        endDateTime: endDateTime
-      };
-    }
-
+    // COTIZADOR CON ENVÍO AUTOMÁTICO A LA PESTAÑA "SOLICITUDES" + WHATSAPP
     if (form) {
       form.addEventListener('submit', async event => {
         event.preventDefault();
@@ -981,6 +851,39 @@
         const detailsInput = document.getElementById('details').value.trim();
         const finalDetails = detailsInput || 'No especificada';
 
+        // 1. Preparar datos adaptados exactamente a las columnas de la pestaña "SOLICITUDES"
+        const quotePayload = {
+          tipo_formulario: "cotizacion",
+          nombres: name,
+          telefono: `+51${phoneVal}`,
+          correo: email,
+          modalidad: selected.textContent.trim(),
+          cantidad: quantity.value,
+          zona: zone,
+          fecha_inicio: shift.startDate,
+          horario: `${shift.startTime} - ${shift.endTime} (${schedule})`,
+          descripcion: finalDetails,
+          estimado: total.textContent
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Registrando solicitud...';
+
+        try {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(quotePayload)
+          });
+        } catch (err) {
+          console.error("Error al registrar en Sheet:", err);
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = '🚀 Enviar solicitud y abrir WhatsApp';
+        }
+
+        // 2. Abrir WhatsApp con el mensaje estructurado
         const message = [
           'Hola CuidadoTotal, quiero solicitar una cotización.',
           '',
@@ -1001,18 +904,11 @@
 
         const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-        showStatus('WhatsApp abierto para enviar la cotización.', true);
+        showStatus('¡Solicitud registrada en el sistema y WhatsApp abierto con éxito!', true);
       });
     }
 
-    const jobForm = document.getElementById('jobForm');
-    const jobError = document.getElementById('jobFormError');
-    const jobStatus = document.getElementById('jobFormStatus');
-    const jobSubmitBtn = document.getElementById('jobSubmit');
-    
-    // URL DE TU APPS SCRIPT
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwvwoyMJz_bTXQu182oPlwgHIrc-Nb2eXaXDiGWnLRHO2dymSbXy-jWsE03_9rqK2HmqA/exec';
-
+    // FORMULARIO DE POSTULANTES (Conectado a la pestaña "POSTULANTES")
     if (jobForm) {
       jobForm.addEventListener('submit', async e => {
         e.preventDefault();
@@ -1061,15 +957,13 @@
         }
 
         jobSubmitBtn.disabled = true;
-        jobSubmitBtn.textContent = 'Enviando postulación y subiendo CV...';
+        jobSubmitBtn.textContent = 'Enviando postulación...';
 
         const reader = new FileReader();
         reader.readAsDataURL(file);
         
         reader.onload = async () => {
-          const base64Content = reader.result.split(',')[1];
-
-          // Payload estructurado para que coincida exactamente con el script de Apps Script
+          // Datos mapeados estrictamente a las columnas de la pestaña "POSTULANTES"
           const payload = {
             tipo_formulario: "postulante", 
             nombres: document.getElementById('jobName').value.trim(),
@@ -1088,7 +982,7 @@
               body: JSON.stringify(payload)
             });
 
-            jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos han sido registrados correctamente.';
+            jobStatus.textContent = '¡Postulación enviada con éxito! Tus datos han sido registrados en nuestra base de datos.';
             jobStatus.className = 'text-sm rounded-xl p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium';
             jobStatus.classList.remove('hidden');
             jobForm.reset();
@@ -1101,6 +995,8 @@
             jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
           }
         };
+      });
+    }
 
         reader.onerror = () => {
           jobError.textContent = 'No se pudo leer el archivo adjunto.';

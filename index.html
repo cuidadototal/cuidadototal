@@ -798,14 +798,69 @@
     const CONFIG = {
       WHATSAPP_NUMBER: '51968495402',
       TIMEZONE: 'America/Lima',
-      // PEGA AQUÍ LA URL DE TU APPS SCRIPT:
       GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw-nVuzu8ToM7r5cvxiJ-JgotYLWv3erZ9XpsHUs7ia3YoN-2uPl7JIU7kl0m38fUAdOg/exec'
     };
 
     const WHATSAPP = CONFIG.WHATSAPP_NUMBER;
     const GOOGLE_SCRIPT_URL = CONFIG.GOOGLE_SCRIPT_URL;
 
-    // ... (Mantén aquí el resto de tus funciones de modales, inputs numéricos y menú móvil) ...
+    // Referencias a los elementos del DOM y del Cotizador
+    const form = document.getElementById('quoteForm');
+    const service = document.getElementById('service');
+    const quantity = document.getElementById('quantity');
+    const startDate = document.getElementById('startDate');
+    const total = document.getElementById('total');
+    const estimateLabel = document.getElementById('estimateLabel');
+    const error = document.getElementById('formError');
+    const status = document.getElementById('formStatus');
+    const submitButton = document.getElementById('quoteSubmit');
+
+    // Inicializar fecha de inicio por defecto a hoy
+    if (startDate && !startDate.value) {
+      const today = new Date().toISOString().split('T')[0];
+      startDate.value = today;
+    }
+
+    function calculateTotal() {
+      if (!service || !quantity || !total) return;
+      const selectedOption = service.selectedOptions[0];
+      const price = parseFloat(selectedOption.value) || 0;
+      const qty = parseInt(quantity.value) || 1;
+      const unitType = selectedOption.dataset.unit || 'turno';
+
+      const finalAmount = price * qty;
+      total.textContent = `S/ ${finalAmount}`;
+      if (estimateLabel) {
+        estimateLabel.textContent = `${qty} ${unitType}${qty > 1 ? 's' : ''}`;
+      }
+    }
+
+    if (service) service.addEventListener('change', calculateTotal);
+    if (quantity) quantity.addEventListener('input', calculateTotal);
+    calculateTotal();
+
+    function getShiftInfo(dateStr, startStr, endStr) {
+      if (!dateStr || !startStr || !endStr) return { startDate: dateStr, startTime: startStr, endTime: endStr, sameTime: false };
+      return {
+        startDate: dateStr,
+        startTime: startStr,
+        endTime: endStr,
+        sameTime: startStr === endStr
+      };
+    }
+
+    function showError(message) {
+      if (!error) return;
+      error.textContent = message;
+      error.classList.remove('hidden');
+    }
+
+    function showStatus(message, success = true) {
+      if (!status) return;
+      status.textContent = message;
+      status.className = `text-sm rounded-xl p-3 ${success ? 'bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium' : 'bg-red-50 border border-red-200 text-red-800 font-medium'}`;
+      status.classList.remove('hidden');
+    }
 
     // COTIZADOR CON ENVÍO AUTOMÁTICO A LA PESTAÑA "SOLICITUDES" + WHATSAPP
     if (form) {
@@ -909,6 +964,11 @@
     }
 
     // FORMULARIO DE POSTULANTES (Conectado a la pestaña "POSTULANTES")
+    const jobForm = document.getElementById('jobForm');
+    const jobError = document.getElementById('jobFormError');
+    const jobStatus = document.getElementById('jobFormStatus');
+    const jobSubmitBtn = document.getElementById('jobSubmit');
+
     if (jobForm) {
       jobForm.addEventListener('submit', async e => {
         e.preventDefault();
@@ -960,7 +1020,6 @@
         jobSubmitBtn.textContent = 'Enviando postulación...';
 
         const reader = new FileReader();
-        reader.readAsDataURL(file);
         
         reader.onload = async () => {
           // Datos mapeados estrictamente a las columnas de la pestaña "POSTULANTES"
@@ -995,8 +1054,6 @@
             jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
           }
         };
-      });
-    }
 
         reader.onerror = () => {
           jobError.textContent = 'No se pudo leer el archivo adjunto.';
@@ -1004,9 +1061,12 @@
           jobSubmitBtn.disabled = false;
           jobSubmitBtn.textContent = 'Enviar Postulación Profesional';
         };
+
+        reader.readAsDataURL(file);
       });
     }
 
+    // Funcionalidades secundarias (Modales, Asesor, Navegación)
     (() => {
       const WA = CONFIG.WHATSAPP_NUMBER;
       const $ = id => document.getElementById(id);
@@ -1135,6 +1195,7 @@
       document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     })();
 
+    // Gestión del menú móvil y navegación
     (() => {
       const navMap = {
         'Empieza aquí': 'cv-orientador',
@@ -1150,6 +1211,16 @@
       };
 
       const header = document.querySelector('header');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuBtn = document.getElementById('menuBtn');
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+          menuBtn.setAttribute('aria-expanded', !expanded);
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
 
       function goToSection(id, updateHash = true) {
         const target = document.getElementById(id);

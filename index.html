@@ -957,6 +957,7 @@
 
       const shift = getShiftInfo(startDate.value, startTime, endTime);
 
+      // Estructura limpia en formato JSON nativo para Make
       return {
         tipo_solicitud: 'cotizacion_web',
         estado: 'PENDIENTE_DE_CONFIRMACION',
@@ -999,25 +1000,28 @@
         return { sent: false, reason: 'webhook_not_configured' };
       }
 
-      const body = new URLSearchParams();
-      Object.entries(payload).forEach(([key, value]) => {
-        body.append(key, String(value ?? ''));
-      });
-
       try {
-        await fetch(webhook, {
+        // CORRECCIÓN: Envío directo como JSON y sin modo no-cors para que Make lea las variables limpiamente
+        const response = await fetch(webhook, {
           method: 'POST',
-          mode: 'no-cors',
-          cache: 'no-store',
-          keepalive: true,
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: body.toString()
+          headers: { 
+            'Content-Type': 'application/json' 
+          },
+          body: JSON.stringify(payload)
         });
-        return { sent: true };
+
+        if (response.ok || response.type ===писки || response.type === 'opaque') {
+          return { sent: true };
+        }
+        
+        // Fallback secundario con sendBeacon por seguridad si la pestaña se cierra rápido
+        const beaconQueued = navigator.sendBeacon(webhook, JSON.stringify(payload));
+        if (beaconQueued) return { sent: true, method: 'beacon' };
+
+        return { sent: false, reason: 'http_error' };
       } catch (err) {
         try {
-          const beaconBody = new Blob([body.toString()], { type: 'application/x-www-form-urlencoded;charset=UTF-8' });
-          const queued = navigator.sendBeacon(webhook, beaconBody);
+          const queued = navigator.sendBeacon(webhook, JSON.stringify(payload));
           if (queued) return { sent: true, method: 'beacon' };
         } catch (beaconErr) {}
         return { sent: false, reason: 'network_error', error: err };

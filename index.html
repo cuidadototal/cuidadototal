@@ -864,105 +864,102 @@
 
     // COTIZADOR CON ENVÍO AUTOMÁTICO A LA PESTAÑA "SOLICITUDES" + WHATSAPP
     if (form) {
-      form.addEventListener('submit', async event => {
-        event.preventDefault();
-        error.classList.add('hidden');
-        error.textContent = '';
-        status.classList.add('hidden');
-        status.textContent = '';
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      error.classList.add('hidden');
+      error.textContent = '';
+      status.classList.add('hidden');
+      status.textContent = '';
 
-        const phoneVal = document.getElementById('customerPhone').value.trim();
-        if (phoneVal.length !== 9) {
-          showError('El número de celular debe tener exactamente 9 dígitos.');
-          return;
-        }
+      const phoneVal = document.getElementById('customerPhone').value.trim();
+      if (phoneVal.length !== 9) {
+        showError('El número de celular debe tener exactamente 9 dígitos.');
+        return;
+      }
 
-        if (!form.checkValidity()) {
-          showError('Revisa los campos obligatorios antes de continuar.');
-          form.reportValidity();
-          return;
-        }
+      if (!form.checkValidity()) {
+        showError('Revisa los campos obligatorios antes de continuar.');
+        form.reportValidity();
+        return;
+      }
 
-        const startTime = document.getElementById('startTime').value;
-        const endTime = document.getElementById('endTime').value;
+      const startTime = document.getElementById('startTime').value;
+      const endTime = document.getElementById('endTime').value;
 
-        if (!startTime || !endTime) {
-          showError('Debes indicar la hora de inicio y la hora de fin.');
-          return;
-        }
+      if (!startTime || !endTime) {
+        showError('Debes indicar la hora de inicio y la hora de fin.');
+        return;
+      }
 
-        const shift = getShiftInfo(startDate.value, startTime, endTime);
+      const shift = getShiftInfo(startDate.value, startTime, endTime);
 
-        if (shift.sameTime) {
-          showError('La hora de inicio y la hora de fin no pueden ser iguales.');
-          return;
-        }
+      if (shift.sameTime) {
+        showError('La hora de inicio y la hora de fin no pueden ser iguales.');
+        return;
+      }
 
-        const selected = service.selectedOptions[0];
-        const name = document.getElementById('customerName').value.trim();
-        const email = document.getElementById('customerEmail').value.trim();
-        const zone = document.getElementById('zone').value.trim();
-        const schedule = document.getElementById('schedule').value;
-        const detailsInput = document.getElementById('details').value.trim();
-        const finalDetails = detailsInput || 'No especificada';
+      const selected = service.selectedOptions[0];
+      const name = document.getElementById('customerName').value.trim();
+      const email = document.getElementById('customerEmail').value.trim();
+      const zone = document.getElementById('zone').value.trim();
+      const schedule = document.getElementById('schedule').value;
+      const detailsInput = document.getElementById('details').value.trim();
+      const finalDetails = detailsInput || 'No especificada';
 
-        // 1. Preparar datos adaptados exactamente a las columnas de la pestaña "SOLICITUDES"
-        const quotePayload = {
-          tipo_formulario: "cotizacion",
-          nombres: name,
-          telefono: `+51${phoneVal}`,
-          correo: email,
-          modalidad: selected.textContent.trim(),
-          cantidad: quantity.value,
-          zona: zone,
-          fecha_inicio: shift.startDate,
-          horario: `${shift.startTime} - ${shift.endTime} (${schedule})`,
-          necesidad_general: finalDetails,
-          estimado: total.textContent
-        };
+      const quotePayload = {
+        tipo_formulario: "cotizacion",
+        nombres: name,
+        telefono: `+51${phoneVal}`,
+        correo: email,
+        modalidad: selected.textContent.trim(),
+        cantidad: quantity.value,
+        zona: zone,
+        fecha_inicio: shift.startDate,
+        horario: `${shift.startTime} - ${shift.endTime} (${schedule})`,
+        necesidad_general: finalDetails,
+        estimado: total.textContent
+      };
 
-        submitButton.disabled = true;
-        submitButton.textContent = 'Registrando solicitud...';
+      // 1. Abrir WhatsApp inmediatamente
+      const message = [
+        'Hola CuidadoTotal, quiero solicitar una cotización.',
+        '',
+        `• Familiar: ${name}`,
+        `• Teléfono: +51${phoneVal}`,
+        `• Correo: ${email}`,
+        `• Modalidad: ${selected.textContent.trim()}`,
+        `• Cantidad: ${quantity.value}`,
+        `• Zona: ${zone}`,
+        `• Fecha: ${shift.startDate}`,
+        `• Horario: ${shift.startTime} - ${shift.endTime}`,
+        `• Tipo de turno: ${schedule}`,
+        `• Necesidad general: ${finalDetails}`,
+        `• Estimado: ${total.textContent}`,
+        '',
+        'Entiendo que el precio final y la disponibilidad deben confirmarse.'
+      ].join('\n');
 
-        try {
-          await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(quotePayload)
-          });
-        } catch (err) {
-          console.error("Error al registrar en Sheet:", err);
-        } finally {
-          submitButton.disabled = false;
-          submitButton.textContent = '🚀 Enviar solicitud y abrir WhatsApp';
-        }
+      const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
-        // 2. Abrir WhatsApp con el mensaje estructurado
-        const message = [
-          'Hola CuidadoTotal, quiero solicitar una cotización.',
-          '',
-          `• Familiar: ${name}`,
-          `• Teléfono: +51${phoneVal}`,
-          `• Correo: ${email}`,
-          `• Modalidad: ${selected.textContent.trim()}`,
-          `• Cantidad: ${quantity.value}`,
-          `• Zona: ${zone}`,
-          `• Fecha: ${shift.startDate}`,
-          `• Horario: ${shift.startTime} - ${shift.endTime}`,
-          `• Tipo de turno: ${schedule}`,
-          `• Necesidad general: ${finalDetails}`,
-          `• Estimado: ${total.textContent}`,
-          '',
-          'Entiendo que el precio final y la disponibilidad deben confirmarse.'
-        ].join('\n');
+      // 2. Enviar a Google Sheets en segundo plano
+      submitButton.disabled = true;
+      submitButton.textContent = 'Registrando solicitud...';
 
-        const whatsappUrl = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(quotePayload)
+      }).finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = '🚀 Enviar solicitud y abrir WhatsApp';
         showStatus('¡Solicitud registrada en el sistema y WhatsApp abierto con éxito!', true);
+        form.reset();
+        calculateTotal();
       });
-    }
-
+    });
+  }
     // FORMULARIO DE POSTULANTES (Conectado a la pestaña "POSTULANTES")
     const jobForm = document.getElementById('jobForm');
     const jobError = document.getElementById('jobFormError');

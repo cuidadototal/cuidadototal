@@ -962,7 +962,7 @@
         tipo_solicitud: 'cotizacion_web',
         estado: 'PENDIENTE_DE_CONFIRMACION',
         fecha_solicitud: new Date().toISOString(),
-        request_id: `CV-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        request_id: crypto.randomUUID(),
         evento: 'NUEVA_SOLICITUD_COTIZACION',
         nombre_familiar: name,
         telefono: phone,

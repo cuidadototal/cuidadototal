@@ -138,7 +138,7 @@
     <section class="relative overflow-hidden bg-gradient-to-br from-sky-50/80 via-white to-blue-50/60 py-16 lg:py-24">
       <div class="absolute -top-40 -right-40 w-96 h-96 bg-sky-200/30 rounded-full blur-3xl pointer-events-none"></div>
       
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative grid lg:grid-cols-[.9fr_1.1fr] gap-12 items-center">
         <div>
           <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-sky-100/70 border border-sky-200 text-sky-900 text-xs font-extrabold uppercase tracking-wider shadow-sm">
             <span class="w-2.5 h-2.5 rounded-full bg-sky-600 animate-pulse"></span>
@@ -957,7 +957,6 @@
 
       const shift = getShiftInfo(startDate.value, startTime, endTime);
 
-      // Estructura limpia en formato JSON nativo para Make
       return {
         tipo_solicitud: 'cotizacion_web',
         estado: 'PENDIENTE_DE_CONFIRMACION',
@@ -1001,7 +1000,6 @@
       }
 
       try {
-        // CORRECCIÓN: Envío directo como JSON y sin modo no-cors para que Make lea las variables limpiamente
         const response = await fetch(webhook, {
           method: 'POST',
           headers: { 
@@ -1010,11 +1008,10 @@
           body: JSON.stringify(payload)
         });
 
-        if (response.ok || response.type ===писки || response.type === 'opaque') {
+        if (response.ok || response.type === 'opaque') {
           return { sent: true };
         }
         
-        // Fallback secundario con sendBeacon por seguridad si la pestaña se cierra rápido
         const beaconQueued = navigator.sendBeacon(webhook, JSON.stringify(payload));
         if (beaconQueued) return { sent: true, method: 'beacon' };
 
@@ -1115,7 +1112,9 @@
     const jobError = document.getElementById('jobFormError');
     const jobStatus = document.getElementById('jobFormStatus');
     const jobSubmitBtn = document.getElementById('jobSubmit');
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvAfqCbt2sDUmtf3hdkE8MNwyDCh_ibbecVs5c0VVbF0GjWXvw99PEdIVumTomztLWDQ/exec';
+    
+    // URL ACTUALIZADA DE GOOGLE APPS SCRIPT
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxAfqCbt2sDUMtf3hdkE8MNwyDCh_ibbecVs5c0VvBF0GjWXW99PElVumTomztLWDQ/exec';
 
     if (jobForm) {
       jobForm.addEventListener('submit', async e => {

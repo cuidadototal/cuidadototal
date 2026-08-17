@@ -961,65 +961,65 @@
     });
   }
     // FORMULARIO DE POSTULANTES (Conectado a la pestaña "POSTULANTES")
-    const jobForm = document.getElementById('jobForm');
-    const jobError = document.getElementById('jobFormError');
-    const jobStatus = document.getElementById('jobFormStatus');
-    const jobSubmitBtn = document.getElementById('jobSubmit');
+const jobForm = document.getElementById('jobForm');
+const jobError = document.getElementById('jobFormError');
+const jobStatus = document.getElementById('jobFormStatus');
+const jobSubmitBtn = document.getElementById('jobSubmit');
 
-    if (jobForm) {
-    jobForm.addEventListener('submit', async event => {
-      event.preventDefault(); // <--- ESTO EVITA QUE SE RECARGUE LA PÁGINA
-      
-      jobError.classList.add('hidden');
-      jobError.textContent = '';
-      jobStatus.classList.add('hidden');
-      jobStatus.textContent = '';
-
-      const phoneVal = document.getElementById('jobPhone').value.trim();
-
-        if (dniVal.length !== 8) {
-          jobError.textContent = 'El DNI debe tener exactamente 8 dígitos.';
-          jobError.classList.remove('hidden');
-          return;
-        }
-
-        if (phoneVal.length !== 9) {
-          jobError.textContent = 'El celular debe tener exactamente 9 dígitos.';
-          jobError.classList.remove('hidden');
-          return;
-        }
-
-        const checkedZones = Array.from(jobForm.querySelectorAll('input[name="jobZones"]:checked'))
-          .map(cb => cb.value);
-
-        if (checkedZones.length === 0) {
-          jobError.textContent = 'Debes marcar al menos una zona de cobertura.';
-          jobError.classList.remove('hidden');
-          return;
-        }
-
-        const fileInput = document.getElementById('jobCv');
-        const file = fileInput.files[0];
-
-        if (!file) {
-          jobError.textContent = 'Debes adjuntar tu Currículum Vitae (PDF o Word).';
-          jobError.classList.remove('hidden');
-          return;
-        }
-
-        if (file.size > 5 * 1024 * 1024) {
-          jobError.textContent = 'El archivo es muy pesado. El tamaño máximo permitido es 5MB.';
-          jobError.classList.remove('hidden');
-          return;
-        }
-
-        jobSubmitBtn.disabled = true;
-        jobSubmitBtn.textContent = 'Enviando postulación...';
-
-        const reader = new FileReader();
+if (jobForm) {
+  jobForm.addEventListener('submit', async e => {
+    e.preventDefault(); // <--- EVITA QUE SE RECARGUE LA PÁGINA
     
+    jobError.classList.add('hidden');
+    jobError.textContent = '';
+    jobStatus.classList.add('hidden');
+    jobStatus.textContent = '';
+
+    const dniVal = document.getElementById('jobDni').value.trim();
+    const phoneVal = document.getElementById('jobPhone').value.trim();
+
+    if (dniVal.length !== 8) {
+      jobError.textContent = 'El DNI debe tener exactamente 8 dígitos.';
+      jobError.classList.remove('hidden');
+      return;
+    }
+
+    if (phoneVal.length !== 9) {
+      jobError.textContent = 'El celular debe tener exactamente 9 dígitos.';
+      jobError.classList.remove('hidden');
+      return;
+    }
+
+    const checkedZones = Array.from(jobForm.querySelectorAll('input[name="jobZones"]:checked'))
+      .map(cb => cb.value);
+
+    if (checkedZones.length === 0) {
+      jobError.textContent = 'Debes marcar al menos una zona de interés.';
+      jobError.classList.remove('hidden');
+      return;
+    }
+
+    const fileInput = document.getElementById('jobCv');
+    const file = fileInput.files[0];
+
+    if (!file) {
+      jobError.textContent = 'Por favor, adjunta tu Currículum Vitae (PDF o Word).';
+      jobError.classList.remove('hidden');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      jobError.textContent = 'El archivo es demasiado pesado. El límite es 5MB.';
+      jobError.classList.remove('hidden');
+      return;
+    }
+
+    jobSubmitBtn.disabled = true;
+    jobSubmitBtn.textContent = 'Subiendo CV y registrando...';
+
+    const reader = new FileReader();
+
     reader.onload = async () => {
-      // Datos mapeados para subir el archivo a Drive y guardar el link
       const payload = {
         tipo_formulario: "postulante",
         nombres: document.getElementById('jobName').value.trim(),
@@ -1027,7 +1027,7 @@
         dni: dniVal,
         celular: `+51${phoneVal}`,
         zona: checkedZones.join(', '),
-        fileData: reader.result.split(',')[1], // Contenido del archivo en base64
+        fileData: reader.result.split(',')[1],
         fileName: file.name,
         mimeType: file.type
       };
@@ -1062,6 +1062,8 @@
     };
 
     reader.readAsDataURL(file);
+  });
+}
 
     // Funcionalidades secundarias (Modales, Asesor, Navegación)
     (() => {
